@@ -104,7 +104,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* SECTION ROADMAP */}
+      {/* SECTION ROADMAP INTEGRÉE */}
       <section className="max-w-6xl mx-auto px-6 mb-40 relative z-20 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
         <div className="mb-12 flex items-end justify-between border-b border-white/10 pb-6">
           <div>
@@ -163,7 +163,7 @@ export default function Landing() {
           {/* Colonne de droite */}
           <div className="md:col-span-5 flex flex-col gap-6">
             
-            {/* Carte Focus (AVEC L'ANIMATION) */}
+            {/* Carte Focus */}
             <div className="flex-1 group relative p-6 rounded-3xl bg-[#0a0a16] border border-white/10 hover:border-white/30 transition duration-300 overflow-hidden">
               <div className="absolute right-0 top-0 p-32 bg-[#ff6b4a] opacity-5 blur-[80px] rounded-full group-hover:opacity-10 transition duration-500"></div>
               <div className="relative z-10">
@@ -178,9 +178,9 @@ export default function Landing() {
                   <span className="text-[#ff6b4a] font-bold">+45 MIN</span>
                 </div>
                 
-                {/* BARRE DE PROGRESSION ANIMÉE */}
+                {/* BARRE DE PROGRESSION CORRIGÉE */}
                 <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                   <div className="h-full bg-[#ff6b4a] w-[0%] group-hover:w-[85%] transition-all duration-1000 ease-out shadow-[0_0_10px_#ff6b4a]" />
+                   <div className="h-full bg-[#ff6b4a] w-[0%] group-hover:w-[85%] transition-all duration-1000 ease-out shadow-[0_0_10px_#ff6b4a]"></div>
                 </div>
 
               </div>
