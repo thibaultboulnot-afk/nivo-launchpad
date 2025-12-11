@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Zap, Shield, Activity, ChevronRight } from 'lucide-react';
+import { Zap, Shield, Activity, ChevronRight } from 'lucide-react';
 
 export default function Landing() {
   return (
@@ -9,16 +9,19 @@ export default function Landing() {
       <div className="aurora absolute inset-0 pointer-events-none" />
       
       {/* Grid Background */}
-      <div className="grid-background absolute inset-0 pointer-events-none opacity-50" />
+      <div className="grid-background absolute inset-0 pointer-events-none opacity-30" />
+
+      {/* Scanline Effect */}
+      <div className="scanline absolute inset-0 pointer-events-none opacity-30" />
 
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/10">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="font-display text-primary-foreground font-bold text-lg">N</span>
+              <span className="font-sans font-bold text-lg text-primary-foreground">N</span>
             </div>
-            <span className="font-display text-xl font-semibold">NIVO</span>
+            <span className="font-sans text-xl font-bold tracking-tight">NIVO</span>
           </div>
           
           <div className="flex items-center gap-4">
@@ -27,10 +30,10 @@ export default function Landing() {
                 Connexion
               </Button>
             </Link>
-            <Link to="/login">
+            <Link to="/diagnostic">
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground glow-primary-sm">
-                Commencer
-                <ArrowRight className="ml-2 h-4 w-4" />
+                Lancer le Diagnostic
+                <ChevronRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -44,45 +47,80 @@ export default function Landing() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-fade-in">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="font-mono text-xs text-muted-foreground">
-              System Patch v1.0 • Pour développeurs
+              System Patch v2.0 • Pour Digital Builders
             </span>
           </div>
 
           {/* Title */}
-          <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            Debuggez votre{' '}
-            <span className="text-gradient italic">posture</span>
+          <h1 className="font-display text-4xl md:text-6xl font-bold mb-6 animate-fade-in leading-tight" style={{ animationDelay: '0.1s' }}>
+            Étudiants, Devs, Freelances :{' '}
+            <span className="text-gradient italic">NIVO</span> est le correctif système pour éliminer le mal de dos et retrouver votre <span className="text-primary">focus</span>.
           </h1>
 
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            21 jours pour corriger les bugs de votre corps. 
-            La routine de maintenance physique conçue pour les builders qui passent 8h+ devant un écran.
+            21 jours pour corriger les bugs de votre infrastructure biologique. 
+            Conçu pour les builders qui passent 8h+ devant un écran.
           </p>
 
           {/* CTA */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <Link to="/login">
+            <Link to="/diagnostic">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground glow-primary h-14 px-8 text-lg">
-                Lancer le diagnostic
+                Lancer le Diagnostic
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <span className="text-muted-foreground font-mono text-sm">
-              &gt; 5 min setup • Gratuit
+              &gt; 2 min setup • Gratuit
             </span>
           </div>
 
-          {/* Visual Element */}
+          {/* Spine Wireframe Visual */}
           <div className="mt-20 relative animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <div className="aspect-video max-w-3xl mx-auto rounded-2xl glass border border-border/20 overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent" />
+            <div className="aspect-[16/9] max-w-3xl mx-auto rounded-2xl glass border border-border/20 overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
+              
+              {/* Spine Wireframe SVG */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full glass mx-auto mb-4 flex items-center justify-center glow-primary animate-float">
-                    <Activity className="h-10 w-10 text-primary" />
-                  </div>
+                <svg
+                  viewBox="0 0 100 200"
+                  className="h-4/5 opacity-30"
+                  fill="none"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="0.5"
+                >
+                  {/* Vertebrae */}
+                  {[...Array(24)].map((_, i) => (
+                    <g key={i}>
+                      <ellipse
+                        cx="50"
+                        cy={15 + i * 7.5}
+                        rx={12 - Math.abs(i - 12) * 0.3}
+                        ry="3"
+                        className="animate-pulse"
+                        style={{ animationDelay: `${i * 0.05}s` }}
+                      />
+                      <line
+                        x1={38 - Math.abs(i - 12) * 0.3}
+                        y1={15 + i * 7.5}
+                        x2={30}
+                        y2={12 + i * 7.5}
+                        strokeWidth="0.3"
+                      />
+                      <line
+                        x1={62 + Math.abs(i - 12) * 0.3}
+                        y1={15 + i * 7.5}
+                        x2={70}
+                        y2={12 + i * 7.5}
+                        strokeWidth="0.3"
+                      />
+                    </g>
+                  ))}
+                </svg>
+
+                <div className="absolute bottom-8 left-0 right-0 text-center">
                   <p className="font-mono text-sm text-muted-foreground">
-                    Protocol: Maintenance_Physique.exe
+                    &gt; scanning_vertebrae.exe
                   </p>
                 </div>
               </div>
@@ -147,7 +185,7 @@ export default function Landing() {
       <footer className="py-10 px-6 border-t border-border/10">
         <div className="container mx-auto text-center">
           <p className="font-mono text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} NIVO • System Patch for Developers
+            &copy; {new Date().getFullYear()} NIVO • System Patch for Digital Builders
           </p>
         </div>
       </footer>

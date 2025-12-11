@@ -59,8 +59,9 @@ export default {
         },
         nivo: {
           orange: "hsl(var(--nivo-orange))",
-          dark: "hsl(var(--nivo-dark))",
-          glass: "hsl(var(--nivo-glass))",
+          abyss: "hsl(var(--nivo-abyss))",
+          card: "hsl(var(--nivo-card))",
+          danger: "hsl(var(--nivo-danger))",
         },
       },
       fontFamily: {
