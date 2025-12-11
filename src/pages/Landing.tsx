@@ -79,24 +79,6 @@ export default function Landing() {
               </Button>
             </Link>
           </div>
-          
-          {/* Visual Element - 3D Spine */}
-          <div className="mt-20 relative animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <div className="aspect-video max-w-3xl mx-auto rounded-2xl glass border border-white/10 overflow-hidden relative group">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#ff6b4a]/20 blur-[100px] rounded-full" />   
-          
-              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                <div className="bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded text-[10px] font-mono text-[#ff6b4a] animate-pulse">
-                  ⚠ SYSTEM ALERT :: POSTURE COMPROMISED
-                </div>
-                <p className="font-mono text-xs text-slate-500 hidden sm:block">
-                  Analysis: Vertebral_Decompression.exe
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* SECTION ROADMAP INTEGRÉE */}
       <section className="max-w-6xl mx-auto px-6 mb-40 relative z-20 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
