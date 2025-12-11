@@ -27,7 +27,7 @@ export default function Landing() {
                 LOG_IN
               </Button>
             </Link>
-            <Link to="/onboarding">
+            <Link to="/diagnostic">
               <Button className="bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] font-medium glow-primary-sm">
                 Diagnostic
               </Button>
@@ -50,7 +50,7 @@ export default function Landing() {
             </span>
           </div>
 
-          {/* Title - MISE À JOUR */}
+          {/* Title */}
           <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 animate-fade-in leading-[1.1]" style={{ animationDelay: '0.1s' }}>
             Debuggez votre <span className="italic text-slate-500">posture</span><br />
             <span className="bg-gradient-to-r from-white via-slate-200 to-slate-500 bg-clip-text text-transparent">
@@ -58,15 +58,15 @@ export default function Landing() {
             </span>
           </h1>
 
-          {/* Description - MISE À JOUR */}
+          {/* Description Mise à Jour */}
           <p className="text-lg md:text-xl text-slate-400 font-light mb-10 max-w-2xl mx-auto animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
             Étudiants, Devs, Freelances : vous passez votre vie assis. 
             NIVO est le correctif système pour éliminer le mal de dos et retrouver votre focus.
           </p>
 
-          {/* CTA */}
+          {/* CTA Vers Diagnostic */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <Link to="/onboarding">
+            <Link to="/diagnostic">
               <Button size="lg" className="bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] glow-primary h-14 px-8 text-lg rounded-full font-medium transition-all hover:scale-105">
                 Lancer le Diagnostic Système
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -75,14 +75,37 @@ export default function Landing() {
             <Link to="/login">
               <Button variant="outline" size="lg" className="border-white/10 text-white hover:bg-white/5 h-14 px-8 rounded-full">
                 <ChevronRight className="mr-2 h-4 w-4" />
-                Voir la méthode
+                Espace Membre
               </Button>
             </Link>
           </div>
+          
+          {/* Visual Element - 3D Spine */}
+          <div className="mt-20 relative animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <div className="aspect-video max-w-3xl mx-auto rounded-2xl glass border border-white/10 overflow-hidden relative group">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#ff6b4a]/20 blur-[100px] rounded-full" />
+              
+              <img 
+                src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop" 
+                alt="Structure Biologique" 
+                className="w-full h-full object-contain mix-blend-screen grayscale contrast-125 opacity-90 animate-float"
+              />
+
+              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                <div className="bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded text-[10px] font-mono text-[#ff6b4a] animate-pulse">
+                  ⚠ SYSTEM ALERT :: POSTURE COMPROMISED
+                </div>
+                <p className="font-mono text-xs text-slate-500 hidden sm:block">
+                  Analysis: Vertebral_Decompression.exe
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* SECTION ROADMAP INTEGRÉE (Code nettoyé) */}
+      {/* SECTION ROADMAP INTEGRÉE */}
       <section className="max-w-6xl mx-auto px-6 mb-40 relative z-20 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
         <div className="mb-12 flex items-end justify-between border-b border-white/10 pb-6">
           <div>
@@ -99,7 +122,6 @@ export default function Landing() {
           
           {/* Carte Graphique */}
           <div className="md:col-span-7 group relative rounded-3xl bg-[#0a0a16] border border-white/10 overflow-hidden hover:border-[#ff6b4a]/50 transition duration-500">
-            {/* Fond Quadrillé */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
             
             <div className="relative p-8 h-full flex flex-col justify-between z-10">
@@ -117,19 +139,16 @@ export default function Landing() {
                 </p>
                 
                 <div className="w-full flex items-end gap-2 h-32 pb-2 border-b border-white/5">
-                  {/* Semaine 1 */}
                   <div className="flex-1 flex flex-col justify-end gap-2 group-hover:-translate-y-1 transition duration-500">
                     <span className="text-[9px] text-slate-500 text-center font-mono">SEMAINE 1</span>
                     <div className="w-full bg-white/10 h-10 rounded-t-sm relative border-t border-white/20"></div>
                     <span className="text-[10px] text-white text-center font-medium">SOULAGER</span>
                   </div>
-                  {/* Semaine 2 */}
                   <div className="flex-1 flex flex-col justify-end gap-2 group-hover:-translate-y-2 transition duration-700 delay-75">
                     <span className="text-[9px] text-slate-500 text-center font-mono">SEMAINE 2</span>
                     <div className="w-full bg-white/20 h-16 rounded-t-sm relative border-t border-white/30"></div>
                     <span className="text-[10px] text-white text-center font-medium">ALIGNER</span>
                   </div>
-                  {/* Semaine 3 */}
                   <div className="flex-1 flex flex-col justify-end gap-2 group-hover:-translate-y-3 transition duration-1000 delay-100">
                     <span className="text-[9px] text-[#ff6b4a] text-center font-mono">SEMAINE 3</span>
                     <div className="w-full bg-gradient-to-t from-[#ff6b4a]/20 to-[#ff6b4a] h-24 rounded-t-sm relative shadow-[0_0_20px_-5px_#ff6b4a] border-t border-[#ff6b4a]">
@@ -159,9 +178,12 @@ export default function Landing() {
                   <span>SESSION DE DEEP WORK</span>
                   <span className="text-[#ff6b4a] font-bold">+45 MIN</span>
                 </div>
+                
+                {/* BARRE DE PROGRESSION CORRIGÉE AVEC VOTRE CODE */}
                 <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                  <div className="h-full bg-[#ff6b4a] w-[85%] shadow-[0_0_10px_#ff6b4a]"></div>
+                   <div className="h-full bg-[#ff6b4a] w-[0%] group-hover:w-[85%] transition-all duration-1000 ease-out shadow-[0_0_10px_#ff6b4a]"></div>
                 </div>
+
               </div>
             </div>
 
@@ -174,8 +196,8 @@ export default function Landing() {
                 </div>
                 <p className="text-sm text-slate-400 font-light mb-4">Des micro-exercices invisibles à faire pendant vos calls ou vos sessions de code.</p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="px-2 py-1 rounded text-[10px] font-mono bg-white/5 border border-white/10 text-slate-300">ASSIS</span>
-                  <span className="px-2 py-1 rounded text-[10px] font-mono bg-white/5 border border-white/10 text-slate-300">DEBOUT</span>
+                  <span className="px-2 py-1 rounded text-[10px] font-mono bg-white/5 border border-white/10 text-slate-300 group-hover:bg-white/10 transition">ASSIS</span>
+                  <span className="px-2 py-1 rounded text-[10px] font-mono bg-white/5 border border-white/10 text-slate-300 group-hover:bg-white/10 transition">DEBOUT</span>
                   <span className="px-2 py-1 rounded text-[10px] font-mono bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 text-[#ff6b4a]">SANS MATÉRIEL</span>
                 </div>
               </div>
