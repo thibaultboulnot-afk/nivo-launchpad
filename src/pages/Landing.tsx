@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ChevronRight, Map, Brain, Laptop } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { ArrowRight, ChevronRight, Map, Brain, Laptop, AlertTriangle, Zap, Target } from 'lucide-react';
 
 export default function Landing() {
   return (
@@ -104,6 +105,124 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* SECTION 1: SYSTEM FAILURE - Le Problème */}
+      <section className="py-24 px-6 relative z-10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <span className="text-red-500 font-mono text-xs tracking-widest uppercase mb-4 block">⚠ System Failure Detected</span>
+            <h2 className="font-display text-4xl md:text-5xl text-white font-bold mb-4">
+              Pourquoi votre hardware <span className="text-red-500">surchauffe</span>
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Le corps humain n'a pas été conçu pour 8h+ d'écran par jour. Voici ce qui se passe vraiment.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Carte 1 - Cou */}
+            <div className="group relative p-6 rounded-2xl bg-[#0a0a16] border border-red-500/20 hover:border-red-500/50 transition-all duration-300 overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-4">
+                  <AlertTriangle className="w-6 h-6 text-red-500" />
+                </div>
+                <div className="font-mono text-[10px] text-red-500 mb-2 tracking-wider">ERR::CERVICAL_001</div>
+                <h3 className="text-xl text-white font-medium mb-3">Surcharge Cervicale</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  <span className="text-red-400 font-semibold">+20kg</span> de pression sur le cou dès que vous penchez la tête vers l'écran.
+                </p>
+              </div>
+            </div>
+
+            {/* Carte 2 - Dos */}
+            <div className="group relative p-6 rounded-2xl bg-[#0a0a16] border border-orange-500/20 hover:border-orange-500/50 transition-all duration-300 overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-4">
+                  <AlertTriangle className="w-6 h-6 text-orange-500" />
+                </div>
+                <div className="font-mono text-[10px] text-orange-500 mb-2 tracking-wider">ERR::LUMBAR_002</div>
+                <h3 className="text-xl text-white font-medium mb-3">Compression Lombaire</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Le poids du corps écrase le bas du dos (<span className="text-orange-400 font-semibold">L4-L5</span>) à cause de la chaise.
+                </p>
+              </div>
+            </div>
+
+            {/* Carte 3 - Cerveau */}
+            <div className="group relative p-6 rounded-2xl bg-[#0a0a16] border border-amber-500/20 hover:border-amber-500/50 transition-all duration-300 overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-4">
+                  <Brain className="w-6 h-6 text-amber-500" />
+                </div>
+                <div className="font-mono text-[10px] text-amber-500 mb-2 tracking-wider">ERR::FOCUS_003</div>
+                <h3 className="text-xl text-white font-medium mb-3">Latence Cognitive</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  La douleur de fond consomme jusqu'à <span className="text-amber-400 font-semibold">30%</span> de votre attention (Focus).
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 2: CORE PROTOCOLS - L'Approche */}
+      <section className="py-24 px-6 relative z-10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-4 block">Core Protocols</span>
+            <h2 className="font-display text-4xl md:text-5xl text-white font-bold mb-4">
+              Une approche basée sur la <span className="italic text-slate-400">biomécanique</span>
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Pas de yoga, pas de méditation. Des protocoles précis basés sur la science du mouvement.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Bento 1 - Décompression */}
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-[#0a0a16] to-[#0f0f1a] border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-300">
+              <div className="mb-6">
+                <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Zap className="w-7 h-7 text-[#ff6b4a]" />
+                </div>
+              </div>
+              <h3 className="text-2xl text-white font-medium mb-3">Décompression</h3>
+              <p className="text-slate-400 leading-relaxed">
+                Créer de l'espace intervertébral pour libérer les nerfs comprimés et réduire la douleur immédiate.
+              </p>
+            </div>
+
+            {/* Bento 2 - Anti-Fragilité */}
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-[#0a0a16] to-[#0f0f1a] border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-300">
+              <div className="mb-6">
+                <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Target className="w-7 h-7 text-[#ff6b4a]" />
+                </div>
+              </div>
+              <h3 className="text-2xl text-white font-medium mb-3">Anti-Fragilité</h3>
+              <p className="text-slate-400 leading-relaxed">
+                Renforcer la chaîne postérieure pour que votre dos supporte les longues sessions sans faiblir.
+              </p>
+            </div>
+
+            {/* Bento 3 - Mobilité */}
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-[#0a0a16] to-[#0f0f1a] border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-300">
+              <div className="mb-6">
+                <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <ArrowRight className="w-7 h-7 text-[#ff6b4a]" />
+                </div>
+              </div>
+              <h3 className="text-2xl text-white font-medium mb-3">Mobilité</h3>
+              <p className="text-slate-400 leading-relaxed">
+                Lubrifier les articulations statiques pour retrouver une amplitude de mouvement naturelle.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION ROADMAP INTEGRÉE */}
       <section className="max-w-6xl mx-auto px-6 mb-40 relative z-20 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
         <div className="mb-12 flex items-end justify-between border-b border-white/10 pb-6">
@@ -202,6 +321,47 @@ export default function Landing() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: FAQ & SPECS */}
+      <section className="py-24 px-6 relative z-10">
+        <div className="container mx-auto max-w-3xl">
+          <div className="text-center mb-12">
+            <span className="text-slate-500 font-mono text-xs tracking-widest uppercase mb-4 block">FAQ & Specs</span>
+            <h2 className="font-display text-3xl md:text-4xl text-white font-bold">
+              Questions fréquentes
+            </h2>
+          </div>
+
+          <Accordion type="single" collapsible className="space-y-4">
+            <AccordionItem value="item-1" className="border border-white/10 rounded-xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
+              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
+                Besoin de matériel ?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-400 pb-5">
+                <span className="text-[#ff6b4a] font-medium">Non.</span> Poids du corps uniquement. Vous pouvez faire tous les exercices dans votre chambre ou à côté de votre bureau.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2" className="border border-white/10 rounded-xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
+              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
+                Durée des sessions ?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-400 pb-5">
+                <span className="text-[#ff6b4a] font-medium">15 minutes par jour.</span> Conçu pour s'intégrer dans n'importe quel emploi du temps chargé, même entre deux meetings.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3" className="border border-white/10 rounded-xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
+              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
+                Est-ce du yoga ?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-400 pb-5">
+                <span className="text-[#ff6b4a] font-medium">Non.</span> C'est de la maintenance articulaire ciblée. Des mouvements précis basés sur la biomécanique, pas de spiritualité ou de postures complexes.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
 
