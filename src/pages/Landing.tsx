@@ -83,19 +83,10 @@ export default function Landing() {
           
 
               
-              <img 
-                src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop" 
-                alt="Structure Biologique" 
-                className="w-full h-full object-contain mix-blend-screen grayscale contrast-125 opacity-90 animate-float"
-              />
+              
 
-              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                <div className="bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded text-[10px] font-mono text-[#ff6b4a] animate-pulse">
-                  ⚠ SYSTEM ALERT :: POSTURE COMPROMISED
-                </div>
-                <p className="font-mono text-xs text-slate-500 hidden sm:block">
-                  Analysis: Vertebral_Decompression.exe
-                </p>
+
+
               </div>
             </div>
           </div>
