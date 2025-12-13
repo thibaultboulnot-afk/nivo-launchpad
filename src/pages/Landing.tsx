@@ -37,7 +37,7 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section (Épuré) */}
       <section className="pt-32 pb-20 px-6 relative z-10">
         <div className="container mx-auto text-center max-w-5xl">
           {/* Badge */}
@@ -79,28 +79,6 @@ export default function Landing() {
                 Espace Membre
               </Button>
             </Link>
-          </div>
-          
-          {/* Visual Element - 3D Spine */}
-          <div className="mt-20 relative animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <div className="aspect-video max-w-3xl mx-auto rounded-2xl glass border border-white/10 overflow-hidden relative group">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#ff6b4a]/20 blur-[100px] rounded-full" />
-              
-              <img 
-                src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop" 
-                alt="Structure Biologique" 
-                className="w-full h-full object-contain mix-blend-screen grayscale contrast-125 opacity-90 animate-float"
-              />
-
-              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                <div className="bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded text-[10px] font-mono text-[#ff6b4a] animate-pulse">
-                  ⚠ SYSTEM ALERT :: POSTURE COMPROMISED
-                </div>
-                <p className="font-mono text-xs text-slate-500 hidden sm:block">
-                  Analysis: Vertebral_Decompression.exe
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -297,7 +275,7 @@ export default function Landing() {
                   <span className="text-[#ff6b4a] font-bold">+45 MIN</span>
                 </div>
                 
-                {/* BARRE DE PROGRESSION CORRIGÉE */}
+                {/* BARRE DE PROGRESSION */}
                 <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
                    <div className="h-full bg-[#ff6b4a] w-[0%] group-hover:w-[85%] transition-all duration-1000 ease-out shadow-[0_0_10px_#ff6b4a]"></div>
                 </div>
