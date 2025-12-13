@@ -37,7 +37,7 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* Hero Section (Épuré) */}
+      {/* Hero Section (Texte uniquement) */}
       <section className="pt-32 pb-20 px-6 relative z-10">
         <div className="container mx-auto text-center max-w-5xl">
           {/* Badge */}
@@ -275,7 +275,7 @@ export default function Landing() {
                   <span className="text-[#ff6b4a] font-bold">+45 MIN</span>
                 </div>
                 
-                {/* BARRE DE PROGRESSION */}
+                {/* Barre de progression avec animation */}
                 <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
                    <div className="h-full bg-[#ff6b4a] w-[0%] group-hover:w-[85%] transition-all duration-1000 ease-out shadow-[0_0_10px_#ff6b4a]"></div>
                 </div>
