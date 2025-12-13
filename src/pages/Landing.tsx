@@ -81,10 +81,7 @@ export default function Landing() {
             </Link>
           </div>
           
-          {/* Visual Element - 3D Spine */}
-          <div className="mt-20 relative animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <div className="aspect-video max-w-3xl mx-auto rounded-2xl glass border border-white/10 overflow-hidden relative group">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#ff6b4a]/20 blur-[100px] rounded-full" />
+
               
               <img 
                 src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop" 
