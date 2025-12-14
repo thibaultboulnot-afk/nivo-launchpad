@@ -25,12 +25,12 @@ export default function Landing() {
           <div className="flex items-center gap-4">
             <Link to="/login">
               <Button variant="ghost" className="text-slate-400 hover:text-white font-mono text-xs">
-                LOG_IN
+                Connexion Système
               </Button>
             </Link>
             <Link to="/diagnostic">
               <Button className="bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] font-medium glow-primary-sm">
-                Diagnostic
+                Lancer le Scan
               </Button>
             </Link>
           </div>
@@ -53,7 +53,7 @@ export default function Landing() {
 
           {/* Title */}
           <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 animate-fade-in leading-[1.1]" style={{ animationDelay: '0.1s' }}>
-            Debuggez votre <span className="italic text-slate-500">posture</span><br />
+            Initialisez le <span className="italic text-slate-500">protocole</span><br />
             <span className="bg-gradient-to-r from-white via-slate-200 to-slate-500 bg-clip-text text-transparent">
               en 21 jours chrono.
             </span>
@@ -69,14 +69,14 @@ export default function Landing() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             <Link to="/diagnostic">
               <Button size="lg" className="bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] glow-primary h-14 px-8 text-lg rounded-full font-medium transition-all hover:scale-105">
-                Lancer le Diagnostic Système
+                Lancer le Scan Corporel
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link to="/login">
               <Button variant="outline" size="lg" className="border-white/10 text-white hover:bg-white/5 h-14 px-8 rounded-full">
                 <ChevronRight className="mr-2 h-4 w-4" />
-                Espace Membre
+                Connexion Système
               </Button>
             </Link>
           </div>

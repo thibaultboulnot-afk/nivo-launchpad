@@ -3,24 +3,65 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { BodyMap } from '@/components/BodyMap';
+import { BiomechanicalBody } from '@/components/BiomechanicalBody';
+import { DiagnosticModuleCard } from '@/components/DiagnosticModuleCard';
 import { useDiagnostic } from '@/contexts/DiagnosticContext';
-import { ArrowRight, ArrowLeft, Loader2, Terminal } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Loader2, Terminal, Skull, Shield, Target, Zap, Hand, Brain } from 'lucide-react';
 
-const zoneLabels: Record<string, string> = {
-  cou: 'Cervicales',
-  epaules: 'Épaules',
-  'dos-haut': 'Haut du Dos',
-  lombaires: 'Lombaires',
-  hanches: 'Hanches',
-  poignets: 'Poignets',
-};
+const diagnosticModules = [
+  {
+    id: 'tech-neck',
+    title: 'La Nuque (Tech Neck)',
+    subtitle: 'Tensions cervicales, maux de tête, regard fixé sur l\'écran.',
+    icon: Skull,
+  },
+  {
+    id: 'kyphose',
+    title: 'La Carapace (Kyphose)',
+    subtitle: 'Épaules enroulées vers l\'avant, sensation d\'oppression thoracique.',
+    icon: Shield,
+  },
+  {
+    id: 'core',
+    title: 'Le Core (Lombaires)',
+    subtitle: 'Douleur en barre dans le bas du dos après 2h assis.',
+    icon: Target,
+  },
+  {
+    id: 'hanches',
+    title: 'Les Hanches (Flexors)',
+    subtitle: 'Sensation de pincement à l\'aine, difficulté à se redresser.',
+    icon: Zap,
+  },
+  {
+    id: 'peripheriques',
+    title: 'Périphériques (Extrémités)',
+    subtitle: 'Fourmillements poignets/mains, tensions avant-bras.',
+    icon: Hand,
+  },
+  {
+    id: 'systeme-nerveux',
+    title: 'Système Nerveux (Fatigue)',
+    subtitle: 'Brouillard mental, baisse de focus, fatigue oculaire.',
+    icon: Brain,
+  },
+];
+
+const analysisSteps = [
+  'Calibrage de l\'alignement vertébral...',
+  'Analyse des tensions statiques...',
+  'Détection des déséquilibres musculaires...',
+  'Évaluation de la chaîne postérieure...',
+  'Génération de la routine de décompression...',
+];
 
 export default function Diagnostic() {
   const navigate = useNavigate();
   const { data, setData } = useDiagnostic();
   const [step, setStep] = useState(1);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [hoveredZone, setHoveredZone] = useState<string | null>(null);
+  const [currentAnalysisStep, setCurrentAnalysisStep] = useState(0);
 
   // Local form state
   const [age, setAge] = useState(data.age?.toString() || '');
@@ -46,130 +87,224 @@ export default function Diagnostic() {
 
   const startAnalysis = () => {
     setIsAnalyzing(true);
-    setTimeout(() => {
-      setIsAnalyzing(false);
-      navigate('/checkout');
-    }, 3000);
+    setCurrentAnalysisStep(0);
   };
 
+  // Animate through analysis steps
+  useEffect(() => {
+    if (isAnalyzing && currentAnalysisStep < analysisSteps.length) {
+      const timer = setTimeout(() => {
+        setCurrentAnalysisStep((prev) => prev + 1);
+      }, 800);
+      return () => clearTimeout(timer);
+    } else if (isAnalyzing && currentAnalysisStep >= analysisSteps.length) {
+      const timer = setTimeout(() => {
+        setIsAnalyzing(false);
+        navigate('/checkout');
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isAnalyzing, currentAnalysisStep, navigate]);
+
+  const selectedModule = diagnosticModules.find((m) => m.id === data.painZone);
+
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <div className="min-h-screen bg-[#050510] relative overflow-hidden text-white">
       {/* Background Effects */}
-      <div className="aurora absolute inset-0 pointer-events-none" />
-      <div className="grid-background absolute inset-0 pointer-events-none opacity-30" />
-      <div className="scanline absolute inset-0 pointer-events-none opacity-50" />
+      <div className="aurora absolute inset-0 pointer-events-none opacity-30" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,107,74,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,107,74,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
 
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10 backdrop-blur-md">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="font-sans font-bold text-lg text-primary-foreground">N</span>
+            <div className="w-8 h-8 rounded-lg bg-[#ff6b4a] flex items-center justify-center shadow-[0_0_15px_-3px_#ff6b4a]">
+              <span className="font-sans font-bold text-lg text-[#050510]">N</span>
             </div>
             <span className="font-sans text-xl font-bold tracking-tight">NIVO</span>
           </Link>
           
           {/* Progress Indicator */}
-          <div className="flex items-center gap-2">
-            {[1, 2, 3].map((s) => (
-              <div
-                key={s}
-                className={`w-8 h-1 rounded-full transition-colors ${
-                  s <= step ? 'bg-primary' : 'bg-border'
-                }`}
-              />
-            ))}
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider hidden sm:block">
+              Bio-Scan Progress
+            </span>
+            <div className="flex items-center gap-1.5">
+              {[1, 2, 3].map((s) => (
+                <div
+                  key={s}
+                  className={`w-8 h-1.5 rounded-full transition-all duration-500 ${
+                    s <= step ? 'bg-[#ff6b4a] shadow-[0_0_10px_rgba(255,107,74,0.5)]' : 'bg-white/10'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </nav>
 
-      <main className="pt-24 pb-12 px-6 container mx-auto max-w-2xl">
-        {/* Step 1: Body Map */}
+      <main className="pt-24 pb-12 px-6 min-h-screen">
+        {/* Step 1: Bio-Mechanical Interface */}
         {step === 1 && (
           <div className="animate-fade-in">
             <div className="text-center mb-8">
-              <h1 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                Localisez le <span className="text-destructive">Bug</span>
+              <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-2 block">
+                Module 01 — Analyse Biomécanique
+              </span>
+              <h1 className="font-display text-3xl md:text-4xl font-bold mb-3">
+                Identifiez votre <span className="text-[#ff6b4a]">Zone de Tension</span>
               </h1>
-              <p className="text-muted-foreground">
-                Cliquez sur la zone qui vous cause le plus de problèmes.
+              <p className="text-slate-400 max-w-md mx-auto">
+                Sélectionnez le module qui correspond le mieux à vos symptômes.
               </p>
             </div>
 
-            <BodyMap
-              selectedZone={data.painZone}
-              onSelectZone={(zone) => setData({ painZone: zone })}
-            />
+            {/* Split Screen Layout */}
+            <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              {/* Left: Biomechanical Body Visualization */}
+              <div className="relative">
+                <div className="sticky top-24 p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 overflow-hidden">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-[#ff6b4a] animate-pulse" />
+                      <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider">
+                        Interface Bio-Mécanique
+                      </span>
+                    </div>
+                    <span className="font-mono text-[10px] text-slate-600">v2.1.0</span>
+                  </div>
 
-            {data.painZone && (
-              <div className="mt-8 p-4 rounded-xl glass border border-destructive/30 text-center animate-fade-in">
-                <span className="font-mono text-sm text-destructive">
-                  &gt; Zone identifiée : {zoneLabels[data.painZone] || data.painZone}
-                </span>
+                  {/* Body Visualization */}
+                  <div className="aspect-[3/4] relative">
+                    <BiomechanicalBody
+                      selectedZone={data.painZone}
+                      hoveredZone={hoveredZone}
+                    />
+                  </div>
+
+                  {/* Status Bar */}
+                  <div className="mt-6 pt-4 border-t border-white/5">
+                    {data.painZone ? (
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs text-slate-400">
+                          Zone sélectionnée:
+                        </span>
+                        <span className="font-mono text-xs text-[#ff6b4a]">
+                          {selectedModule?.title}
+                        </span>
+                      </div>
+                    ) : (
+                      <p className="font-mono text-xs text-slate-500 text-center">
+                        En attente de sélection...
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
-            )}
+
+              {/* Right: Module Cards Panel */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 mb-6">
+                  <Terminal className="w-4 h-4 text-slate-500" />
+                  <span className="font-mono text-xs text-slate-400">
+                    &gt; Modules de diagnostic disponibles
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {diagnosticModules.map((module) => (
+                    <DiagnosticModuleCard
+                      key={module.id}
+                      id={module.id}
+                      title={module.title}
+                      subtitle={module.subtitle}
+                      icon={module.icon}
+                      isSelected={data.painZone === module.id}
+                      isHovered={hoveredZone === module.id}
+                      onSelect={(id) => setData({ painZone: id })}
+                      onHover={setHoveredZone}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
         {/* Step 2: Stats Form */}
         {step === 2 && (
-          <div className="animate-fade-in">
+          <div className="animate-fade-in max-w-xl mx-auto">
             <div className="text-center mb-8">
-              <h1 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                Paramètres <span className="text-primary">Système</span>
+              <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-2 block">
+                Module 02 — Paramètres Utilisateur
+              </span>
+              <h1 className="font-display text-3xl md:text-4xl font-bold mb-3">
+                Calibrage <span className="text-[#ff6b4a]">Système</span>
               </h1>
-              <p className="text-muted-foreground">
-                Quelques données pour calibrer votre protocole.
+              <p className="text-slate-400">
+                Entrez vos données pour personnaliser le protocole.
               </p>
             </div>
 
-            <div className="glass rounded-2xl p-6 space-y-6">
-              <div className="font-mono text-xs text-muted-foreground mb-4 flex items-center gap-2">
-                <Terminal className="w-4 h-4" />
-                <span>&gt; system_config --user</span>
-              </div>
+            <div className="p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 overflow-hidden relative">
+              {/* Grid texture */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50" />
+              
+              {/* Corner decorations */}
+              <div className="absolute top-3 left-3 text-white/10 font-mono text-[10px]">+</div>
+              <div className="absolute top-3 right-3 text-white/10 font-mono text-[10px]">+</div>
+              <div className="absolute bottom-3 left-3 text-white/10 font-mono text-[10px]">+</div>
+              <div className="absolute bottom-3 right-3 text-white/10 font-mono text-[10px]">+</div>
 
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="age" className="font-mono text-sm">
-                    Âge <span className="text-muted-foreground">(années)</span>
-                  </Label>
-                  <Input
-                    id="age"
-                    type="number"
-                    value={age}
-                    onChange={(e) => setAge(e.target.value)}
-                    placeholder="28"
-                    className="font-mono bg-background/50 border-border/50"
-                  />
+              <div className="relative z-10">
+                <div className="font-mono text-xs text-slate-500 mb-6 flex items-center gap-2">
+                  <Terminal className="w-4 h-4" />
+                  <span>&gt; user_config --calibrate</span>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="weight" className="font-mono text-sm">
-                    Poids <span className="text-muted-foreground">(kg)</span>
-                  </Label>
-                  <Input
-                    id="weight"
-                    type="number"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                    placeholder="75"
-                    className="font-mono bg-background/50 border-border/50"
-                  />
-                </div>
+                <div className="space-y-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="age" className="font-mono text-sm text-slate-300">
+                      Âge <span className="text-slate-600">(années)</span>
+                    </Label>
+                    <Input
+                      id="age"
+                      type="number"
+                      value={age}
+                      onChange={(e) => setAge(e.target.value)}
+                      placeholder="28"
+                      className="font-mono bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:border-[#ff6b4a]/50 focus:ring-[#ff6b4a]/20"
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="screenHours" className="font-mono text-sm">
-                    Heures d'écran <span className="text-muted-foreground">(par jour)</span>
-                  </Label>
-                  <Input
-                    id="screenHours"
-                    type="number"
-                    value={screenHours}
-                    onChange={(e) => setScreenHours(e.target.value)}
-                    placeholder="10"
-                    className="font-mono bg-background/50 border-border/50"
-                  />
+                  <div className="space-y-2">
+                    <Label htmlFor="weight" className="font-mono text-sm text-slate-300">
+                      Poids <span className="text-slate-600">(kg)</span>
+                    </Label>
+                    <Input
+                      id="weight"
+                      type="number"
+                      value={weight}
+                      onChange={(e) => setWeight(e.target.value)}
+                      placeholder="75"
+                      className="font-mono bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:border-[#ff6b4a]/50 focus:ring-[#ff6b4a]/20"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="screenHours" className="font-mono text-sm text-slate-300">
+                      Heures d'écran <span className="text-slate-600">(par jour)</span>
+                    </Label>
+                    <Input
+                      id="screenHours"
+                      type="number"
+                      value={screenHours}
+                      onChange={(e) => setScreenHours(e.target.value)}
+                      placeholder="10"
+                      className="font-mono bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:border-[#ff6b4a]/50 focus:ring-[#ff6b4a]/20"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -178,28 +313,62 @@ export default function Diagnostic() {
 
         {/* Step 3: Analysis */}
         {step === 3 && (
-          <div className="animate-fade-in text-center">
+          <div className="animate-fade-in text-center max-w-lg mx-auto pt-12">
             <div className="mb-12">
-              <h1 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                Analyse en <span className="text-primary">cours</span>
+              <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-2 block">
+                Module 03 — Traitement
+              </span>
+              <h1 className="font-display text-3xl md:text-4xl font-bold mb-3">
+                Analyse <span className="text-[#ff6b4a]">en cours</span>
               </h1>
             </div>
 
-            <div className="glass rounded-2xl p-8 max-w-md mx-auto">
-              <div className="flex flex-col items-center gap-6">
+            <div className="p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 overflow-hidden relative">
+              {/* Grid texture */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50" />
+
+              <div className="relative z-10 flex flex-col items-center gap-8">
+                {/* Loader */}
                 <div className="relative">
-                  <Loader2 className="w-16 h-16 text-primary animate-spin" />
-                  <div className="absolute inset-0 rounded-full glow-primary animate-pulse" />
+                  <div className="w-24 h-24 rounded-full border-2 border-[#ff6b4a]/20 flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full border-2 border-[#ff6b4a]/40 flex items-center justify-center animate-spin" style={{ animationDuration: '3s' }}>
+                      <div className="w-16 h-16 rounded-full border-2 border-t-[#ff6b4a] border-r-[#ff6b4a] border-b-transparent border-l-transparent flex items-center justify-center animate-spin">
+                        <div className="w-3 h-3 rounded-full bg-[#ff6b4a]" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 rounded-full shadow-[0_0_40px_rgba(255,107,74,0.3)]" />
                 </div>
 
-                <div className="font-mono text-sm text-muted-foreground space-y-2">
-                  <p className="animate-pulse">&gt; Scanning biomécanique...</p>
-                  <p className="animate-pulse" style={{ animationDelay: '0.5s' }}>
-                    &gt; Analyse de la posture...
-                  </p>
-                  <p className="animate-pulse" style={{ animationDelay: '1s' }}>
-                    &gt; Génération du protocole...
-                  </p>
+                {/* Analysis Steps */}
+                <div className="w-full space-y-2 text-left">
+                  {analysisSteps.map((stepText, index) => (
+                    <div
+                      key={index}
+                      className={`flex items-center gap-3 font-mono text-sm transition-all duration-500 ${
+                        index < currentAnalysisStep
+                          ? 'text-[#ff6b4a]'
+                          : index === currentAnalysisStep
+                          ? 'text-white'
+                          : 'text-slate-600'
+                      }`}
+                    >
+                      <span className="w-5 h-5 rounded border border-current flex items-center justify-center text-[10px]">
+                        {index < currentAnalysisStep ? '✓' : index === currentAnalysisStep ? '▸' : '○'}
+                      </span>
+                      <span className={index === currentAnalysisStep ? 'animate-pulse' : ''}>
+                        {stepText}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Progress bar */}
+                <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-[#ff6b4a] to-[#ff856b] transition-all duration-500"
+                    style={{ width: `${(currentAnalysisStep / analysisSteps.length) * 100}%` }}
+                  />
                 </div>
               </div>
             </div>
@@ -208,12 +377,12 @@ export default function Diagnostic() {
 
         {/* Navigation Buttons */}
         {step < 3 && (
-          <div className="mt-10 flex items-center justify-between">
+          <div className="max-w-6xl mx-auto mt-10 flex items-center justify-between">
             {step > 1 ? (
               <Button
                 variant="ghost"
                 onClick={() => setStep(step - 1)}
-                className="text-muted-foreground"
+                className="text-slate-400 hover:text-white hover:bg-white/5"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Retour
@@ -225,7 +394,7 @@ export default function Diagnostic() {
             <Button
               onClick={handleNextStep}
               disabled={step === 1 ? !canProceedStep1 : !canProceedStep2}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground glow-primary-sm"
+              className="bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,107,74,0.3)] hover:shadow-[0_0_30px_rgba(255,107,74,0.5)] transition-all"
             >
               {step === 2 ? 'Lancer l\'analyse' : 'Continuer'}
               <ArrowRight className="w-4 h-4 ml-2" />
@@ -233,6 +402,16 @@ export default function Diagnostic() {
           </div>
         )}
       </main>
+
+      {/* Custom animation for scan line */}
+      <style>{`
+        @keyframes scanLine {
+          0%, 100% { top: 0%; opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
+        }
+      `}</style>
     </div>
   );
 }
