@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { ArrowRight, ChevronRight, Map, Brain, Laptop, Zap, Target, Activity, Wind, Cpu, TrendingUp } from 'lucide-react';
+import { ArrowRight, ChevronRight, Map, Brain, Laptop, AlertTriangle, Zap, Target, Activity, Wind, Cpu, TrendingUp } from 'lucide-react';
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-[#050510] relative overflow-hidden text-white selection:bg-[#ff6b4a] selection:text-white">
+    <div className="min-h-screen bg-[#050510] relative overflow-hidden text-white selection:bg-[#ff6b4a] selection:text-white font-sans">
       {/* Background Effects */}
       <div className="aurora absolute inset-0 pointer-events-none opacity-40" />
       <div className="grid-background absolute inset-0 pointer-events-none opacity-20" />
@@ -30,7 +30,7 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* Hero Section (Mis à jour : Ciblage Subtil) */}
+      {/* 1. HERO SECTION : La Promesse */}
       <section className="pt-40 pb-20 px-6 relative z-10">
         <div className="container mx-auto text-center max-w-4xl">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-8 animate-fade-in backdrop-blur-md">
@@ -42,8 +42,8 @@ export default function Landing() {
           </div>
 
           <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 animate-fade-in leading-[1.1] delay-100">
-            Overclockez votre <span className="italic text-slate-500">cerveau</span><br />
-            <span className="bg-gradient-to-r from-white via-slate-200 to-slate-500 bg-clip-text text-transparent">en patchant votre dos.</span>
+            Debuggez votre <span className="italic text-slate-500">posture</span><br />
+            <span className="bg-gradient-to-r from-white via-slate-200 to-slate-500 bg-clip-text text-transparent">en 21 jours chrono.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-slate-400 font-light mb-10 max-w-2xl mx-auto animate-fade-in delay-200 leading-relaxed">
@@ -68,13 +68,13 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Section 1: System Failure (PHASE 2 & 5 - Le Problème "Tech") */}
+      {/* 2. PROBLEM SECTION : Pourquoi ça casse (System Failure) */}
       <section className="py-24 px-6 relative z-10 border-t border-white/5 bg-black/20">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <span className="text-red-500 font-mono text-xs tracking-widest uppercase mb-4 block">⚠ Critical Hardware Errors</span>
             <h2 className="font-display text-3xl md:text-4xl text-white font-bold mb-4">Pourquoi votre corps <span className="text-red-500">crash</span></h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">La science prouve que le travail sédentaire intense est une activité à "haut risque biologique". Voici les logs d'erreur de votre corps.</p>
+            <p className="text-slate-400 max-w-2xl mx-auto">La science prouve que la sédentarité intense est une activité à "haut risque biologique". Voici les logs d'erreur de votre corps.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -84,25 +84,25 @@ export default function Landing() {
                 color: "text-red-500", 
                 border: "border-red-500/20", 
                 bg: "bg-red-500/10", 
-                code: "ERR::CINDERELLA_EFFECT", 
-                title: "Hardware Burn-in", 
-                desc: "L'hypothèse Cendrillon : la tension statique, même faible, maintient vos fibres musculaires en contraction continue, causant leur nécrose." 
+                code: "ERR::STATIC_TENSION", 
+                title: "Usure Musculaire", 
+                desc: "L'hypothèse Cendrillon : la tension statique, même faible, maintient vos fibres en contraction continue, causant leur épuisement prématuré." 
               },
               { 
                 icon: Activity, 
                 color: "text-orange-500", 
                 border: "border-orange-500/20", 
                 bg: "bg-orange-500/10", 
-                code: "ERR::CPU_THROTTLING", 
+                code: "ERR::VASCULAR_RESTRICTION", 
                 title: "Ischémie Cérébrale", 
-                desc: "La position 'Tête en avant' comprime les artères vertébrales. Résultat : -20% de débit sanguin au cerveau et apparition du 'Brain Fog'." 
+                desc: "La position 'Tête en avant' comprime les artères vertébrales. Résultat : moins de débit sanguin au cerveau et apparition du 'Brain Fog'." 
               },
               { 
                 icon: Wind, 
                 color: "text-amber-500", 
                 border: "border-amber-500/20", 
                 bg: "bg-amber-500/10", 
-                code: "ERR::COOLING_FAIL", 
+                code: "ERR::RESPIRATORY_FAIL", 
                 title: "Hypoxie Ventilatoire", 
                 desc: "La posture voûtée verrouille la cage thoracique (-6% de capacité pulmonaire). Votre système tourne en manque d'oxygène." 
               }
@@ -120,7 +120,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Section 2: Core Protocols (PHASE 3 - La Solution "Micro-Dosing") */}
+      {/* 3. SOLUTION SECTION : La Méthode (Core Protocols) */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
@@ -134,17 +134,17 @@ export default function Landing() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-[#0a0a16] to-[#0f0f1a] border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-300">
+            <div className="group relative p-8 rounded-3xl bg-[#0a0a16] border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-300">
               <div className="mb-6"><div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center"><Zap className="w-7 h-7 text-[#ff6b4a]" /></div></div>
               <h3 className="text-2xl text-white font-medium mb-3">Fast Charge</h3>
               <p className="text-slate-400 leading-relaxed">Exploitation de la récupération viscoélastique. +3mm de hauteur discale gagnée en 15 minutes de décompression.</p>
             </div>
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-[#0a0a16] to-[#0f0f1a] border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-300">
+            <div className="group relative p-8 rounded-3xl bg-[#0a0a16] border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-300">
               <div className="mb-6"><div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center"><Target className="w-7 h-7 text-[#ff6b4a]" /></div></div>
               <h3 className="text-2xl text-white font-medium mb-3">Anti-Fragilité</h3>
-              <p className="text-slate-400 leading-relaxed">Réversion de l'Inhibition Musculaire Arthrogénique (AMI). Réactivation des stabilisateurs profonds éteints par la chaise.</p>
+              <p className="text-slate-400 leading-relaxed">Réversion de l'Inhibition Musculaire. Réactivation des stabilisateurs profonds éteints par la chaise.</p>
             </div>
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-[#0a0a16] to-[#0f0f1a] border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-300">
+            <div className="group relative p-8 rounded-3xl bg-[#0a0a16] border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-300">
               <div className="mb-6"><div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center"><Brain className="w-7 h-7 text-[#ff6b4a]" /></div></div>
               <h3 className="text-2xl text-white font-medium mb-3">Reboot Neural</h3>
               <p className="text-slate-400 leading-relaxed">21 jours : le temps exact nécessaire à la neuroplasticité pour réécrire vos schémas moteurs par défaut.</p>
@@ -153,41 +153,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* SECTION MEDICAL DATA (PHASE 4 - L'Autorité) */}
-      <section className="py-20 px-6 relative z-10 border-y border-white/5 bg-[#020205]">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
-            <div>
-              <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-2 block">Clinical Data</span>
-              <h2 className="font-display text-3xl text-white font-bold">Pourquoi le mouvement bat la chirurgie</h2>
-            </div>
-            <div className="font-mono text-xs text-slate-500 text-right">
-              Source : NASS Guidelines 2025<br/>& Cochrane Reviews
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <div className="font-mono text-4xl text-white font-bold mb-2">96%</div>
-              <div className="text-[#ff6b4a] text-xs font-mono mb-3 uppercase tracking-wider">Taux de Résorption</div>
-              <p className="text-slate-400 text-sm">Des hernies discales graves se résorbent spontanément si l'inflammation est modulée par le mouvement (Macrophages M2).</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <div className="font-mono text-4xl text-white font-bold mb-2">0%</div>
-              <div className="text-[#ff6b4a] text-xs font-mono mb-3 uppercase tracking-wider">Différence à 2 Ans</div>
-              <p className="text-slate-400 text-sm">Aucune différence de résultat clinique entre chirurgie et réhabilitation active après 24 mois.</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <div className="font-mono text-4xl text-white font-bold mb-2">-40%</div>
-              <div className="text-[#ff6b4a] text-xs font-mono mb-3 uppercase tracking-wider">Risque de Chronicité</div>
-              <p className="text-slate-400 text-sm">Réduit drastiquement chez les patients qui reprennent la marche sous 48h (vs Repos au lit).</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION PERFORMANCE / ROI (PHASE 6 - Le Bonus Cognitif) */}
-      <section className="py-24 px-6 relative z-10 bg-gradient-to-b from-[#0a0a16] to-[#050510]">
+      {/* 4. BENEFIT SECTION : Le Gain (Performance / ROI) */}
+      <section className="py-24 px-6 relative z-10 bg-gradient-to-b from-[#0a0a16] to-[#050510] border-y border-white/5">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <span className="text-emerald-500 font-mono text-xs tracking-widest uppercase mb-4 block">System Overclocking</span>
@@ -197,8 +164,8 @@ export default function Landing() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-8 rounded-3xl bg-[#0f0f1a] border border-emerald-500/20 relative overflow-hidden group">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-8 rounded-3xl bg-[#0f0f1a] border border-emerald-500/20 relative overflow-hidden group hover:border-emerald-500/40 transition-all">
               <div className="absolute right-0 top-0 p-24 bg-emerald-500/10 blur-[60px] rounded-full group-hover:bg-emerald-500/20 transition-all duration-500"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-4">
@@ -207,12 +174,12 @@ export default function Landing() {
                 </div>
                 <div className="font-mono text-3xl text-white font-bold mb-2">+35% <span className="text-sm font-normal text-slate-400">Taux de décharge neuronale</span></div>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  L'Hypothèse des Ressources Neuronales prouve que la douleur consomme votre focus. En supprimant le bruit proprioceptif, vous libérez du CPU pour le code complexe.
+                  L'Hypothèse des Ressources Neuronales prouve que la douleur consomme votre focus. En supprimant le bruit de fond corporel, vous libérez du CPU pour vos tâches complexes.
                 </p>
               </div>
             </div>
 
-            <div className="p-8 rounded-3xl bg-[#0f0f1a] border border-emerald-500/20 relative overflow-hidden group">
+            <div className="p-8 rounded-3xl bg-[#0f0f1a] border border-emerald-500/20 relative overflow-hidden group hover:border-emerald-500/40 transition-all">
               <div className="absolute right-0 top-0 p-24 bg-emerald-500/10 blur-[60px] rounded-full group-hover:bg-emerald-500/20 transition-all duration-500"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-4">
@@ -229,7 +196,40 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Section Roadmap (Bento Grid) */}
+      {/* 5. PROOF SECTION : L'Autorité (Medical Data) */}
+      <section className="py-20 px-6 relative z-10 border-b border-white/5 bg-[#020205]">
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
+            <div>
+              <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-2 block">Clinical Data</span>
+              <h2 className="font-display text-3xl text-white font-bold">Pourquoi le mouvement bat la chirurgie</h2>
+            </div>
+            <div className="font-mono text-xs text-slate-500 text-right">
+              Source : NASS Guidelines 2025<br/>& Cochrane Reviews
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
+              <div className="font-mono text-4xl text-white font-bold mb-2">96%</div>
+              <div className="text-[#ff6b4a] text-xs font-mono mb-3 uppercase tracking-wider">Taux de Résorption</div>
+              <p className="text-slate-400 text-sm">Des hernies discales graves se résorbent spontanément si l'inflammation est modulée par le mouvement.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
+              <div className="font-mono text-4xl text-white font-bold mb-2">0%</div>
+              <div className="text-[#ff6b4a] text-xs font-mono mb-3 uppercase tracking-wider">Différence à 2 Ans</div>
+              <p className="text-slate-400 text-sm">Aucune différence de résultat clinique entre chirurgie et réhabilitation active après 24 mois.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
+              <div className="font-mono text-4xl text-white font-bold mb-2">-40%</div>
+              <div className="text-[#ff6b4a] text-xs font-mono mb-3 uppercase tracking-wider">Risque de Chronicité</div>
+              <p className="text-slate-400 text-sm">Réduit drastiquement chez les patients qui reprennent la marche sous 48h (vs Repos au lit).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. HOW SECTION : Roadmap (Bento Grid) */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between border-b border-white/10 pb-6">
@@ -294,7 +294,7 @@ export default function Landing() {
                     <h3 className="text-lg text-white font-medium">Hacks de Bureau</h3>
                     <Laptop className="w-5 h-5 text-slate-500 group-hover:text-[#ff6b4a] transition" />
                   </div>
-                  <p className="text-sm text-slate-400 font-light mb-4">Micro-exercices invisibles à faire pendant vos calls ou vos sessions de code.</p>
+                  <p className="text-sm text-slate-400 font-light mb-4">Micro-exercices invisibles à faire pendant vos calls ou vos sessions de Deep Work.</p>
                   <div className="flex flex-wrap gap-2">
                     {["ASSIS", "DEBOUT", "SANS MATÉRIEL"].map(tag => (
                       <span key={tag} className="px-2 py-1 rounded text-[10px] font-mono bg-white/5 border border-white/10 text-slate-300">{tag}</span>
@@ -307,7 +307,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* 7. FAQ SECTION */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-12">
@@ -320,7 +320,7 @@ export default function Landing() {
             </AccordionItem>
             <AccordionItem value="item-2" className="border border-white/10 rounded-xl bg-[#0a0a16] px-6">
               <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">Durée des sessions ?</AccordionTrigger>
-              <AccordionContent className="text-slate-400 pb-5"><span className="text-[#ff6b4a] font-medium">15 minutes par jour.</span> C'est la "Dose Minimale Efficace" prouvée pour réhydrater les disques et maintenir la Lipoprotéine Lipase active.</AccordionContent>
+              <AccordionContent className="text-slate-400 pb-5"><span className="text-[#ff6b4a] font-medium">15 minutes par jour.</span> C'est la "Dose Minimale Efficace" prouvée pour réhydrater les disques sans fatigue.</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3" className="border border-white/10 rounded-xl bg-[#0a0a16] px-6">
               <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">Est-ce du yoga ?</AccordionTrigger>
