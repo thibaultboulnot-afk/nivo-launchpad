@@ -106,39 +106,56 @@ export default function Dashboard() {
       </header>
 
       <main className="container mx-auto px-6 py-10 relative z-10">
-        {/* Program Selector */}
-        <div className="mb-6 animate-fade-in">
-          <p className="font-mono text-xs text-muted-foreground mb-2">PROGRAMME ACTIF</p>
-          <div className="flex flex-wrap gap-2">
+        {/* Program Selector - Styled Tabs */}
+        <div className="mb-8 animate-fade-in">
+          <div className="flex items-center gap-2 mb-4">
+            <p className="font-mono text-xs text-muted-foreground">PROGRAMME</p>
+            <div className="flex-1 h-px bg-border/20"></div>
+          </div>
+          
+          <div className="glass rounded-2xl border border-border/20 p-2 inline-flex gap-2">
             {Object.values(PROGRAMS).map((program) => (
               <button
                 key={program.id}
                 onClick={() => setCurrentProgramId(program.id)}
-                className={`px-4 py-2 rounded-lg font-mono text-sm transition-all ${
+                className={`relative px-5 py-3 rounded-xl font-mono text-sm transition-all ${
                   currentProgramId === program.id
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-card border border-border/20 text-muted-foreground hover:border-primary/50'
+                    ? 'bg-primary text-primary-foreground shadow-[0_0_20px_-5px_hsl(var(--primary))]'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-card/50'
                 }`}
               >
-                {program.name.replace('NIVO ', '')}
+                <span className="relative z-10">{program.name.replace('NIVO ', '')}</span>
+                {currentProgramId === program.id && (
+                  <span className="absolute top-1 right-1 px-1.5 py-0.5 rounded text-[8px] bg-background/20 text-primary-foreground font-bold">
+                    ACTIVE
+                  </span>
+                )}
               </button>
             ))}
           </div>
-          <p className="font-mono text-xs text-muted-foreground mt-2">{currentProgram.description}</p>
+          
+          <p className="font-mono text-xs text-muted-foreground mt-3">{currentProgram.description}</p>
         </div>
 
-        {/* Welcome Section */}
+        {/* Welcome Section with Badge */}
         <div className="mb-10 animate-fade-in">
           <p className="font-mono text-sm text-muted-foreground mb-2">
             &gt; Bonjour{profile?.full_name ? `, ${profile.full_name}` : ''}
           </p>
-          <h1 className="font-display text-4xl font-bold">
-            {isProgramComplete ? (
-              <span className="text-gradient">Programme Terminé ✓</span>
-            ) : (
-              <>Jour <span className="text-gradient">{currentDay}</span> / {totalDays}</>
+          <div className="flex items-center gap-4 flex-wrap">
+            <h1 className="font-display text-4xl font-bold">
+              {isProgramComplete ? (
+                <span className="text-gradient">Programme Terminé ✓</span>
+              ) : (
+                <>Jour <span className="text-gradient">{currentDay}</span> / {totalDays}</>
+              )}
+            </h1>
+            {!isProgramComplete && (
+              <span className="px-3 py-1 rounded-full text-[10px] font-mono bg-primary/10 border border-primary/30 text-primary">
+                [ {currentProgramId} :: ACTIVE ]
+              </span>
             )}
-          </h1>
+          </div>
           <p className="font-mono text-sm text-primary mt-1">{phaseLabel}</p>
         </div>
 
