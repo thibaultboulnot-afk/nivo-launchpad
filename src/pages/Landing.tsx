@@ -143,6 +143,120 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* 1.5 PRODUCT SHOWCASE - Fake Dashboard */}
+      <section className="py-16 px-6 relative z-10">
+        <div className="container mx-auto max-w-5xl">
+          {/* Floating App Window Container */}
+          <div 
+            className="relative animate-fade-in"
+            style={{ 
+              animationDelay: '0.5s',
+              perspective: '1000px'
+            }}
+          >
+            {/* Orange Glow Behind */}
+            <div className="absolute inset-0 bg-[#ff6b4a]/20 blur-[80px] rounded-3xl -z-10 scale-95" />
+            
+            {/* The Window */}
+            <div 
+              className="relative rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.02] backdrop-blur-xl overflow-hidden shadow-2xl"
+              style={{
+                transform: 'rotateX(2deg) rotateY(-1deg)',
+                transformStyle: 'preserve-3d'
+              }}
+            >
+              {/* Window Top Bar */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/[0.02]">
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500/60" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/60" />
+                  </div>
+                  <span className="font-mono text-xs text-slate-400 ml-4">SESSION DU JOUR : 01</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
+                  <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">Système Connecté</span>
+                </div>
+              </div>
+
+              {/* Main Content Area */}
+              <div className="p-8">
+                {/* Audio Player Section */}
+                <div className="relative p-6 rounded-2xl bg-gradient-to-br from-white/[0.05] to-transparent border border-white/10 mb-6">
+                  {/* Track Info */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-16 h-16 rounded-xl bg-[#ff6b4a]/20 border border-[#ff6b4a]/30 flex items-center justify-center">
+                      <Brain className="w-8 h-8 text-[#ff6b4a]" />
+                    </div>
+                    <div>
+                      <p className="font-mono text-[10px] text-[#ff6b4a] uppercase tracking-widest mb-1">Protocole Actif</p>
+                      <h3 className="text-xl font-medium text-white">Décompression Lombaire</h3>
+                    </div>
+                  </div>
+
+                  {/* Waveform Visualization */}
+                  <div className="relative h-20 mb-6 flex items-center justify-center gap-[3px]">
+                    {[...Array(60)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-1 bg-gradient-to-t from-[#ff6b4a]/40 to-[#ff6b4a] rounded-full"
+                        style={{
+                          height: `${20 + Math.sin(i * 0.3) * 30 + Math.random() * 20}%`,
+                          animationDelay: `${i * 0.05}s`,
+                          opacity: i < 25 ? 1 : 0.3
+                        }}
+                      />
+                    ))}
+                    {/* Progress Indicator */}
+                    <div className="absolute left-[40%] top-0 bottom-0 w-0.5 bg-white/80 shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
+                  </div>
+
+                  {/* Play Button */}
+                  <div className="flex items-center justify-center gap-8">
+                    <button className="w-6 h-6 text-slate-500 hover:text-white transition-colors">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                    </button>
+                    <button className="w-16 h-16 rounded-full bg-[#ff6b4a] flex items-center justify-center shadow-[0_0_30px_-5px_#ff6b4a] hover:scale-105 transition-transform">
+                      <svg className="w-7 h-7 text-[#050510] ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <button className="w-6 h-6 text-slate-500 hover:text-white transition-colors">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                    </button>
+                  </div>
+
+                  {/* Time */}
+                  <div className="flex justify-between mt-4 font-mono text-xs text-slate-500">
+                    <span>04:32</span>
+                    <span>12:00</span>
+                  </div>
+                </div>
+
+                {/* Stats Cards */}
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
+                    <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-2">Pression Discale</p>
+                    <p className="text-2xl font-bold text-green-400">-15%</p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
+                    <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-2">Durée</p>
+                    <p className="text-2xl font-bold text-white">12 <span className="text-base font-normal text-slate-400">min</span></p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
+                    <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-2">Série en cours</p>
+                    <p className="text-2xl font-bold text-[#ff6b4a]">1 <span className="text-base font-normal text-slate-400">Jour</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 2. PROBLEM SECTION - Hardware Latency */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-6xl">
