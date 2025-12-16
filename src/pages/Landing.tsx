@@ -1,11 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { 
-  ArrowRight, ChevronRight, Map, Zap, Activity, Wind, Target, RotateCcw, Check, Lock, 
-  Settings, Shield, BrainCircuit, Play, HelpCircle, Terminal, Eye 
-} from 'lucide-react';
+import { ArrowRight, ChevronRight, Map, Brain, Laptop, Zap, Activity, Wind, Target, RotateCcw, Check, Lock, Eye } from 'lucide-react';
 
 // --- CONFIGURATION DU CONTENU DYNAMIQUE ---
 const PROGRAM_DETAILS = {
@@ -51,6 +48,8 @@ const PROGRAM_DETAILS = {
 };
 
 export default function Landing() {
+  const navigate = useNavigate();
+  // État par défaut sur 'SYSTEM_REBOOT' pour montrer l'offre recommandée
   const [selectedProgram, setSelectedProgram] = useState<'RAPID_PATCH' | 'SYSTEM_REBOOT' | 'ARCHITECT_MODE'>('SYSTEM_REBOOT');
   const [isTransitioning, setIsTransitioning] = useState(false);
   const details = PROGRAM_DETAILS[selectedProgram];
@@ -66,13 +65,14 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050510] relative overflow-hidden text-white selection:bg-[#ff6b4a] selection:text-white font-sans">
-      
-      {/* --- BACKGROUND EFFECTS --- */}
+    <div className="min-h-screen bg-[#050510] relative overflow-hidden text-white selection:bg-[#ff6b4a] selection:text-white">
+      {/* Aurora Background Effect */}
       <div className="aurora absolute inset-0 pointer-events-none opacity-40" />
+      
+      {/* Grid Background */}
       <div className="grid-background absolute inset-0 pointer-events-none opacity-20" />
 
-      {/* --- NAVBAR --- */}
+      {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10 backdrop-blur-md">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -97,31 +97,35 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* --- 1. HERO SECTION --- */}
-      <section className="pt-32 pb-12 px-6 relative z-10">
+      {/* 1. HERO SECTION */}
+      <section className="pt-32 pb-24 px-6 relative z-10">
         <div className="container mx-auto text-center max-w-4xl">
+          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-8 animate-fade-in backdrop-blur-md">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff6b4a] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ff6b4a]"></span>
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-slate-300">
-              PROTOCOLE CLINIQUE VALIDÉ
+            <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">
+              System Patch v2.0 Available
             </span>
           </div>
 
+          {/* Title */}
           <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 animate-fade-in leading-[1.1]" style={{ animationDelay: '0.1s' }}>
-            La Maintenance Système <br />
+            Initialisez le <span className="italic text-slate-500">protocole</span><br />
             <span className="bg-gradient-to-r from-white via-slate-200 to-slate-500 bg-clip-text text-transparent">
-              pour le Corps Humain.
+              en 21 jours chrono.
             </span>
           </h1>
 
+          {/* Description */}
           <p className="text-lg md:text-xl text-slate-400 font-light mb-10 max-w-2xl mx-auto animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
-            Basé sur les protocoles de décompression discale et de stabilité du rachis. <br/>
-            Conçu pour les ingénieurs, par des ingénieurs.
+            Votre ambition vous demande de rester assis. Votre corps a besoin de mouvement. 
+            NIVO est le correctif système pour réconcilier les deux.
           </p>
 
+          {/* CTA */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             <Link to="/diagnostic">
               <Button size="lg" className="bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] glow-primary h-14 px-8 text-lg rounded-full font-medium transition-all hover:scale-105">
@@ -139,46 +143,213 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* --- 1.5 PRODUCT SHOWCASE (Ghost Dashboard) --- */}
-      <section className="py-12 px-6 relative z-10 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-        <div className="container mx-auto max-w-5xl">
-          <div className="relative rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl shadow-2xl overflow-hidden transform md:rotate-x-2 transition-all hover:rotate-0 duration-700 group">
-            <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
-            
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-white/5">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-              </div>
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 border border-white/5">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                <span className="text-[10px] font-mono text-slate-400">SESSION LIVE : JOUR 01</span>
-              </div>
+      {/* 1.5 PRODUCT SHOWCASE - Hyper-Realistic Dashboard (Architect Mode Theme) */}
+      <section className="py-20 px-6 relative z-10">
+        <div className="container mx-auto max-w-6xl">
+          {/* Section Label */}
+          <div className="text-center mb-12">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500 block mb-3">Interface Preview</span>
+            <p className="text-slate-400 text-sm">Découvrez votre futur espace de travail</p>
+          </div>
+
+          {/* Floating App Window Container */}
+          <div 
+            className="relative animate-fade-in"
+            style={{ 
+              animationDelay: '0.5s',
+              perspective: '2000px'
+            }}
+          >
+            {/* Multi-layer Glow Effect */}
+            <div className="absolute inset-0 scale-90 -z-10">
+              <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-slate-400/20 to-transparent blur-[100px] rounded-[40px]" />
+              <div className="absolute inset-x-10 top-10 bottom-20 bg-white/5 blur-[60px] rounded-[40px]" />
             </div>
-
-            <div className="p-8 md:p-12 flex flex-col items-center justify-center min-h-[400px] relative">
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
-
-              <div className="relative z-10 w-full max-w-lg text-center">
-                <div className="mb-6 inline-flex items-center justify-center w-24 h-24 rounded-full border border-white/10 bg-white/5 shadow-[0_0_30px_-5px_rgba(255,107,74,0.3)] group-hover:scale-105 transition-transform duration-500">
-                  <Play className="w-8 h-8 text-white fill-white ml-1" />
-                </div>
-                <h3 className="text-2xl font-display font-bold text-white mb-2">Initialisation Système</h3>
-                <p className="text-slate-400 font-mono text-sm mb-8">Protocole : Décompression Lombaire L5-S1</p>
-                
-                <div className="flex items-center gap-1 h-12 justify-center mb-6">
-                  {[...Array(20)].map((_, i) => (
-                    <div key={i} className="w-1 bg-[#ff6b4a] rounded-full animate-pulse" style={{ height: `${Math.random() * 100}%`, animationDelay: `${i * 0.05}s` }}></div>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-4 text-xs font-mono text-slate-500">
-                  <span>02:14</span>
-                  <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full w-[25%] bg-[#ff6b4a]"></div>
+            
+            {/* The Main Window - Architect Mode Theme */}
+            <div 
+              className="relative rounded-[24px] border border-white/[0.08] bg-black overflow-hidden"
+              style={{
+                transform: 'rotateX(4deg) rotateY(-2deg)',
+                transformStyle: 'preserve-3d',
+                boxShadow: '0 60px 120px -30px rgba(0,0,0,0.8), 0 30px 60px -20px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.1)'
+              }}
+            >
+              {/* Gloss/Reflection Effect on top-left */}
+              <div className="absolute top-0 left-0 w-1/2 h-1/3 bg-gradient-to-br from-white/[0.08] via-transparent to-transparent pointer-events-none rounded-tl-[24px]" />
+              
+              {/* Window Structure: Sidebar + Main */}
+              <div className="flex">
+                {/* Sidebar Navigation */}
+                <div className="w-16 md:w-20 bg-white/[0.02] border-r border-white/[0.05] flex flex-col items-center py-6 gap-6">
+                  {/* Logo */}
+                  <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-[0_0_30px_-5px_rgba(255,255,255,0.3)]">
+                    <span className="text-black font-bold text-lg">N</span>
                   </div>
-                  <span>12:00</span>
+                  
+                  {/* Nav Icons */}
+                  <div className="flex flex-col gap-4 mt-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    </div>
+                    <div className="w-10 h-10 rounded-xl bg-transparent flex items-center justify-center text-slate-600 hover:text-white transition-colors">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                    </div>
+                    <div className="w-10 h-10 rounded-xl bg-transparent flex items-center justify-center text-slate-600 hover:text-white transition-colors">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    </div>
+                    <div className="w-10 h-10 rounded-xl bg-transparent flex items-center justify-center text-slate-600 hover:text-white transition-colors">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Main Content Area */}
+                <div className="flex-1">
+                  {/* Header Bar */}
+                  <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.05] bg-white/[0.01]">
+                    <div className="flex items-center gap-4">
+                      <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                        <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                        <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+                      </div>
+                      <div className="h-4 w-px bg-white/10 ml-2" />
+                      <span className="font-mono text-[11px] text-slate-500 uppercase tracking-wider">Session 01 · Architect Mode</span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      {/* Notification Bell */}
+                      <div className="relative">
+                        <svg className="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                        <span className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full"></span>
+                      </div>
+                      {/* User Avatar */}
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center text-[10px] font-bold text-white">
+                          JD
+                        </div>
+                        <span className="text-sm text-slate-400 hidden md:block">John Doe</span>
+                      </div>
+                      {/* Status */}
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                        </span>
+                        <span className="font-mono text-[10px] text-emerald-400 uppercase tracking-wider">Online</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Dashboard Content */}
+                  <div className="p-6 md:p-8">
+                    {/* Day Header */}
+                    <div className="flex items-center justify-between mb-8">
+                      <div>
+                        <p className="font-mono text-[10px] text-slate-600 uppercase tracking-widest mb-1">Jour 12 · Phase 2</p>
+                        <h2 className="text-2xl md:text-3xl font-light text-white">Décompression Vertébrale</h2>
+                      </div>
+                      <div className="hidden md:flex items-center gap-2">
+                        <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 font-mono text-[10px] text-slate-400">
+                          [ ARCHITECT_MODE :: ACTIVE ]
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Rich Audio Player */}
+                    <div className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent border border-white/[0.06] backdrop-blur-xl mb-6">
+                      {/* Inner glow */}
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-white/[0.02] to-transparent pointer-events-none" />
+                      
+                      <div className="relative z-10">
+                        {/* Track Info */}
+                        <div className="flex items-center gap-5 mb-8">
+                          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden">
+                            <Brain className="w-10 h-10 text-white/80" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-mono text-[10px] text-slate-500 uppercase tracking-widest mb-1">Protocole Actif</p>
+                            <h3 className="text-xl md:text-2xl font-light text-white mb-1">Décompression Lombaire</h3>
+                            <p className="text-sm text-slate-500">Module Focus · Anti-Fragilité</p>
+                          </div>
+                        </div>
+
+                        {/* Detailed Waveform */}
+                        <div className="relative h-24 mb-6 flex items-end justify-center gap-[2px] px-2">
+                          {[...Array(80)].map((_, i) => {
+                            const baseHeight = 20 + Math.sin(i * 0.15) * 25 + Math.cos(i * 0.08) * 15;
+                            const played = i < 32;
+                            return (
+                              <div
+                                key={i}
+                                className={`w-[3px] md:w-1 rounded-full transition-all duration-300 ${
+                                  played 
+                                    ? 'bg-gradient-to-t from-slate-400 to-white' 
+                                    : 'bg-gradient-to-t from-slate-800 to-slate-600'
+                                }`}
+                                style={{
+                                  height: `${baseHeight + Math.random() * 15}%`,
+                                  opacity: played ? 1 : 0.4
+                                }}
+                              />
+                            );
+                          })}
+                          {/* Playhead */}
+                          <div className="absolute left-[40%] top-0 bottom-0 flex flex-col items-center">
+                            <div className="w-0.5 flex-1 bg-white shadow-[0_0_15px_rgba(255,255,255,0.6)]" />
+                            <div className="w-3 h-3 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] -mt-1" />
+                          </div>
+                        </div>
+
+                        {/* Progress Bar */}
+                        <div className="mb-4">
+                          <div className="h-1 rounded-full bg-slate-800 overflow-hidden">
+                            <div className="h-full w-[40%] bg-gradient-to-r from-slate-400 to-white rounded-full" />
+                          </div>
+                        </div>
+
+                        {/* Time + Controls */}
+                        <div className="flex items-center justify-between">
+                          <span className="font-mono text-xs text-slate-500">04:48</span>
+                          
+                          <div className="flex items-center gap-6">
+                            <button className="w-8 h-8 text-slate-500 hover:text-white transition-colors">
+                              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                            </button>
+                            <button className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-[0_0_40px_-5px_rgba(255,255,255,0.4)] hover:scale-105 transition-transform">
+                              <svg className="w-7 h-7 text-black ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </button>
+                            <button className="w-8 h-8 text-slate-500 hover:text-white transition-colors">
+                              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                            </button>
+                          </div>
+                          
+                          <span className="font-mono text-xs text-slate-500">12:00</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Stats Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+                        <p className="font-mono text-[9px] text-slate-600 uppercase tracking-wider mb-2">Pression Discale</p>
+                        <p className="text-2xl font-light text-emerald-400">-15%</p>
+                      </div>
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+                        <p className="font-mono text-[9px] text-slate-600 uppercase tracking-wider mb-2">Durée</p>
+                        <p className="text-2xl font-light text-white">12 <span className="text-sm font-normal text-slate-500">min</span></p>
+                      </div>
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+                        <p className="font-mono text-[9px] text-slate-600 uppercase tracking-wider mb-2">Streak</p>
+                        <p className="text-2xl font-light text-white">12 <span className="text-sm font-normal text-slate-500">jours</span></p>
+                      </div>
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+                        <p className="font-mono text-[9px] text-slate-600 uppercase tracking-wider mb-2">Focus Score</p>
+                        <p className="text-2xl font-light text-white">94<span className="text-sm font-normal text-slate-500">%</span></p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -186,17 +357,18 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* --- 2. PROBLEM SECTION (Latence Matérielle) --- */}
+      {/* 2. PROBLEM SECTION - Hardware Latency */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <span className="text-red-500 font-mono text-xs tracking-widest uppercase mb-4 block">⚠ Alerte Système</span>
             <h2 className="font-display text-4xl md:text-5xl text-white font-bold">
-              Latence Matérielle
+              Hardware Latency
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Carte 1 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-red-500/50 transition-all duration-500 overflow-hidden">
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
               <div className="relative z-10">
@@ -212,6 +384,7 @@ export default function Landing() {
               </div>
             </div>
 
+            {/* Carte 2 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-orange-500/50 transition-all duration-500 overflow-hidden">
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
               <div className="relative z-10">
@@ -227,6 +400,7 @@ export default function Landing() {
               </div>
             </div>
 
+            {/* Carte 3 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-yellow-500/50 transition-all duration-500 overflow-hidden">
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
               <div className="relative z-10">
@@ -245,60 +419,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* --- 2.5 AUTHORITY SECTION (System Kernel) --- */}
-      <section className="py-24 px-6 relative z-10 bg-[#020205]">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <span className="text-slate-500 font-mono text-xs tracking-widest uppercase mb-4 block">System Kernel</span>
-            <h2 className="font-display text-4xl md:text-5xl text-white font-bold mb-4">
-              Architecture du Protocole
-            </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">
-              NIVO ne réinvente pas la roue. Nous avons compilé les standards cliniques de référence (Gold Standards) en une routine exécutable.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-8 border border-white/5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] transition-colors">
-              <Settings className="w-10 h-10 text-white mb-6 opacity-80" />
-              <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                Moteur Mécanique
-                <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">McKenzie®</span>
-              </h4>
-              <p className="text-sm font-mono text-[#ff6b4a] mb-4">module: CENTRALISATION</p>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Utilisation des mouvements d'extension (MDT) pour repousser mécaniquement le disque vers son centre. La référence mondiale pour la douleur discale.
-              </p>
-            </div>
-
-            <div className="p-8 border border-white/5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] transition-colors">
-              <Shield className="w-10 h-10 text-white mb-6 opacity-80" />
-              <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                Pare-Feu
-                <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">McGill Method</span>
-              </h4>
-              <p className="text-sm font-mono text-[#ff6b4a] mb-4">module: HYGIÈNE VERTÉBRALE</p>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Principes de stabilité du Dr. Stuart McGill. Créer une ceinture de force naturelle (Core Stiffness) pour protéger le dos des micro-mouvements nocifs.
-              </p>
-            </div>
-
-            <div className="p-8 border border-white/5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] transition-colors">
-              <BrainCircuit className="w-10 h-10 text-white mb-6 opacity-80" />
-              <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                Système d'Exploitation
-                <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Neuro-Physio</span>
-              </h4>
-              <p className="text-sm font-mono text-[#ff6b4a] mb-4">module: REPROGRAMMATION</p>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Exploitation de la neuroplasticité pour changer votre posture par défaut (inconsciente) en 21 jours, sans effort volontaire constant.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- 3. DATA SECTION --- */}
+      {/* 3. SOCIAL PROOF / DATA - Données Cliniques */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16">
@@ -309,29 +430,35 @@ export default function Landing() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 text-center">
-              <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white to-slate-500 bg-clip-text text-transparent mb-3">96%</p>
-              <p className="text-lg text-white font-medium mb-2">de Résorption Spontanée</p>
-              <p className="text-slate-400 text-sm mb-4">des hernies avec le mouvement adapté</p>
-              <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: NCBI 2019</p>
+            {/* Stat 1 */}
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-500 overflow-hidden text-center">
+              <div className="relative z-10">
+                <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-transparent mb-3 group-hover:from-[#ff6b4a] group-hover:to-[#ff856b] transition-all duration-500">96%</p>
+                <p className="text-lg text-white font-medium mb-2">de Résorption Spontanée</p>
+                <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: NCBI 2019 — Étude sur 283 patients</p>
+              </div>
             </div>
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 text-center">
-              <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white to-slate-500 bg-clip-text text-transparent mb-3">0%</p>
-              <p className="text-lg text-white font-medium mb-2">de Différence</p>
-              <p className="text-slate-400 text-sm mb-4">entre chirurgie et réhab active à 2 ans</p>
-              <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: Spine Journal 2021</p>
+            {/* Stat 2 */}
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-500 overflow-hidden text-center">
+              <div className="relative z-10">
+                <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-transparent mb-3 group-hover:from-[#ff6b4a] group-hover:to-[#ff856b] transition-all duration-500">0%</p>
+                <p className="text-lg text-white font-medium mb-2">de Différence</p>
+                <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: Spine Journal 2021 — Méta-analyse</p>
+              </div>
             </div>
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 text-center">
-              <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white to-slate-500 bg-clip-text text-transparent mb-3">-40%</p>
-              <p className="text-lg text-white font-medium mb-2">de Risque</p>
-              <p className="text-slate-400 text-sm mb-4">de chronicité en restant actif</p>
-              <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: The Lancet 2018</p>
+            {/* Stat 3 */}
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-500 overflow-hidden text-center">
+              <div className="relative z-10">
+                <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-transparent mb-3 group-hover:from-[#ff6b4a] group-hover:to-[#ff856b] transition-all duration-500">-40%</p>
+                <p className="text-lg text-white font-medium mb-2">de Risque</p>
+                <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: The Lancet 2018 — Cohorte 12 mois</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* --- 4. SOLUTION SECTION (Code Source) --- */}
+      {/* 4. SOLUTION SECTION - Code Source */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
@@ -342,10 +469,13 @@ export default function Landing() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Fast Charge */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
               <div className="relative z-10">
-                <div className="mb-6 w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center">
-                  <Zap className="w-7 h-7 text-[#ff6b4a]" />
+                <div className="mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
+                    <Zap className="w-7 h-7 text-[#ff6b4a]" />
+                  </div>
                 </div>
                 <h3 className="text-2xl text-white font-medium">Fast Charge</h3>
                 <p className="text-slate-400 leading-relaxed mt-3">
@@ -353,10 +483,13 @@ export default function Landing() {
                 </p>
               </div>
             </div>
+            {/* Anti-Fragilité */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
               <div className="relative z-10">
-                <div className="mb-6 w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center">
-                  <Target className="w-7 h-7 text-[#ff6b4a]" />
+                <div className="mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
+                    <Target className="w-7 h-7 text-[#ff6b4a]" />
+                  </div>
                 </div>
                 <h3 className="text-2xl text-white font-medium">Anti-Fragilité</h3>
                 <p className="text-slate-400 leading-relaxed mt-3">
@@ -364,10 +497,13 @@ export default function Landing() {
                 </p>
               </div>
             </div>
+            {/* Reboot Neural */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
               <div className="relative z-10">
-                <div className="mb-6 w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center">
-                  <RotateCcw className="w-7 h-7 text-[#ff6b4a]" />
+                <div className="mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
+                    <RotateCcw className="w-7 h-7 text-[#ff6b4a]" />
+                  </div>
                 </div>
                 <h3 className="text-2xl text-white font-medium">Reboot Neural</h3>
                 <p className="text-slate-400 leading-relaxed mt-3">
@@ -379,7 +515,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* --- 5. PRICING & INTERACTIVE ROADMAP SECTION --- */}
+      {/* 5. PRICING & INTERACTIVE ROADMAP SECTION */}
       <section className="py-24 px-6 relative z-10" id="pricing">
         <div className="container mx-auto max-w-6xl">
           
@@ -515,8 +651,10 @@ export default function Landing() {
 
           {/* B. DYNAMIC ROADMAP DISPLAY */}
           <div className={`bg-[#0a0a16] rounded-b-3xl md:rounded-3xl md:rounded-t-none border border-white/10 border-t-0 md:border-t p-8 md:p-12 relative overflow-hidden transition-all duration-300 ${isTransitioning ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}>
+            {/* Background Grid specific to selection */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
             
+            {/* Active indicator bar */}
             <div className={`absolute top-0 left-0 right-0 h-1 transition-colors duration-300 ${
               selectedProgram === 'RAPID_PATCH' ? 'bg-white/40' :
               selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#ff6b4a]' :
@@ -543,6 +681,7 @@ export default function Landing() {
                 </div>
               </div>
 
+              {/* THE VISUAL TIMELINE */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-12">
                 {details.phases.map((phase, idx) => (
                   <div key={idx} className={`relative flex flex-col gap-3 p-4 rounded-xl border transition-all duration-500 ${phase.active ? 'bg-white/5 border-white/10' : 'bg-black/40 border-white/5 opacity-50 grayscale'}`}>
@@ -562,6 +701,7 @@ export default function Landing() {
                 ))}
               </div>
 
+              {/* UPSELL CTA for non-complete programs */}
               {selectedProgram === 'RAPID_PATCH' && (
                 <div className="mb-8 p-4 rounded-xl border border-[#ff6b4a]/20 bg-[#ff6b4a]/5 flex items-center justify-between">
                   <p className="text-sm text-slate-300">
@@ -592,6 +732,7 @@ export default function Landing() {
                 </div>
               )}
 
+              {/* ACTION AREA */}
               <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-white/5">
                 <div className="flex flex-wrap gap-2">
                   {details.features.map((feat, i) => (
@@ -619,152 +760,48 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* --- 5.5 LE BENCHMARK (COMPARISON) --- */}
-      <section className="py-24 px-6 relative z-10 bg-[#020205]">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <span className="text-slate-500 font-mono text-xs tracking-widest uppercase mb-4 block">Benchmark</span>
-            <h2 className="font-display text-3xl md:text-4xl text-white font-bold">
-              Pourquoi le modèle classique <br/> échoue pour les pros du digital
-            </h2>
-          </div>
-
-          <div className="overflow-hidden rounded-3xl border border-white/10 overflow-x-auto">
-            <div className="min-w-[600px] grid grid-cols-3 bg-white/5 p-4 border-b border-white/10 text-xs font-mono uppercase tracking-widest text-slate-500">
-              <div className="col-span-1 pl-4">Feature</div>
-              <div className="col-span-1 text-center">Médecine Classique</div>
-              <div className="col-span-1 text-center text-[#ff6b4a]">NIVO System Patch</div>
-            </div>
-
-            {/* Rows */}
-            <div className="min-w-[600px] grid grid-cols-3 p-6 border-b border-white/5 items-center hover:bg-white/[0.02] transition-colors">
-              <div className="col-span-1 text-white font-bold pl-4">Approche</div>
-              <div className="col-span-1 text-center text-slate-500">Réactive (Quand c'est cassé)</div>
-              <div className="col-span-1 text-center text-white font-medium bg-[#ff6b4a]/10 py-2 rounded-lg border border-[#ff6b4a]/20">Proactive (Maintenance)</div>
-            </div>
-            <div className="min-w-[600px] grid grid-cols-3 p-6 border-b border-white/5 items-center hover:bg-white/[0.02] transition-colors">
-              <div className="col-span-1 text-white font-bold pl-4">Fréquence</div>
-              <div className="col-span-1 text-center text-slate-500">1h / semaine (Insuffisant)</div>
-              <div className="col-span-1 text-center text-white font-medium bg-[#ff6b4a]/10 py-2 rounded-lg border border-[#ff6b4a]/20">15 min / jour (Neuroplasticité)</div>
-            </div>
-            <div className="min-w-[600px] grid grid-cols-3 p-6 border-b border-white/5 items-center hover:bg-white/[0.02] transition-colors">
-              <div className="col-span-1 text-white font-bold pl-4">Contexte</div>
-              <div className="col-span-1 text-center text-slate-500">Cabinet médical (Hors contexte)</div>
-              <div className="col-span-1 text-center text-white font-medium bg-[#ff6b4a]/10 py-2 rounded-lg border border-[#ff6b4a]/20">Au poste de travail (Réel)</div>
-            </div>
-            <div className="min-w-[600px] grid grid-cols-3 p-6 border-b border-white/5 items-center hover:bg-white/[0.02] transition-colors">
-              <div className="col-span-1 text-white font-bold pl-4">Coût</div>
-              <div className="col-span-1 text-center text-slate-500">Trajet + Co-paiement</div>
-              <div className="col-span-1 text-center text-white font-medium bg-[#ff6b4a]/10 py-2 rounded-lg border border-[#ff6b4a]/20">Accès à vie (Prix unique)</div>
-            </div>
-            <div className="min-w-[600px] grid grid-cols-3 p-6 items-center hover:bg-white/[0.02] transition-colors">
-              <div className="col-span-1 text-white font-bold pl-4">Objectif</div>
-              <div className="col-span-1 text-center text-slate-500">"Moins de douleur"</div>
-              <div className="col-span-1 text-center text-white font-medium bg-[#ff6b4a]/10 py-2 rounded-lg border border-[#ff6b4a]/20">Performance & Anti-Fragilité</div>
-            </div>
-          </div>
-          
-          <div className="text-center mt-8">
-            <p className="text-slate-400 text-sm italic">
-              "Ne choisissez pas. Utilisez NIVO pour ne plus avoir besoin d'y aller."
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* --- 6. EXPANDED FAQ SECTION --- */}
+      {/* 6. FAQ SECTION */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center p-3 mb-6 bg-white/5 rounded-full border border-white/10">
-              <HelpCircle className="w-6 h-6 text-[#ff6b4a]" />
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl text-white font-bold mb-4">
-              Vous hésitez toujours ?
+            <span className="text-slate-500 font-mono text-xs tracking-widest uppercase mb-4 block">FAQ & Specs</span>
+            <h2 className="font-display text-3xl md:text-4xl text-white font-bold">
+              Questions fréquentes
             </h2>
-            <p className="text-slate-400">Nous répondons à vos questions en toute transparence.</p>
           </div>
 
           <Accordion type="single" collapsible className="space-y-4">
             <AccordionItem value="item-1" className="border border-white/10 rounded-2xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
-              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left text-lg">
-                J'ai déjà mal au dos, est-ce dangereux ?
+              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
+                Besoin de matériel ?
               </AccordionTrigger>
-              <AccordionContent className="text-slate-400 pb-5 leading-relaxed">
-                NIVO est conçu pour la "bobologie" du travailleur assis (tensions, raideurs, fatigue). <br/><br/>
-                <strong className="text-white">Attention :</strong> Si vous avez une douleur aiguë (type "coup de poignard"), des fourmillements dans les jambes ou une perte de sensibilité, consultez impérativement un médecin avant. NIVO est un outil de maintenance, pas de chirurgie.
+              <AccordionContent className="text-slate-400 pb-5">
+                <span className="text-[#ff6b4a] font-medium">Non.</span> Poids du corps uniquement. Vous pouvez faire tous les exercices dans votre chambre ou à côté de votre bureau.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-2" className="border border-white/10 rounded-2xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
-              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left text-lg">
-                Quelle différence avec une vidéo YouTube gratuite ?
+              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
+                Durée des sessions ?
               </AccordionTrigger>
-              <AccordionContent className="text-slate-400 pb-5 leading-relaxed">
-                YouTube vous donne des exercices en vrac ("randomness"). NIVO vous donne une <strong className="text-white">architecture</strong>. C'est la différence entre lire des bouts de code sur StackOverflow et suivre une documentation structurée. La progression jour après jour est calculée pour ne pas vous blesser.
+              <AccordionContent className="text-slate-400 pb-5">
+                <span className="text-[#ff6b4a] font-medium">15 minutes par jour.</span> Conçu pour s'intégrer dans n'importe quel emploi du temps chargé, même entre deux meetings.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-3" className="border border-white/10 rounded-2xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
-              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left text-lg">
-                Ai-je besoin de matériel ?
+              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
+                Est-ce du yoga ?
               </AccordionTrigger>
               <AccordionContent className="text-slate-400 pb-5">
-                <span className="text-[#ff6b4a] font-medium">Non.</span> Tout se fait au poids du corps. Pour certains exercices de la phase 3, une bande élastique ou une bouteille d'eau peut être utile, mais c'est optionnel.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-4" className="border border-white/10 rounded-2xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
-              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left text-lg">
-                Et si ça ne marche pas pour moi ? (Garantie)
-              </AccordionTrigger>
-              <AccordionContent className="text-slate-400 pb-5">
-                Nous prenons le risque. Si après 14 jours d'application du protocole, vous ne sentez aucune amélioration sur votre posture ou votre niveau d'énergie, envoyez un simple email. <strong className="text-white">Remboursement intégral, sans question.</strong>
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-5" className="border border-white/10 rounded-2xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
-              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left text-lg">
-                C'est un abonnement caché ?
-              </AccordionTrigger>
-              <AccordionContent className="text-slate-400 pb-5">
-                <span className="text-[#ff6b4a] font-medium">Absolument pas.</span> C'est un paiement unique (One-Time Payment). Vous payez une fois, vous gardez l'accès au programme et à ses futures mises à jour à vie.
+                <span className="text-[#ff6b4a] font-medium">Non.</span> C'est de la maintenance articulaire ciblée. Des mouvements précis basés sur la biomécanique, pas de spiritualité ou de postures complexes.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
         </div>
       </section>
 
-      {/* --- 7. FINAL CTA (MISSION) --- */}
-      <section className="py-24 px-6 relative z-10">
-        <div className="absolute inset-0 bg-[#ff6b4a]/5 pointer-events-none"></div>
-        <div className="container mx-auto max-w-4xl text-center">
-          <div className="inline-flex mb-6 p-4 bg-[#ff6b4a]/10 rounded-full border border-[#ff6b4a]/20">
-            <Terminal className="w-8 h-8 text-[#ff6b4a]" />
-          </div>
-          <h2 className="font-display text-4xl md:text-6xl text-white font-bold mb-6">
-            Ne laissez pas votre chaise gagner.
-          </h2>
-          <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Votre carrière est un marathon, pas un sprint. Vous mettez à jour vos langages, vos frameworks et vos outils. 
-            Il est temps de mettre à jour le hardware qui permet tout cela : <strong className="text-white">Vous.</strong>
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/diagnostic">
-              <Button size="lg" className="bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] h-16 px-10 text-xl rounded-full font-bold glow-primary transition-transform hover:scale-105">
-                Commencer la Maintenance
-                <ArrowRight className="ml-2 h-6 w-6" />
-              </Button>
-            </Link>
-          </div>
-          <p className="mt-6 text-xs font-mono text-slate-500">
-            Rejoignez 1200+ Builders qui ont déjà patché leur dos.
-          </p>
-        </div>
-      </section>
-
-      {/* --- FOOTER --- */}
+      {/* Footer */}
       <footer className="py-10 px-6 border-t border-white/5 bg-[#020205] relative z-10">
         <div className="container mx-auto text-center">
           <p className="font-mono text-xs text-slate-600">
