@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { ArrowRight, ChevronRight, Map, Brain, Laptop, Zap, Activity, Wind, Target, RotateCcw, Check, Lock } from 'lucide-react';
+import { ArrowRight, ChevronRight, Map, Brain, Laptop, Zap, Activity, Wind, Target, RotateCcw, Check, Lock, Eye } from 'lucide-react';
 
 // --- CONFIGURATION DU CONTENU DYNAMIQUE ---
 const PROGRAM_DETAILS = {
@@ -48,9 +48,21 @@ const PROGRAM_DETAILS = {
 };
 
 export default function Landing() {
+  const navigate = useNavigate();
   // État par défaut sur 'SYSTEM_REBOOT' pour montrer l'offre recommandée
   const [selectedProgram, setSelectedProgram] = useState<'RAPID_PATCH' | 'SYSTEM_REBOOT' | 'ARCHITECT_MODE'>('SYSTEM_REBOOT');
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const details = PROGRAM_DETAILS[selectedProgram];
+
+  const handleSelectProgram = (program: 'RAPID_PATCH' | 'SYSTEM_REBOOT' | 'ARCHITECT_MODE') => {
+    if (program !== selectedProgram) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setSelectedProgram(program);
+        setIsTransitioning(false);
+      }, 150);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#050510] relative overflow-hidden text-white selection:bg-[#ff6b4a] selection:text-white">
@@ -304,71 +316,150 @@ export default function Landing() {
           </div>
 
           {/* A. PRICING CARDS (SELECTORS) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-0">
             {/* CARD 1: RAPID PATCH */}
             <div 
-              onClick={() => setSelectedProgram('RAPID_PATCH')}
-              className={`cursor-pointer group flex flex-col p-6 rounded-3xl border transition-all duration-300 relative ${selectedProgram === 'RAPID_PATCH' ? 'bg-white/10 border-white/40 shadow-2xl' : 'bg-[#0a0a16] border-white/10 hover:border-white/20 opacity-60 hover:opacity-100'}`}
+              className={`group flex flex-col p-6 rounded-t-3xl md:rounded-3xl md:rounded-b-none border transition-all duration-300 relative ${selectedProgram === 'RAPID_PATCH' ? 'bg-[#0a0a16] border-white/40 border-b-0 md:border-b shadow-[0_0_30px_-10px_rgba(255,255,255,0.3)]' : 'bg-[#0a0a16] border-white/10 hover:border-white/20'}`}
             >
+              <div className="flex items-center gap-2 mb-3">
+                <span className="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono uppercase tracking-wider text-slate-400">Urgence & Douleur</span>
+              </div>
               <h3 className="font-display text-2xl font-bold text-white mb-1">Rapid Patch</h3>
-              <p className="text-3xl font-bold text-white mb-4">49€</p>
-              <div className="space-y-2 mb-6">
-                {PROGRAM_DETAILS.RAPID_PATCH.features.slice(0,2).map((f,i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-slate-300"><Check className="w-3 h-3 text-[#ff6b4a]"/> {f}</div>
+              <p className="text-xs text-slate-500 mb-2">14 Jours</p>
+              <p className="text-3xl font-bold text-white mb-2">49€</p>
+              <p className="text-xs text-slate-500 mb-4">Paiement unique</p>
+              <p className="text-sm text-slate-400 mb-6 leading-relaxed">Éteindre l'inflammation et stopper la douleur en 2 semaines.</p>
+              <div className="space-y-2 mb-6 flex-grow">
+                {PROGRAM_DETAILS.RAPID_PATCH.features.map((f, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-slate-300"><Check className="w-3 h-3 text-[#ff6b4a]" /> {f}</div>
                 ))}
               </div>
-              <div className={`mt-auto w-full h-1 rounded-full transition-colors duration-300 ${selectedProgram === 'RAPID_PATCH' ? 'bg-white' : 'bg-transparent'}`}></div>
+              <div className="flex flex-col gap-2 mt-auto">
+                <Link to="/checkout?plan=RAPID_PATCH" className="w-full">
+                  <Button className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20">
+                    Commencer ce programme
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+                <Button 
+                  variant="ghost" 
+                  onClick={() => handleSelectProgram('RAPID_PATCH')}
+                  className={`w-full text-slate-400 hover:text-white hover:bg-white/5 text-xs ${selectedProgram === 'RAPID_PATCH' ? 'text-[#ff6b4a]' : ''}`}
+                >
+                  <Eye className="mr-2 w-4 h-4" />
+                  Explorer l'architecture
+                </Button>
+              </div>
+              {selectedProgram === 'RAPID_PATCH' && (
+                <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-white/40 hidden md:block"></div>
+              )}
             </div>
 
             {/* CARD 2: SYSTEM REBOOT */}
             <div 
-              onClick={() => setSelectedProgram('SYSTEM_REBOOT')}
-              className={`cursor-pointer group flex flex-col p-6 rounded-3xl border transition-all duration-300 relative transform md:-translate-y-4 ${selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#0a0a16] border-[#ff6b4a] shadow-[0_0_40px_-10px_rgba(255,107,74,0.3)]' : 'bg-[#0a0a16] border-white/10 hover:border-[#ff6b4a]/50 opacity-60 hover:opacity-100'}`}
+              className={`group flex flex-col p-6 rounded-t-3xl md:rounded-3xl md:rounded-b-none border transition-all duration-300 relative transform md:-translate-y-4 ${selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#0a0a16] border-[#ff6b4a] border-b-0 md:border-b shadow-[0_0_40px_-10px_rgba(255,107,74,0.4)]' : 'bg-[#0a0a16] border-white/10 hover:border-[#ff6b4a]/50'}`}
             >
-              {selectedProgram === 'SYSTEM_REBOOT' && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-1 bg-[#ff6b4a] text-[#050510] text-[10px] font-bold rounded-full uppercase tracking-widest">
-                  Recommandé
-                </div>
-              )}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-1 bg-[#ff6b4a] text-[#050510] text-[10px] font-bold rounded-full uppercase tracking-widest">
+                Recommandé • Standard
+              </div>
+              <div className="flex items-center gap-2 mb-3 mt-2">
+                <span className="px-2 py-0.5 rounded bg-[#ff6b4a]/20 text-[10px] font-mono uppercase tracking-wider text-[#ff6b4a]">Le Protocole Standard</span>
+              </div>
               <h3 className="font-display text-2xl font-bold text-white mb-1">System Reboot</h3>
-              <p className="text-3xl font-bold text-white mb-4">99€</p>
-              <div className="space-y-2 mb-6">
-                {PROGRAM_DETAILS.SYSTEM_REBOOT.features.slice(0,3).map((f,i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-slate-300"><Check className="w-3 h-3 text-[#ff6b4a]"/> {f}</div>
+              <p className="text-xs text-slate-500 mb-2">21 Jours</p>
+              <p className="text-3xl font-bold text-white mb-2">99€</p>
+              <p className="text-xs text-slate-500 mb-4">Paiement unique</p>
+              <p className="text-sm text-slate-400 mb-6 leading-relaxed">La correction complète. Réalignez votre posture par défaut.</p>
+              <div className="space-y-2 mb-6 flex-grow">
+                {PROGRAM_DETAILS.SYSTEM_REBOOT.features.map((f, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-slate-300"><Check className="w-3 h-3 text-[#ff6b4a]" /> {f}</div>
                 ))}
               </div>
-              <div className={`mt-auto w-full h-1 rounded-full transition-colors duration-300 ${selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#ff6b4a]' : 'bg-transparent'}`}></div>
+              <div className="flex flex-col gap-2 mt-auto">
+                <Link to="/checkout?plan=SYSTEM_REBOOT" className="w-full">
+                  <Button className="w-full bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] font-bold glow-primary">
+                    Initialiser le Protocole
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+                <Button 
+                  variant="ghost" 
+                  onClick={() => handleSelectProgram('SYSTEM_REBOOT')}
+                  className={`w-full text-slate-400 hover:text-white hover:bg-white/5 text-xs ${selectedProgram === 'SYSTEM_REBOOT' ? 'text-[#ff6b4a]' : ''}`}
+                >
+                  <Eye className="mr-2 w-4 h-4" />
+                  Explorer l'architecture
+                </Button>
+              </div>
+              {selectedProgram === 'SYSTEM_REBOOT' && (
+                <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-[#ff6b4a] hidden md:block"></div>
+              )}
             </div>
 
             {/* CARD 3: ARCHITECT MODE */}
             <div 
-              onClick={() => setSelectedProgram('ARCHITECT_MODE')}
-              className={`cursor-pointer group flex flex-col p-6 rounded-3xl border transition-all duration-300 relative ${selectedProgram === 'ARCHITECT_MODE' ? 'bg-white/10 border-white/40 shadow-2xl' : 'bg-[#0a0a16] border-white/10 hover:border-white/20 opacity-60 hover:opacity-100'}`}
+              className={`group flex flex-col p-6 rounded-t-3xl md:rounded-3xl md:rounded-b-none border transition-all duration-300 relative ${selectedProgram === 'ARCHITECT_MODE' ? 'bg-[#0a0a16] border-slate-500 border-b-0 md:border-b shadow-[0_0_30px_-10px_rgba(148,163,184,0.3)]' : 'bg-[#0a0a16] border-white/10 hover:border-slate-500/50'}`}
             >
+              <div className="flex items-center gap-2 mb-3">
+                <span className="px-2 py-0.5 rounded bg-slate-700 text-[10px] font-mono uppercase tracking-wider text-slate-300">Performance & Pro</span>
+              </div>
               <h3 className="font-display text-2xl font-bold text-white mb-1">Architect Mode</h3>
-              <p className="text-3xl font-bold text-white mb-4">149€</p>
-              <div className="space-y-2 mb-6">
-                {PROGRAM_DETAILS.ARCHITECT_MODE.features.slice(0,3).map((f,i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-slate-300"><Check className="w-3 h-3 text-[#ff6b4a]"/> {f}</div>
+              <p className="text-xs text-slate-500 mb-2">30 Jours</p>
+              <p className="text-3xl font-bold text-white mb-2">149€</p>
+              <p className="text-xs text-slate-500 mb-4">Paiement unique</p>
+              <p className="text-sm text-slate-400 mb-6 leading-relaxed">Devenez Anti-Fragile. Pour ceux qui veulent optimiser leur focus.</p>
+              <div className="space-y-2 mb-6 flex-grow">
+                {PROGRAM_DETAILS.ARCHITECT_MODE.features.map((f, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-slate-300"><Check className="w-3 h-3 text-[#ff6b4a]" /> {f}</div>
                 ))}
               </div>
-              <div className={`mt-auto w-full h-1 rounded-full transition-colors duration-300 ${selectedProgram === 'ARCHITECT_MODE' ? 'bg-white' : 'bg-transparent'}`}></div>
+              <div className="flex flex-col gap-2 mt-auto">
+                <Link to="/checkout?plan=ARCHITECT_MODE" className="w-full">
+                  <Button className="w-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-600">
+                    Commencer ce programme
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+                <Button 
+                  variant="ghost" 
+                  onClick={() => handleSelectProgram('ARCHITECT_MODE')}
+                  className={`w-full text-slate-400 hover:text-white hover:bg-white/5 text-xs ${selectedProgram === 'ARCHITECT_MODE' ? 'text-slate-300' : ''}`}
+                >
+                  <Eye className="mr-2 w-4 h-4" />
+                  Explorer l'architecture
+                </Button>
+              </div>
+              {selectedProgram === 'ARCHITECT_MODE' && (
+                <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-slate-500 hidden md:block"></div>
+              )}
             </div>
           </div>
 
           {/* B. DYNAMIC ROADMAP DISPLAY */}
-          <div className="bg-[#0a0a16] rounded-3xl border border-white/10 p-8 md:p-12 relative overflow-hidden transition-all duration-500 animate-fade-in">
+          <div className={`bg-[#0a0a16] rounded-b-3xl md:rounded-3xl md:rounded-t-none border border-white/10 border-t-0 md:border-t p-8 md:p-12 relative overflow-hidden transition-all duration-300 ${isTransitioning ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}>
             {/* Background Grid specific to selection */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
+            
+            {/* Active indicator bar */}
+            <div className={`absolute top-0 left-0 right-0 h-1 transition-colors duration-300 ${
+              selectedProgram === 'RAPID_PATCH' ? 'bg-white/40' :
+              selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#ff6b4a]' :
+              'bg-slate-500'
+            }`}></div>
             
             <div className="relative z-10">
               <div className="flex justify-between items-end mb-12">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
                     <Map className={`w-5 h-5 ${selectedProgram === 'SYSTEM_REBOOT' ? 'text-[#ff6b4a]' : 'text-white'}`} />
-                    <span className="font-mono text-xs text-slate-500 uppercase tracking-widest">Visualisation du parcours</span>
+                    <span className="font-mono text-xs text-slate-500 uppercase tracking-widest">Architecture du Programme</span>
                   </div>
                   <h3 className="font-display text-3xl md:text-4xl text-white font-bold">{details.title}</h3>
+                  <p className="text-sm text-slate-400 mt-2">
+                    {selectedProgram === 'RAPID_PATCH' && 'Focus : Soulagement Urgent & Décompression'}
+                    {selectedProgram === 'SYSTEM_REBOOT' && 'Focus : Réalignement & Habitude'}
+                    {selectedProgram === 'ARCHITECT_MODE' && 'Focus : Anti-Fragilité & Performance Cognitive'}
+                  </p>
                 </div>
                 <div className="text-right hidden md:block">
                   <p className="text-sm text-slate-400">Durée totale</p>
@@ -381,21 +472,55 @@ export default function Landing() {
                 {details.phases.map((phase, idx) => (
                   <div key={idx} className={`relative flex flex-col gap-3 p-4 rounded-xl border transition-all duration-500 ${phase.active ? 'bg-white/5 border-white/10' : 'bg-black/40 border-white/5 opacity-50 grayscale'}`}>
                     {!phase.active && (
-                      <div className="absolute inset-0 flex items-center justify-center z-20">
-                        <Lock className="w-6 h-6 text-slate-600" />
+                      <div className="absolute inset-0 flex items-center justify-center z-20 bg-black/60 rounded-xl">
+                        <div className="flex flex-col items-center gap-1">
+                          <Lock className="w-5 h-5 text-slate-500" />
+                          <span className="text-[10px] text-slate-500 font-mono">NON INCLUS</span>
+                        </div>
                       </div>
                     )}
                     <span className={`text-[10px] font-mono tracking-widest uppercase ${phase.active ? 'text-[#ff6b4a]' : 'text-slate-600'}`}>{phase.name}</span>
-                    <div className={`h-1 w-full rounded-full ${phase.active ? (selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#ff6b4a]' : 'bg-white') : 'bg-slate-800'}`}></div>
+                    <div className={`h-1 w-full rounded-full ${phase.active ? (selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#ff6b4a]' : selectedProgram === 'ARCHITECT_MODE' ? 'bg-slate-400' : 'bg-white') : 'bg-slate-800'}`}></div>
                     <h4 className={`text-lg font-bold ${phase.active ? 'text-white' : 'text-slate-500'}`}>{phase.label}</h4>
                     <p className="text-xs text-slate-400 leading-relaxed">{phase.desc}</p>
                   </div>
                 ))}
               </div>
 
+              {/* UPSELL CTA for non-complete programs */}
+              {selectedProgram === 'RAPID_PATCH' && (
+                <div className="mb-8 p-4 rounded-xl border border-[#ff6b4a]/20 bg-[#ff6b4a]/5 flex items-center justify-between">
+                  <p className="text-sm text-slate-300">
+                    <span className="text-[#ff6b4a] font-medium">Débloquez tout le parcours</span> — Passez au System Reboot pour un réalignement complet.
+                  </p>
+                  <Button 
+                    variant="ghost" 
+                    onClick={() => handleSelectProgram('SYSTEM_REBOOT')}
+                    className="text-[#ff6b4a] hover:text-[#ff6b4a] hover:bg-[#ff6b4a]/10 text-xs"
+                  >
+                    Voir System Reboot →
+                  </Button>
+                </div>
+              )}
+
+              {selectedProgram === 'SYSTEM_REBOOT' && (
+                <div className="mb-8 p-4 rounded-xl border border-slate-500/20 bg-slate-500/5 flex items-center justify-between">
+                  <p className="text-sm text-slate-300">
+                    <span className="text-slate-300 font-medium">Ajoutez la phase Performance</span> — Passez à Architect Mode pour les protocoles Focus & Deep Work.
+                  </p>
+                  <Button 
+                    variant="ghost" 
+                    onClick={() => handleSelectProgram('ARCHITECT_MODE')}
+                    className="text-slate-300 hover:text-white hover:bg-slate-500/10 text-xs"
+                  >
+                    Voir Architect Mode →
+                  </Button>
+                </div>
+              )}
+
               {/* ACTION AREA */}
               <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-white/5">
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-2">
                   {details.features.map((feat, i) => (
                     <span key={i} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-slate-300 font-mono flex items-center gap-2">
                       <Check className="w-3 h-3 text-[#ff6b4a]" /> {feat}
@@ -406,9 +531,11 @@ export default function Landing() {
                   <Button size="lg" className={`h-14 px-8 rounded-full font-bold text-lg transition-all ${
                     selectedProgram === 'SYSTEM_REBOOT' 
                       ? 'bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] glow-primary' 
+                      : selectedProgram === 'ARCHITECT_MODE'
+                      ? 'bg-slate-800 hover:bg-slate-700 text-white border border-slate-600'
                       : 'bg-white text-black hover:bg-slate-200'
                   }`}>
-                    Commencer ce programme
+                    Commencer — {details.price}
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
