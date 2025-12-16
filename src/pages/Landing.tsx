@@ -143,112 +143,212 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 1.5 PRODUCT SHOWCASE - Fake Dashboard */}
-      <section className="py-16 px-6 relative z-10">
-        <div className="container mx-auto max-w-5xl">
+      {/* 1.5 PRODUCT SHOWCASE - Hyper-Realistic Dashboard (Architect Mode Theme) */}
+      <section className="py-20 px-6 relative z-10">
+        <div className="container mx-auto max-w-6xl">
+          {/* Section Label */}
+          <div className="text-center mb-12">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500 block mb-3">Interface Preview</span>
+            <p className="text-slate-400 text-sm">Découvrez votre futur espace de travail</p>
+          </div>
+
           {/* Floating App Window Container */}
           <div 
             className="relative animate-fade-in"
             style={{ 
               animationDelay: '0.5s',
-              perspective: '1000px'
+              perspective: '2000px'
             }}
           >
-            {/* Orange Glow Behind */}
-            <div className="absolute inset-0 bg-[#ff6b4a]/20 blur-[80px] rounded-3xl -z-10 scale-95" />
+            {/* Multi-layer Glow Effect */}
+            <div className="absolute inset-0 scale-90 -z-10">
+              <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-slate-400/20 to-transparent blur-[100px] rounded-[40px]" />
+              <div className="absolute inset-x-10 top-10 bottom-20 bg-white/5 blur-[60px] rounded-[40px]" />
+            </div>
             
-            {/* The Window */}
+            {/* The Main Window - Architect Mode Theme */}
             <div 
-              className="relative rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.02] backdrop-blur-xl overflow-hidden shadow-2xl"
+              className="relative rounded-[24px] border border-white/[0.08] bg-black overflow-hidden"
               style={{
-                transform: 'rotateX(2deg) rotateY(-1deg)',
-                transformStyle: 'preserve-3d'
+                transform: 'rotateX(4deg) rotateY(-2deg)',
+                transformStyle: 'preserve-3d',
+                boxShadow: '0 60px 120px -30px rgba(0,0,0,0.8), 0 30px 60px -20px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.1)'
               }}
             >
-              {/* Window Top Bar */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/[0.02]">
-                <div className="flex items-center gap-3">
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/60" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/60" />
+              {/* Gloss/Reflection Effect on top-left */}
+              <div className="absolute top-0 left-0 w-1/2 h-1/3 bg-gradient-to-br from-white/[0.08] via-transparent to-transparent pointer-events-none rounded-tl-[24px]" />
+              
+              {/* Window Structure: Sidebar + Main */}
+              <div className="flex">
+                {/* Sidebar Navigation */}
+                <div className="w-16 md:w-20 bg-white/[0.02] border-r border-white/[0.05] flex flex-col items-center py-6 gap-6">
+                  {/* Logo */}
+                  <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-[0_0_30px_-5px_rgba(255,255,255,0.3)]">
+                    <span className="text-black font-bold text-lg">N</span>
                   </div>
-                  <span className="font-mono text-xs text-slate-400 ml-4">SESSION DU JOUR : 01</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                  </span>
-                  <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">Système Connecté</span>
-                </div>
-              </div>
-
-              {/* Main Content Area */}
-              <div className="p-8">
-                {/* Audio Player Section */}
-                <div className="relative p-6 rounded-2xl bg-gradient-to-br from-white/[0.05] to-transparent border border-white/10 mb-6">
-                  {/* Track Info */}
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 rounded-xl bg-[#ff6b4a]/20 border border-[#ff6b4a]/30 flex items-center justify-center">
-                      <Brain className="w-8 h-8 text-[#ff6b4a]" />
+                  
+                  {/* Nav Icons */}
+                  <div className="flex flex-col gap-4 mt-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                     </div>
-                    <div>
-                      <p className="font-mono text-[10px] text-[#ff6b4a] uppercase tracking-widest mb-1">Protocole Actif</p>
-                      <h3 className="text-xl font-medium text-white">Décompression Lombaire</h3>
+                    <div className="w-10 h-10 rounded-xl bg-transparent flex items-center justify-center text-slate-600 hover:text-white transition-colors">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                    </div>
+                    <div className="w-10 h-10 rounded-xl bg-transparent flex items-center justify-center text-slate-600 hover:text-white transition-colors">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    </div>
+                    <div className="w-10 h-10 rounded-xl bg-transparent flex items-center justify-center text-slate-600 hover:text-white transition-colors">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                     </div>
                   </div>
-
-                  {/* Waveform Visualization */}
-                  <div className="relative h-20 mb-6 flex items-center justify-center gap-[3px]">
-                    {[...Array(60)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-1 bg-gradient-to-t from-[#ff6b4a]/40 to-[#ff6b4a] rounded-full"
-                        style={{
-                          height: `${20 + Math.sin(i * 0.3) * 30 + Math.random() * 20}%`,
-                          animationDelay: `${i * 0.05}s`,
-                          opacity: i < 25 ? 1 : 0.3
-                        }}
-                      />
-                    ))}
-                    {/* Progress Indicator */}
-                    <div className="absolute left-[40%] top-0 bottom-0 w-0.5 bg-white/80 shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
-                  </div>
-
-                  {/* Play Button */}
-                  <div className="flex items-center justify-center gap-8">
-                    <button className="w-6 h-6 text-slate-500 hover:text-white transition-colors">
-                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-                    </button>
-                    <button className="w-16 h-16 rounded-full bg-[#ff6b4a] flex items-center justify-center shadow-[0_0_30px_-5px_#ff6b4a] hover:scale-105 transition-transform">
-                      <svg className="w-7 h-7 text-[#050510] ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                    </button>
-                    <button className="w-6 h-6 text-slate-500 hover:text-white transition-colors">
-                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-                    </button>
-                  </div>
-
-                  {/* Time */}
-                  <div className="flex justify-between mt-4 font-mono text-xs text-slate-500">
-                    <span>04:32</span>
-                    <span>12:00</span>
-                  </div>
                 </div>
 
-                {/* Stats Cards */}
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                    <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-2">Pression Discale</p>
-                    <p className="text-2xl font-bold text-green-400">-15%</p>
+                {/* Main Content Area */}
+                <div className="flex-1">
+                  {/* Header Bar */}
+                  <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.05] bg-white/[0.01]">
+                    <div className="flex items-center gap-4">
+                      <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                        <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                        <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+                      </div>
+                      <div className="h-4 w-px bg-white/10 ml-2" />
+                      <span className="font-mono text-[11px] text-slate-500 uppercase tracking-wider">Session 01 · Architect Mode</span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      {/* Notification Bell */}
+                      <div className="relative">
+                        <svg className="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                        <span className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full"></span>
+                      </div>
+                      {/* User Avatar */}
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center text-[10px] font-bold text-white">
+                          JD
+                        </div>
+                        <span className="text-sm text-slate-400 hidden md:block">John Doe</span>
+                      </div>
+                      {/* Status */}
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                        </span>
+                        <span className="font-mono text-[10px] text-emerald-400 uppercase tracking-wider">Online</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                    <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-2">Durée</p>
-                    <p className="text-2xl font-bold text-white">12 <span className="text-base font-normal text-slate-400">min</span></p>
-                  </div>
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                    <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-2">Série en cours</p>
-                    <p className="text-2xl font-bold text-[#ff6b4a]">1 <span className="text-base font-normal text-slate-400">Jour</span></p>
+
+                  {/* Dashboard Content */}
+                  <div className="p-6 md:p-8">
+                    {/* Day Header */}
+                    <div className="flex items-center justify-between mb-8">
+                      <div>
+                        <p className="font-mono text-[10px] text-slate-600 uppercase tracking-widest mb-1">Jour 12 · Phase 2</p>
+                        <h2 className="text-2xl md:text-3xl font-light text-white">Décompression Vertébrale</h2>
+                      </div>
+                      <div className="hidden md:flex items-center gap-2">
+                        <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 font-mono text-[10px] text-slate-400">
+                          [ ARCHITECT_MODE :: ACTIVE ]
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Rich Audio Player */}
+                    <div className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent border border-white/[0.06] backdrop-blur-xl mb-6">
+                      {/* Inner glow */}
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-white/[0.02] to-transparent pointer-events-none" />
+                      
+                      <div className="relative z-10">
+                        {/* Track Info */}
+                        <div className="flex items-center gap-5 mb-8">
+                          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden">
+                            <Brain className="w-10 h-10 text-white/80" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-mono text-[10px] text-slate-500 uppercase tracking-widest mb-1">Protocole Actif</p>
+                            <h3 className="text-xl md:text-2xl font-light text-white mb-1">Décompression Lombaire</h3>
+                            <p className="text-sm text-slate-500">Module Focus · Anti-Fragilité</p>
+                          </div>
+                        </div>
+
+                        {/* Detailed Waveform */}
+                        <div className="relative h-24 mb-6 flex items-end justify-center gap-[2px] px-2">
+                          {[...Array(80)].map((_, i) => {
+                            const baseHeight = 20 + Math.sin(i * 0.15) * 25 + Math.cos(i * 0.08) * 15;
+                            const played = i < 32;
+                            return (
+                              <div
+                                key={i}
+                                className={`w-[3px] md:w-1 rounded-full transition-all duration-300 ${
+                                  played 
+                                    ? 'bg-gradient-to-t from-slate-400 to-white' 
+                                    : 'bg-gradient-to-t from-slate-800 to-slate-600'
+                                }`}
+                                style={{
+                                  height: `${baseHeight + Math.random() * 15}%`,
+                                  opacity: played ? 1 : 0.4
+                                }}
+                              />
+                            );
+                          })}
+                          {/* Playhead */}
+                          <div className="absolute left-[40%] top-0 bottom-0 flex flex-col items-center">
+                            <div className="w-0.5 flex-1 bg-white shadow-[0_0_15px_rgba(255,255,255,0.6)]" />
+                            <div className="w-3 h-3 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] -mt-1" />
+                          </div>
+                        </div>
+
+                        {/* Progress Bar */}
+                        <div className="mb-4">
+                          <div className="h-1 rounded-full bg-slate-800 overflow-hidden">
+                            <div className="h-full w-[40%] bg-gradient-to-r from-slate-400 to-white rounded-full" />
+                          </div>
+                        </div>
+
+                        {/* Time + Controls */}
+                        <div className="flex items-center justify-between">
+                          <span className="font-mono text-xs text-slate-500">04:48</span>
+                          
+                          <div className="flex items-center gap-6">
+                            <button className="w-8 h-8 text-slate-500 hover:text-white transition-colors">
+                              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                            </button>
+                            <button className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-[0_0_40px_-5px_rgba(255,255,255,0.4)] hover:scale-105 transition-transform">
+                              <svg className="w-7 h-7 text-black ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </button>
+                            <button className="w-8 h-8 text-slate-500 hover:text-white transition-colors">
+                              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                            </button>
+                          </div>
+                          
+                          <span className="font-mono text-xs text-slate-500">12:00</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Stats Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+                        <p className="font-mono text-[9px] text-slate-600 uppercase tracking-wider mb-2">Pression Discale</p>
+                        <p className="text-2xl font-light text-emerald-400">-15%</p>
+                      </div>
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+                        <p className="font-mono text-[9px] text-slate-600 uppercase tracking-wider mb-2">Durée</p>
+                        <p className="text-2xl font-light text-white">12 <span className="text-sm font-normal text-slate-500">min</span></p>
+                      </div>
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+                        <p className="font-mono text-[9px] text-slate-600 uppercase tracking-wider mb-2">Streak</p>
+                        <p className="text-2xl font-light text-white">12 <span className="text-sm font-normal text-slate-500">jours</span></p>
+                      </div>
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+                        <p className="font-mono text-[9px] text-slate-600 uppercase tracking-wider mb-2">Focus Score</p>
+                        <p className="text-2xl font-light text-white">94<span className="text-sm font-normal text-slate-500">%</span></p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
