@@ -1,9 +1,57 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { ArrowRight, ChevronRight, Map, Brain, Laptop, Zap, Activity, Wind, Target, RotateCcw } from 'lucide-react';
+import { ArrowRight, ChevronRight, Map, Brain, Laptop, Zap, Activity, Wind, Target, RotateCcw, Check, Lock } from 'lucide-react';
+
+// --- CONFIGURATION DU CONTENU DYNAMIQUE ---
+const PROGRAM_DETAILS = {
+  RAPID_PATCH: {
+    title: "Rapid Patch Protocol",
+    duration: "14 Jours",
+    phases: [
+      { name: "SEMAINE 1", label: "SOULAGER", active: true, desc: "Décompression d'urgence & baisse de l'inflammation." },
+      { name: "SEMAINE 2", label: "MOBILISER", active: true, desc: "Récupération des amplitudes articulaires clés." },
+      { name: "SEMAINE 3", label: "RENFORCER", active: false, desc: "Non inclus : Stabilisation durable." },
+      { name: "SEMAINE 4", label: "PERFORMER", active: false, desc: "Non inclus : Optimisation neurale." }
+    ],
+    features: ["Décompression Lombaire", "Protocole Tech-Neck", "Audio-Guide Basique"],
+    price: "49€",
+    color: "slate"
+  },
+  SYSTEM_REBOOT: {
+    title: "System Reboot Protocol",
+    duration: "21 Jours",
+    phases: [
+      { name: "SEMAINE 1", label: "SOULAGER", active: true, desc: "Décompression & Reset du système nerveux." },
+      { name: "SEMAINE 2", label: "ALIGNER", active: true, desc: "Reprogrammation de la posture neutre." },
+      { name: "SEMAINE 3", label: "RENFORCER", active: true, desc: "Verrouillage musculaire de la nouvelle posture." },
+      { name: "SEMAINE 4", label: "PERFORMER", active: false, desc: "Non inclus : Optimisation avancée." }
+    ],
+    features: ["Tout le Rapid Patch", "Reprogrammation Neurale", "Neuroplasticité", "Scientific Rationale"],
+    price: "99€",
+    color: "#ff6b4a"
+  },
+  ARCHITECT_MODE: {
+    title: "Architect Mode Protocol",
+    duration: "30 Jours",
+    phases: [
+      { name: "SEMAINE 1", label: "SOULAGER", active: true, desc: "Décompression & Reset complet." },
+      { name: "SEMAINE 2", label: "ALIGNER", active: true, desc: "Correction structurelle profonde." },
+      { name: "SEMAINE 3", label: "RENFORCER", active: true, desc: "Construction de l'armure posturale." },
+      { name: "SEMAINE 4+", label: "PERFORMER", active: true, desc: "Focus Visuel, Vestibulaire & Deep Work." }
+    ],
+    features: ["Programme Complet (30j)", "Protocoles Vision (Focus)", "Routine Deep Work", "Support Prioritaire"],
+    price: "149€",
+    color: "white"
+  }
+};
 
 export default function Landing() {
+  // État par défaut sur 'SYSTEM_REBOOT' pour montrer l'offre recommandée
+  const [selectedProgram, setSelectedProgram] = useState<'RAPID_PATCH' | 'SYSTEM_REBOOT' | 'ARCHITECT_MODE'>('SYSTEM_REBOOT');
+  const details = PROGRAM_DETAILS[selectedProgram];
+
   return (
     <div className="min-h-screen bg-[#050510] relative overflow-hidden text-white selection:bg-[#ff6b4a] selection:text-white">
       {/* Aurora Background Effect */}
@@ -94,20 +142,9 @@ export default function Landing() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Carte 1 - Usure Silencieuse */}
+            {/* Carte 1 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-red-500/50 transition-all duration-500 overflow-hidden">
-              {/* Grid texture background */}
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
-              
-              {/* Corner decorations */}
-              <div className="absolute top-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute top-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              
-              {/* Glow effect on hover */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-red-500 opacity-0 group-hover:opacity-10 blur-[60px] transition-opacity duration-500 rounded-full"></div>
-              
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-red-500/40 transition-all duration-300">
@@ -121,20 +158,9 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Carte 2 - Brouillard Mental */}
+            {/* Carte 2 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-orange-500/50 transition-all duration-500 overflow-hidden">
-              {/* Grid texture background */}
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
-              
-              {/* Corner decorations */}
-              <div className="absolute top-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute top-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              
-              {/* Glow effect on hover */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-orange-500 opacity-0 group-hover:opacity-10 blur-[60px] transition-opacity duration-500 rounded-full"></div>
-              
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-orange-500/40 transition-all duration-300">
@@ -148,20 +174,9 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Carte 3 - Métabolisme au Ralenti */}
+            {/* Carte 3 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-yellow-500/50 transition-all duration-500 overflow-hidden">
-              {/* Grid texture background */}
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
-              
-              {/* Corner decorations */}
-              <div className="absolute top-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute top-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              
-              {/* Glow effect on hover */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-yellow-500 opacity-0 group-hover:opacity-10 blur-[60px] transition-opacity duration-500 rounded-full"></div>
-              
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-yellow-500/40 transition-all duration-300">
@@ -178,7 +193,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 3. SOCIAL PROOF / DATA - Données Cliniques (Déplacé ici) */}
+      {/* 3. SOCIAL PROOF / DATA - Données Cliniques */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16">
@@ -191,39 +206,25 @@ export default function Landing() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Stat 1 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-500 overflow-hidden text-center">
-              {/* Grid texture background */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-30"></div>
-              
               <div className="relative z-10">
                 <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-transparent mb-3 group-hover:from-[#ff6b4a] group-hover:to-[#ff856b] transition-all duration-500">96%</p>
                 <p className="text-lg text-white font-medium mb-2">de Résorption Spontanée</p>
-                <p className="text-slate-400 text-sm mb-4">des hernies avec le mouvement adapté</p>
                 <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: NCBI 2019 — Étude sur 283 patients</p>
               </div>
             </div>
-
             {/* Stat 2 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-500 overflow-hidden text-center">
-              {/* Grid texture background */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-30"></div>
-              
               <div className="relative z-10">
                 <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-transparent mb-3 group-hover:from-[#ff6b4a] group-hover:to-[#ff856b] transition-all duration-500">0%</p>
                 <p className="text-lg text-white font-medium mb-2">de Différence</p>
-                <p className="text-slate-400 text-sm mb-4">entre chirurgie et réhab active à 2 ans</p>
                 <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: Spine Journal 2021 — Méta-analyse</p>
               </div>
             </div>
-
             {/* Stat 3 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-500 overflow-hidden text-center">
-              {/* Grid texture background */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-30"></div>
-              
               <div className="relative z-10">
                 <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-transparent mb-3 group-hover:from-[#ff6b4a] group-hover:to-[#ff856b] transition-all duration-500">-40%</p>
                 <p className="text-lg text-white font-medium mb-2">de Risque</p>
-                <p className="text-slate-400 text-sm mb-4">de chronicité en restant actif</p>
                 <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: The Lancet 2018 — Cohorte 12 mois</p>
               </div>
             </div>
@@ -244,89 +245,42 @@ export default function Landing() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Fast Charge */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
-              {/* Grid texture background */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
-              
-              {/* Corner decorations */}
-              <div className="absolute top-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute top-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              
-              {/* Glow effect on hover */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#ff6b4a] opacity-0 group-hover:opacity-10 blur-[60px] transition-opacity duration-500 rounded-full"></div>
-              
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
                     <Zap className="w-7 h-7 text-[#ff6b4a]" />
                   </div>
                 </div>
-                <div className="flex items-center gap-2 mb-3">
-                  <h3 className="text-2xl text-white font-medium">Fast Charge</h3>
-                  <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 text-[#ff6b4a]">01</span>
-                </div>
-                <p className="text-slate-400 leading-relaxed">
+                <h3 className="text-2xl text-white font-medium">Fast Charge</h3>
+                <p className="text-slate-400 leading-relaxed mt-3">
                   Récupérez +3mm de hauteur discale en 15 min de décompression.
                 </p>
               </div>
             </div>
-
             {/* Anti-Fragilité */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
-              {/* Grid texture background */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
-              
-              {/* Corner decorations */}
-              <div className="absolute top-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute top-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              
-              {/* Glow effect on hover */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#ff6b4a] opacity-0 group-hover:opacity-10 blur-[60px] transition-opacity duration-500 rounded-full"></div>
-              
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
                     <Target className="w-7 h-7 text-[#ff6b4a]" />
                   </div>
                 </div>
-                <div className="flex items-center gap-2 mb-3">
-                  <h3 className="text-2xl text-white font-medium">Anti-Fragilité</h3>
-                  <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 text-[#ff6b4a]">02</span>
-                </div>
-                <p className="text-slate-400 leading-relaxed">
+                <h3 className="text-2xl text-white font-medium">Anti-Fragilité</h3>
+                <p className="text-slate-400 leading-relaxed mt-3">
                   Réactivez les muscles stabilisateurs éteints par votre chaise.
                 </p>
               </div>
             </div>
-
             {/* Reboot Neural */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
-              {/* Grid texture background */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
-              
-              {/* Corner decorations */}
-              <div className="absolute top-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute top-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              
-              {/* Glow effect on hover */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#ff6b4a] opacity-0 group-hover:opacity-10 blur-[60px] transition-opacity duration-500 rounded-full"></div>
-              
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
                     <RotateCcw className="w-7 h-7 text-[#ff6b4a]" />
                   </div>
                 </div>
-                <div className="flex items-center gap-2 mb-3">
-                  <h3 className="text-2xl text-white font-medium">Reboot Neural</h3>
-                  <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 text-[#ff6b4a]">03</span>
-                </div>
-                <p className="text-slate-400 leading-relaxed">
+                <h3 className="text-2xl text-white font-medium">Reboot Neural</h3>
+                <p className="text-slate-400 leading-relaxed mt-3">
                   21 jours pour reprogrammer votre posture par neuroplasticité.
                 </p>
               </div>
@@ -335,212 +289,133 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 5. PRICING SECTION */}
-      <section className="py-24 px-6 relative z-10">
+      {/* 5. PRICING & INTERACTIVE ROADMAP SECTION */}
+      <section className="py-24 px-6 relative z-10" id="pricing">
         <div className="container mx-auto max-w-6xl">
+          
           <div className="text-center mb-16">
-            <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-4 block">Sélectionnez votre Patch</span>
-            <h2 className="font-display text-4xl md:text-5xl text-white font-bold mb-4">
-              Choisissez votre Protocole
+            <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-4 block">Select Protocol</span>
+            <h2 className="font-display text-4xl md:text-5xl text-white font-bold">
+              Choisissez votre Niveau
             </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">
-              Paiement unique. Accès à vie. Pas d'abonnement.
+            <p className="text-slate-400 mt-4 max-w-2xl mx-auto">
+              Cliquez sur une carte pour révéler l'architecture du programme.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* A. PRICING CARDS (SELECTORS) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            {/* CARD 1: RAPID PATCH */}
+            <div 
+              onClick={() => setSelectedProgram('RAPID_PATCH')}
+              className={`cursor-pointer group flex flex-col p-6 rounded-3xl border transition-all duration-300 relative ${selectedProgram === 'RAPID_PATCH' ? 'bg-white/10 border-white/40 shadow-2xl' : 'bg-[#0a0a16] border-white/10 hover:border-white/20 opacity-60 hover:opacity-100'}`}
+            >
+              <h3 className="font-display text-2xl font-bold text-white mb-1">Rapid Patch</h3>
+              <p className="text-3xl font-bold text-white mb-4">49€</p>
+              <div className="space-y-2 mb-6">
+                {PROGRAM_DETAILS.RAPID_PATCH.features.slice(0,2).map((f,i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-slate-300"><Check className="w-3 h-3 text-[#ff6b4a]"/> {f}</div>
+                ))}
+              </div>
+              <div className={`mt-auto w-full h-1 rounded-full transition-colors duration-300 ${selectedProgram === 'RAPID_PATCH' ? 'bg-white' : 'bg-transparent'}`}></div>
+            </div>
+
+            {/* CARD 2: SYSTEM REBOOT */}
+            <div 
+              onClick={() => setSelectedProgram('SYSTEM_REBOOT')}
+              className={`cursor-pointer group flex flex-col p-6 rounded-3xl border transition-all duration-300 relative transform md:-translate-y-4 ${selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#0a0a16] border-[#ff6b4a] shadow-[0_0_40px_-10px_rgba(255,107,74,0.3)]' : 'bg-[#0a0a16] border-white/10 hover:border-[#ff6b4a]/50 opacity-60 hover:opacity-100'}`}
+            >
+              {selectedProgram === 'SYSTEM_REBOOT' && (
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-1 bg-[#ff6b4a] text-[#050510] text-[10px] font-bold rounded-full uppercase tracking-widest">
+                  Recommandé
+                </div>
+              )}
+              <h3 className="font-display text-2xl font-bold text-white mb-1">System Reboot</h3>
+              <p className="text-3xl font-bold text-white mb-4">99€</p>
+              <div className="space-y-2 mb-6">
+                {PROGRAM_DETAILS.SYSTEM_REBOOT.features.slice(0,3).map((f,i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-slate-300"><Check className="w-3 h-3 text-[#ff6b4a]"/> {f}</div>
+                ))}
+              </div>
+              <div className={`mt-auto w-full h-1 rounded-full transition-colors duration-300 ${selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#ff6b4a]' : 'bg-transparent'}`}></div>
+            </div>
+
+            {/* CARD 3: ARCHITECT MODE */}
+            <div 
+              onClick={() => setSelectedProgram('ARCHITECT_MODE')}
+              className={`cursor-pointer group flex flex-col p-6 rounded-3xl border transition-all duration-300 relative ${selectedProgram === 'ARCHITECT_MODE' ? 'bg-white/10 border-white/40 shadow-2xl' : 'bg-[#0a0a16] border-white/10 hover:border-white/20 opacity-60 hover:opacity-100'}`}
+            >
+              <h3 className="font-display text-2xl font-bold text-white mb-1">Architect Mode</h3>
+              <p className="text-3xl font-bold text-white mb-4">149€</p>
+              <div className="space-y-2 mb-6">
+                {PROGRAM_DETAILS.ARCHITECT_MODE.features.slice(0,3).map((f,i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-slate-300"><Check className="w-3 h-3 text-[#ff6b4a]"/> {f}</div>
+                ))}
+              </div>
+              <div className={`mt-auto w-full h-1 rounded-full transition-colors duration-300 ${selectedProgram === 'ARCHITECT_MODE' ? 'bg-white' : 'bg-transparent'}`}></div>
+            </div>
+          </div>
+
+          {/* B. DYNAMIC ROADMAP DISPLAY */}
+          <div className="bg-[#0a0a16] rounded-3xl border border-white/10 p-8 md:p-12 relative overflow-hidden transition-all duration-500 animate-fade-in">
+            {/* Background Grid specific to selection */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
             
-            {/* RAPID PATCH - Carte 1 */}
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-white/30 transition-all duration-500 overflow-hidden flex flex-col">
-              {/* Grid texture background */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-30"></div>
-              
-              {/* Corner decorations */}
-              <div className="absolute top-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute top-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 left-3 text-white/10 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 right-3 text-white/10 font-mono text-[10px]">+</div>
-              
-              <div className="relative z-10 flex flex-col h-full">
-                {/* Tag */}
-                <div className="mb-4">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-mono bg-red-500/10 border border-red-500/20 text-red-400">
-                    URGENCE & DOULEUR
-                  </span>
-                </div>
-                
-                {/* Title & Price */}
-                <h3 className="text-2xl text-white font-bold mb-2">RAPID PATCH</h3>
-                <p className="text-slate-500 text-sm mb-4">14 Jours</p>
-                
-                <div className="mb-6">
-                  <span className="text-4xl font-bold text-white">49€</span>
-                  <span className="text-slate-500 text-sm ml-2">paiement unique</span>
-                </div>
-                
-                {/* Promise */}
-                <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                  Éteindre l'inflammation et stopper la douleur en 2 semaines.
-                </p>
-                
-                {/* Features */}
-                <div className="space-y-3 mb-8 flex-1">
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-500"></div>
-                    <span>Décompression Lombaire d'Urgence</span>
+            <div className="relative z-10">
+              <div className="flex justify-between items-end mb-12">
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <Map className={`w-5 h-5 ${selectedProgram === 'SYSTEM_REBOOT' ? 'text-[#ff6b4a]' : 'text-white'}`} />
+                    <span className="font-mono text-xs text-slate-500 uppercase tracking-widest">Visualisation du parcours</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-500"></div>
-                    <span>Protocole Tech-Neck</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-500"></div>
-                    <span>Audio-Guide basique</span>
-                  </div>
+                  <h3 className="font-display text-3xl md:text-4xl text-white font-bold">{details.title}</h3>
                 </div>
-                
-                {/* CTA */}
-                <Link to="/checkout?plan=RAPID_PATCH" className="block mt-auto">
-                  <Button className="w-full h-12 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-medium transition-all">
-                    Sélectionner
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
+                <div className="text-right hidden md:block">
+                  <p className="text-sm text-slate-400">Durée totale</p>
+                  <p className="text-2xl font-mono font-bold text-white">{details.duration}</p>
+                </div>
               </div>
-            </div>
 
-            {/* SYSTEM REBOOT - Carte 2 (Phare) */}
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-[#ff6b4a]/10 to-transparent border-2 border-[#ff6b4a]/50 hover:border-[#ff6b4a] transition-all duration-500 overflow-hidden flex flex-col shadow-[0_0_40px_-15px_#ff6b4a]">
-              {/* Grid texture background */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,107,74,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,107,74,0.03)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
-              
-              {/* Glow effect */}
-              <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-60 h-60 bg-[#ff6b4a] opacity-10 blur-[80px] rounded-full"></div>
-              
-              {/* Corner decorations */}
-              <div className="absolute top-3 left-3 text-[#ff6b4a]/30 font-mono text-[10px]">+</div>
-              <div className="absolute top-3 right-3 text-[#ff6b4a]/30 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 left-3 text-[#ff6b4a]/30 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 right-3 text-[#ff6b4a]/30 font-mono text-[10px]">+</div>
-              
-              <div className="relative z-10 flex flex-col h-full">
-                {/* Tag */}
-                <div className="mb-4 flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-mono bg-[#ff6b4a]/20 border border-[#ff6b4a]/40 text-[#ff6b4a]">
-                    RECOMMANDÉ
-                  </span>
-                  <span className="px-2 py-1 rounded text-[9px] font-mono bg-white/10 text-white">
-                    STANDARD
-                  </span>
-                </div>
-                
-                {/* Title & Price */}
-                <h3 className="text-2xl text-white font-bold mb-2">SYSTEM REBOOT</h3>
-                <p className="text-[#ff6b4a] text-sm mb-4 font-medium">21 Jours</p>
-                
-                <div className="mb-6">
-                  <span className="text-5xl font-bold text-white">99€</span>
-                  <span className="text-slate-400 text-sm ml-2">paiement unique</span>
-                </div>
-                
-                {/* Promise */}
-                <p className="text-slate-300 text-sm mb-6 leading-relaxed">
-                  La correction complète. Réalignez votre posture par défaut.
-                </p>
-                
-                {/* Features */}
-                <div className="space-y-3 mb-8 flex-1">
-                  <div className="flex items-center gap-2 text-sm text-white">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b4a]"></div>
-                    <span>Tout le contenu Rapid Patch</span>
+              {/* THE VISUAL TIMELINE */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                {details.phases.map((phase, idx) => (
+                  <div key={idx} className={`relative flex flex-col gap-3 p-4 rounded-xl border transition-all duration-500 ${phase.active ? 'bg-white/5 border-white/10' : 'bg-black/40 border-white/5 opacity-50 grayscale'}`}>
+                    {!phase.active && (
+                      <div className="absolute inset-0 flex items-center justify-center z-20">
+                        <Lock className="w-6 h-6 text-slate-600" />
+                      </div>
+                    )}
+                    <span className={`text-[10px] font-mono tracking-widest uppercase ${phase.active ? 'text-[#ff6b4a]' : 'text-slate-600'}`}>{phase.name}</span>
+                    <div className={`h-1 w-full rounded-full ${phase.active ? (selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#ff6b4a]' : 'bg-white') : 'bg-slate-800'}`}></div>
+                    <h4 className={`text-lg font-bold ${phase.active ? 'text-white' : 'text-slate-500'}`}>{phase.label}</h4>
+                    <p className="text-xs text-slate-400 leading-relaxed">{phase.desc}</p>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-white">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b4a]"></div>
-                    <span>Reprogrammation Neuromotrice</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-white">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b4a]"></div>
-                    <span>Intégration Habitude (Neuroplasticité)</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-white">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b4a]"></div>
-                    <span>Accès "Scientific Rationale"</span>
-                  </div>
-                </div>
-                
-                {/* CTA */}
-                <Link to="/checkout?plan=SYSTEM_REBOOT" className="block mt-auto">
-                  <Button className="w-full h-14 bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] font-bold text-lg glow-primary transition-all hover:scale-[1.02]">
-                    Initialiser le Protocole
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
+                ))}
               </div>
-            </div>
 
-            {/* ARCHITECT MODE - Carte 3 */}
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-slate-800/30 to-transparent border border-slate-700/50 hover:border-slate-600 transition-all duration-500 overflow-hidden flex flex-col">
-              {/* Grid texture background */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
-              
-              {/* Corner decorations */}
-              <div className="absolute top-3 left-3 text-slate-700 font-mono text-[10px]">+</div>
-              <div className="absolute top-3 right-3 text-slate-700 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 left-3 text-slate-700 font-mono text-[10px]">+</div>
-              <div className="absolute bottom-3 right-3 text-slate-700 font-mono text-[10px]">+</div>
-              
-              <div className="relative z-10 flex flex-col h-full">
-                {/* Tag */}
-                <div className="mb-4">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-mono bg-slate-800 border border-slate-600 text-slate-300">
-                    PERFORMANCE & PRO
-                  </span>
+              {/* ACTION AREA */}
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-white/5">
+                <div className="flex flex-wrap gap-4">
+                  {details.features.map((feat, i) => (
+                    <span key={i} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-slate-300 font-mono flex items-center gap-2">
+                      <Check className="w-3 h-3 text-[#ff6b4a]" /> {feat}
+                    </span>
+                  ))}
                 </div>
-                
-                {/* Title & Price */}
-                <h3 className="text-2xl text-white font-bold mb-2">ARCHITECT MODE</h3>
-                <p className="text-slate-500 text-sm mb-4">30 Jours</p>
-                
-                <div className="mb-6">
-                  <span className="text-4xl font-bold text-white">149€</span>
-                  <span className="text-slate-500 text-sm ml-2">paiement unique</span>
-                </div>
-                
-                {/* Promise */}
-                <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                  Devenez Anti-Fragile. Pour ceux qui veulent optimiser leur focus.
-                </p>
-                
-                {/* Features */}
-                <div className="space-y-3 mb-8 flex-1">
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-500"></div>
-                    <span>Programme Complet (Reboot + Hardening)</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-500"></div>
-                    <span>Protocoles Vision & Vestibulaire</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-500"></div>
-                    <span>Routine "Deep Work"</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-500"></div>
-                    <span>Support Prioritaire</span>
-                  </div>
-                </div>
-                
-                {/* CTA */}
-                <Link to="/checkout?plan=ARCHITECT_MODE" className="block mt-auto">
-                  <Button className="w-full h-12 bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 font-medium transition-all">
-                    Sélectionner
-                    <ChevronRight className="ml-2 h-4 w-4" />
+                <Link to={`/checkout?plan=${selectedProgram}`}>
+                  <Button size="lg" className={`h-14 px-8 rounded-full font-bold text-lg transition-all ${
+                    selectedProgram === 'SYSTEM_REBOOT' 
+                      ? 'bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] glow-primary' 
+                      : 'bg-white text-black hover:bg-slate-200'
+                  }`}>
+                    Commencer ce programme
+                    <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
