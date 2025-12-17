@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { ArrowRight, ChevronRight, Map, Brain, Laptop, Zap, Activity, Wind, Target, RotateCcw, Check, Lock, Eye } from 'lucide-react';
+import { ArrowRight, ChevronRight, Map, Brain, Laptop, Zap, Activity, Wind, Target, RotateCcw, Check, Lock, Eye, Shield, Cpu, Settings, X, CheckCircle } from 'lucide-react';
 
 // --- CONFIGURATION DU CONTENU DYNAMIQUE ---
 const PROGRAM_DETAILS = {
@@ -49,7 +49,6 @@ const PROGRAM_DETAILS = {
 
 export default function Landing() {
   const navigate = useNavigate();
-  // État par défaut sur 'SYSTEM_REBOOT' pour montrer l'offre recommandée
   const [selectedProgram, setSelectedProgram] = useState<'RAPID_PATCH' | 'SYSTEM_REBOOT' | 'ARCHITECT_MODE'>('SYSTEM_REBOOT');
   const [isTransitioning, setIsTransitioning] = useState(false);
   const details = PROGRAM_DETAILS[selectedProgram];
@@ -103,26 +102,26 @@ export default function Landing() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-8 animate-fade-in backdrop-blur-md">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff6b4a] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ff6b4a]"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">
-              System Patch v2.0 Available
+            <span className="font-mono text-[10px] uppercase tracking-widest text-white">
+              Protocole Clinique Validé
             </span>
           </div>
 
           {/* Title */}
           <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 animate-fade-in leading-[1.1]" style={{ animationDelay: '0.1s' }}>
-            Initialisez le <span className="italic text-slate-500">protocole</span><br />
+            La <span className="italic text-slate-500">Maintenance Système</span><br />
             <span className="bg-gradient-to-r from-white via-slate-200 to-slate-500 bg-clip-text text-transparent">
-              en 21 jours chrono.
+              pour le Corps Humain.
             </span>
           </h1>
 
           {/* Description */}
           <p className="text-lg md:text-xl text-slate-400 font-light mb-10 max-w-2xl mx-auto animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
-            Votre ambition vous demande de rester assis. Votre corps a besoin de mouvement. 
-            NIVO est le correctif système pour réconcilier les deux.
+            Pour les entrepreneurs et créateurs qui passent leur vie assis.<br />
+            <span className="text-slate-500">Basé sur les standards cliniques de décompression (Méthodes McKenzie & McGill).</span>
           </p>
 
           {/* CTA */}
@@ -143,12 +142,12 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 1.5 PRODUCT SHOWCASE - Hyper-Realistic Dashboard (Architect Mode Theme) */}
+      {/* 2. PRODUCT SHOWCASE - Hyper-Realistic Dashboard (Architect Mode Theme) */}
       <section className="py-20 px-6 relative z-10">
         <div className="container mx-auto max-w-6xl">
           {/* Section Label */}
           <div className="text-center mb-12">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500 block mb-3">Interface Preview</span>
+            <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500 block mb-3">Aperçu de l'Interface</span>
             <p className="text-slate-400 text-sm">Découvrez votre futur espace de travail</p>
           </div>
 
@@ -357,34 +356,40 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 2. PROBLEM SECTION - Hardware Latency */}
+      {/* 3. PROBLEM SECTION - Latence Matérielle */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <span className="text-red-500 font-mono text-xs tracking-widest uppercase mb-4 block">⚠ Alerte Système</span>
             <h2 className="font-display text-4xl md:text-5xl text-white font-bold">
-              Hardware Latency
+              Latence Matérielle
             </h2>
+            <p className="text-slate-400 mt-4 max-w-xl mx-auto">
+              Les signaux d'alerte que votre corps envoie quand votre productivité est menacée.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Carte 1 */}
+            {/* Carte 1 - Baisse de Focus */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-red-500/50 transition-all duration-500 overflow-hidden">
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-red-500/40 transition-all duration-300">
-                    <Zap className="w-7 h-7 text-red-500" />
+                    <Brain className="w-7 h-7 text-red-500" />
                   </div>
                 </div>
-                <h3 className="text-2xl text-white font-medium mb-3">Usure Silencieuse</h3>
+                <h3 className="text-2xl text-white font-medium mb-3">Baisse de Focus</h3>
                 <p className="text-slate-400 leading-relaxed">
-                  La tension statique continue épuise vos muscles posturaux sans que vous le sentiez.
+                  La mauvaise posture réduit l'oxygénation du cerveau de <span className="text-red-400 font-medium">20%</span>. Votre capacité de décision et créativité chutent.
                 </p>
+                <div className="mt-4 pt-4 border-t border-white/5">
+                  <span className="text-xs text-red-400 font-mono">Impact: -2h de Deep Work/jour</span>
+                </div>
               </div>
             </div>
 
-            {/* Carte 2 */}
+            {/* Carte 2 - Ralentissement Métabolique */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-orange-500/50 transition-all duration-500 overflow-hidden">
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
               <div className="relative z-10">
@@ -393,33 +398,129 @@ export default function Landing() {
                     <Activity className="w-7 h-7 text-orange-500" />
                   </div>
                 </div>
-                <h3 className="text-2xl text-white font-medium mb-3">Brouillard Mental</h3>
+                <h3 className="text-2xl text-white font-medium mb-3">Ralentissement Métabolique</h3>
                 <p className="text-slate-400 leading-relaxed">
-                  La mauvaise posture réduit l'oxygénation du cerveau (-20%), freinant vos performances.
+                  L'immobilité prolongée désactive les enzymes responsables de votre énergie. <span className="text-orange-400 font-medium">Fatigue chronique</span> garantie.
                 </p>
+                <div className="mt-4 pt-4 border-t border-white/5">
+                  <span className="text-xs text-orange-400 font-mono">Impact: Crashes énergétiques à 15h</span>
+                </div>
               </div>
             </div>
 
-            {/* Carte 3 */}
+            {/* Carte 3 - Usure Silencieuse */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-yellow-500/50 transition-all duration-500 overflow-hidden">
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-yellow-500/40 transition-all duration-300">
-                    <Wind className="w-7 h-7 text-yellow-500" />
+                    <Zap className="w-7 h-7 text-yellow-500" />
                   </div>
                 </div>
-                <h3 className="text-2xl text-white font-medium mb-3">Métabolisme au Ralenti</h3>
+                <h3 className="text-2xl text-white font-medium mb-3">Usure Silencieuse</h3>
                 <p className="text-slate-400 leading-relaxed">
-                  L'immobilité prolongée désactive les enzymes responsables de votre énergie.
+                  La tension statique continue épuise vos muscles posturaux. Quand la douleur arrive, <span className="text-yellow-400 font-medium">c'est déjà trop tard</span>.
                 </p>
+                <div className="mt-4 pt-4 border-t border-white/5">
+                  <span className="text-xs text-yellow-400 font-mono">Impact: Arrêt de travail forcé</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. SOCIAL PROOF / DATA - Données Cliniques */}
+      {/* 4. NEW SECTION - Architecture du Protocole (La Preuve) */}
+      <section className="py-24 px-6 relative z-10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-4 block">Fondations Scientifiques</span>
+            <h2 className="font-display text-4xl md:text-5xl text-white font-bold">
+              Architecture du Protocole
+            </h2>
+            <p className="text-slate-400 mt-4 max-w-2xl mx-auto">
+              Basé sur les protocoles cliniques les plus éprouvés au monde.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Moteur Mécanique - McKenzie */}
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-[#ff6b4a]/5 to-transparent border border-[#ff6b4a]/20 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
+              {/* Blueprint Grid Pattern */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,107,74,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,107,74,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50"></div>
+              <div className="relative z-10">
+                <div className="mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
+                    <Cpu className="w-7 h-7 text-[#ff6b4a]" />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-mono text-[10px] text-[#ff6b4a] uppercase tracking-widest">Module 01</span>
+                </div>
+                <h3 className="text-2xl text-white font-medium mb-1">Moteur Mécanique</h3>
+                <p className="text-sm text-[#ff6b4a] font-mono mb-4">McKenzie Method®</p>
+                <p className="text-slate-400 leading-relaxed">
+                  Centralisation discale par mouvements directionnels. Technique utilisée par les kinés du monde entier.
+                </p>
+                <div className="mt-6 p-3 rounded-xl bg-black/40 border border-white/5">
+                  <span className="font-mono text-[10px] text-slate-500 block mb-1">OUTPUT</span>
+                  <span className="text-sm text-white">Réduction pression discale -40%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Pare-Feu - McGill */}
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-cyan-500/5 to-transparent border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden">
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50"></div>
+              <div className="relative z-10">
+                <div className="mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 transition-all duration-300">
+                    <Shield className="w-7 h-7 text-cyan-400" />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-widest">Module 02</span>
+                </div>
+                <h3 className="text-2xl text-white font-medium mb-1">Pare-Feu</h3>
+                <p className="text-sm text-cyan-400 font-mono mb-4">McGill Big 3®</p>
+                <p className="text-slate-400 leading-relaxed">
+                  Hygiène vertébrale & stabilité core. Les 3 exercices validés par la recherche pour protéger votre dos.
+                </p>
+                <div className="mt-6 p-3 rounded-xl bg-black/40 border border-white/5">
+                  <span className="font-mono text-[10px] text-slate-500 block mb-1">OUTPUT</span>
+                  <span className="text-sm text-white">Prévention récidive 85%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Système - Neuro-Physio */}
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-purple-500/5 to-transparent border border-purple-500/20 hover:border-purple-500/50 transition-all duration-500 overflow-hidden">
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50"></div>
+              <div className="relative z-10">
+                <div className="mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-purple-500/40 transition-all duration-300">
+                    <Settings className="w-7 h-7 text-purple-400" />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-mono text-[10px] text-purple-400 uppercase tracking-widest">Module 03</span>
+                </div>
+                <h3 className="text-2xl text-white font-medium mb-1">Système</h3>
+                <p className="text-sm text-purple-400 font-mono mb-4">Neuro-Physio</p>
+                <p className="text-slate-400 leading-relaxed">
+                  Reprogrammation posturale par neuroplasticité. 21 jours pour créer de nouveaux schémas moteurs durables.
+                </p>
+                <div className="mt-6 p-3 rounded-xl bg-black/40 border border-white/5">
+                  <span className="font-mono text-[10px] text-slate-500 block mb-1">OUTPUT</span>
+                  <span className="text-sm text-white">Automatisation posture 21j</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. DONNÉES CLINIQUES */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16">
@@ -430,7 +531,6 @@ export default function Landing() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Stat 1 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-500 overflow-hidden text-center">
               <div className="relative z-10">
                 <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-transparent mb-3 group-hover:from-[#ff6b4a] group-hover:to-[#ff856b] transition-all duration-500">96%</p>
@@ -438,7 +538,6 @@ export default function Landing() {
                 <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: NCBI 2019 — Étude sur 283 patients</p>
               </div>
             </div>
-            {/* Stat 2 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-500 overflow-hidden text-center">
               <div className="relative z-10">
                 <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-transparent mb-3 group-hover:from-[#ff6b4a] group-hover:to-[#ff856b] transition-all duration-500">0%</p>
@@ -446,7 +545,6 @@ export default function Landing() {
                 <p className="text-[10px] font-mono text-slate-600 border-t border-white/5 pt-3">Source: Spine Journal 2021 — Méta-analyse</p>
               </div>
             </div>
-            {/* Stat 3 */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/30 transition-all duration-500 overflow-hidden text-center">
               <div className="relative z-10">
                 <p className="text-6xl md:text-7xl font-bold bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-transparent mb-3 group-hover:from-[#ff6b4a] group-hover:to-[#ff856b] transition-all duration-500">-40%</p>
@@ -458,71 +556,14 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 4. SOLUTION SECTION - Code Source */}
-      <section className="py-24 px-6 relative z-10">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-4 block">Protocoles Natifs</span>
-            <h2 className="font-display text-4xl md:text-5xl text-white font-bold">
-              Code Source
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Fast Charge */}
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
-              <div className="relative z-10">
-                <div className="mb-6">
-                  <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
-                    <Zap className="w-7 h-7 text-[#ff6b4a]" />
-                  </div>
-                </div>
-                <h3 className="text-2xl text-white font-medium">Fast Charge</h3>
-                <p className="text-slate-400 leading-relaxed mt-3">
-                  Récupérez +3mm de hauteur discale en 15 min de décompression.
-                </p>
-              </div>
-            </div>
-            {/* Anti-Fragilité */}
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
-              <div className="relative z-10">
-                <div className="mb-6">
-                  <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
-                    <Target className="w-7 h-7 text-[#ff6b4a]" />
-                  </div>
-                </div>
-                <h3 className="text-2xl text-white font-medium">Anti-Fragilité</h3>
-                <p className="text-slate-400 leading-relaxed mt-3">
-                  Réactivez les muscles stabilisateurs éteints par votre chaise.
-                </p>
-              </div>
-            </div>
-            {/* Reboot Neural */}
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
-              <div className="relative z-10">
-                <div className="mb-6">
-                  <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
-                    <RotateCcw className="w-7 h-7 text-[#ff6b4a]" />
-                  </div>
-                </div>
-                <h3 className="text-2xl text-white font-medium">Reboot Neural</h3>
-                <p className="text-slate-400 leading-relaxed mt-3">
-                  21 jours pour reprogrammer votre posture par neuroplasticité.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. PRICING & INTERACTIVE ROADMAP SECTION */}
+      {/* 6. PRICING & INTERACTIVE ROADMAP SECTION */}
       <section className="py-24 px-6 relative z-10" id="pricing">
         <div className="container mx-auto max-w-6xl">
           
           <div className="text-center mb-16">
-            <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-4 block">Select Protocol</span>
+            <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-4 block">Sélection du Programme</span>
             <h2 className="font-display text-4xl md:text-5xl text-white font-bold">
-              Choisissez votre Niveau
+              Choisissez Votre Niveau
             </h2>
             <p className="text-slate-400 mt-4 max-w-2xl mx-auto">
               Cliquez sur une carte pour révéler l'architecture du programme.
@@ -573,17 +614,20 @@ export default function Landing() {
             <div 
               className={`group flex flex-col p-6 rounded-t-3xl md:rounded-3xl md:rounded-b-none border transition-all duration-300 relative transform md:-translate-y-4 ${selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#0a0a16] border-[#ff6b4a] border-b-0 md:border-b shadow-[0_0_40px_-10px_rgba(255,107,74,0.4)]' : 'bg-[#0a0a16] border-white/10 hover:border-[#ff6b4a]/50'}`}
             >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-1 bg-[#ff6b4a] text-[#050510] text-[10px] font-bold rounded-full uppercase tracking-widest">
-                Recommandé • Standard
+              {/* Recommended Badge */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                <span className="px-4 py-1 rounded-full bg-[#ff6b4a] text-[10px] font-bold text-[#050510] uppercase tracking-wider shadow-[0_0_20px_-5px_#ff6b4a]">
+                  Recommandé
+                </span>
               </div>
               <div className="flex items-center gap-2 mb-3 mt-2">
-                <span className="px-2 py-0.5 rounded bg-[#ff6b4a]/20 text-[10px] font-mono uppercase tracking-wider text-[#ff6b4a]">Le Protocole Standard</span>
+                <span className="px-2 py-0.5 rounded bg-[#ff6b4a]/20 text-[10px] font-mono uppercase tracking-wider text-[#ff6b4a]">Réalignement</span>
               </div>
               <h3 className="font-display text-2xl font-bold text-white mb-1">System Reboot</h3>
               <p className="text-xs text-slate-500 mb-2">21 Jours</p>
               <p className="text-3xl font-bold text-white mb-2">99€</p>
               <p className="text-xs text-slate-500 mb-4">Paiement unique</p>
-              <p className="text-sm text-slate-400 mb-6 leading-relaxed">La correction complète. Réalignez votre posture par défaut.</p>
+              <p className="text-sm text-slate-400 mb-6 leading-relaxed">Le protocole complet pour reprogrammer votre posture durablement.</p>
               <div className="space-y-2 mb-6 flex-grow">
                 {PROGRAM_DETAILS.SYSTEM_REBOOT.features.map((f, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs text-slate-300"><Check className="w-3 h-3 text-[#ff6b4a]" /> {f}</div>
@@ -591,8 +635,8 @@ export default function Landing() {
               </div>
               <div className="flex flex-col gap-2 mt-auto">
                 <Link to="/checkout?plan=SYSTEM_REBOOT" className="w-full">
-                  <Button className="w-full bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] font-bold glow-primary">
-                    Initialiser le Protocole
+                  <Button className="w-full bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] font-medium glow-primary-sm">
+                    Commencer ce programme
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>
@@ -651,10 +695,8 @@ export default function Landing() {
 
           {/* B. DYNAMIC ROADMAP DISPLAY */}
           <div className={`bg-[#0a0a16] rounded-b-3xl md:rounded-3xl md:rounded-t-none border border-white/10 border-t-0 md:border-t p-8 md:p-12 relative overflow-hidden transition-all duration-300 ${isTransitioning ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}>
-            {/* Background Grid specific to selection */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
             
-            {/* Active indicator bar */}
             <div className={`absolute top-0 left-0 right-0 h-1 transition-colors duration-300 ${
               selectedProgram === 'RAPID_PATCH' ? 'bg-white/40' :
               selectedProgram === 'SYSTEM_REBOOT' ? 'bg-[#ff6b4a]' :
@@ -681,7 +723,6 @@ export default function Landing() {
                 </div>
               </div>
 
-              {/* THE VISUAL TIMELINE */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-12">
                 {details.phases.map((phase, idx) => (
                   <div key={idx} className={`relative flex flex-col gap-3 p-4 rounded-xl border transition-all duration-500 ${phase.active ? 'bg-white/5 border-white/10' : 'bg-black/40 border-white/5 opacity-50 grayscale'}`}>
@@ -701,7 +742,6 @@ export default function Landing() {
                 ))}
               </div>
 
-              {/* UPSELL CTA for non-complete programs */}
               {selectedProgram === 'RAPID_PATCH' && (
                 <div className="mb-8 p-4 rounded-xl border border-[#ff6b4a]/20 bg-[#ff6b4a]/5 flex items-center justify-between">
                   <p className="text-sm text-slate-300">
@@ -732,7 +772,6 @@ export default function Landing() {
                 </div>
               )}
 
-              {/* ACTION AREA */}
               <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-white/5">
                 <div className="flex flex-wrap gap-2">
                   {details.features.map((feat, i) => (
@@ -760,44 +799,206 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 6. FAQ SECTION */}
+      {/* 7. NEW SECTION - Le Benchmark (Comparatif) */}
+      <section className="py-24 px-6 relative z-10">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <span className="text-slate-500 font-mono text-xs tracking-widest uppercase mb-4 block">Analyse Comparative</span>
+            <h2 className="font-display text-3xl md:text-4xl text-white font-bold max-w-3xl mx-auto leading-tight">
+              Pourquoi le modèle classique échoue pour les pros du digital
+            </h2>
+          </div>
+
+          {/* Comparison Table */}
+          <div className="rounded-3xl border border-white/10 overflow-hidden">
+            {/* Header */}
+            <div className="grid grid-cols-3 bg-white/5">
+              <div className="p-6 border-r border-white/10"></div>
+              <div className="p-6 border-r border-white/10 text-center">
+                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Médecine Classique</span>
+                <p className="text-red-400 text-sm mt-1">Réactif</p>
+              </div>
+              <div className="p-6 text-center bg-[#ff6b4a]/10 relative">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-[#ff6b4a]"></div>
+                <span className="font-mono text-xs text-[#ff6b4a] uppercase tracking-wider">NIVO System Patch</span>
+                <p className="text-[#ff6b4a] text-sm mt-1 font-medium">Proactif</p>
+              </div>
+            </div>
+
+            {/* Row 1 - Approche */}
+            <div className="grid grid-cols-3 border-t border-white/10">
+              <div className="p-6 border-r border-white/10">
+                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Approche</span>
+              </div>
+              <div className="p-6 border-r border-white/10 flex items-center gap-3">
+                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <span className="text-slate-400 text-sm">Réparer la casse</span>
+              </div>
+              <div className="p-6 bg-[#ff6b4a]/5 flex items-center gap-3">
+                <CheckCircle className="w-5 h-5 text-[#ff6b4a] flex-shrink-0" />
+                <span className="text-white text-sm font-medium">Maintenance quotidienne</span>
+              </div>
+            </div>
+
+            {/* Row 2 - Lieu */}
+            <div className="grid grid-cols-3 border-t border-white/10">
+              <div className="p-6 border-r border-white/10">
+                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Lieu</span>
+              </div>
+              <div className="p-6 border-r border-white/10 flex items-center gap-3">
+                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <span className="text-slate-400 text-sm">Cabinet médical (perte de temps)</span>
+              </div>
+              <div className="p-6 bg-[#ff6b4a]/5 flex items-center gap-3">
+                <CheckCircle className="w-5 h-5 text-[#ff6b4a] flex-shrink-0" />
+                <span className="text-white text-sm font-medium">À votre bureau (flux de travail)</span>
+              </div>
+            </div>
+
+            {/* Row 3 - Timing */}
+            <div className="grid grid-cols-3 border-t border-white/10">
+              <div className="p-6 border-r border-white/10">
+                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Timing</span>
+              </div>
+              <div className="p-6 border-r border-white/10 flex items-center gap-3">
+                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <span className="text-slate-400 text-sm">Attendre la douleur</span>
+              </div>
+              <div className="p-6 bg-[#ff6b4a]/5 flex items-center gap-3">
+                <CheckCircle className="w-5 h-5 text-[#ff6b4a] flex-shrink-0" />
+                <span className="text-white text-sm font-medium">Prévention intégrée au quotidien</span>
+              </div>
+            </div>
+
+            {/* Row 4 - Coût */}
+            <div className="grid grid-cols-3 border-t border-white/10">
+              <div className="p-6 border-r border-white/10">
+                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Coût</span>
+              </div>
+              <div className="p-6 border-r border-white/10 flex items-center gap-3">
+                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <span className="text-slate-400 text-sm">Dépenses récurrentes (kiné, médecin)</span>
+              </div>
+              <div className="p-6 bg-[#ff6b4a]/5 flex items-center gap-3">
+                <CheckCircle className="w-5 h-5 text-[#ff6b4a] flex-shrink-0" />
+                <span className="text-white text-sm font-medium">Investissement unique (Asset)</span>
+              </div>
+            </div>
+
+            {/* Row 5 - Résultat */}
+            <div className="grid grid-cols-3 border-t border-white/10">
+              <div className="p-6 border-r border-white/10">
+                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Résultat</span>
+              </div>
+              <div className="p-6 border-r border-white/10 flex items-center gap-3">
+                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <span className="text-slate-400 text-sm">Soulagement temporaire, récidive</span>
+              </div>
+              <div className="p-6 bg-[#ff6b4a]/5 flex items-center gap-3">
+                <CheckCircle className="w-5 h-5 text-[#ff6b4a] flex-shrink-0" />
+                <span className="text-white text-sm font-medium">Autonomie & Anti-fragilité durables</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. FAQ SECTION */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-12">
-            <span className="text-slate-500 font-mono text-xs tracking-widest uppercase mb-4 block">FAQ & Specs</span>
+            <span className="text-slate-500 font-mono text-xs tracking-widest uppercase mb-4 block">Questions Fréquentes</span>
             <h2 className="font-display text-3xl md:text-4xl text-white font-bold">
-              Questions fréquentes
+              Transparence Totale
             </h2>
           </div>
 
           <Accordion type="single" collapsible className="space-y-4">
             <AccordionItem value="item-1" className="border border-white/10 rounded-2xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
               <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
-                Besoin de matériel ?
+                Est-ce dangereux si j'ai une hernie discale ?
               </AccordionTrigger>
               <AccordionContent className="text-slate-400 pb-5">
-                <span className="text-[#ff6b4a] font-medium">Non.</span> Poids du corps uniquement. Vous pouvez faire tous les exercices dans votre chambre ou à côté de votre bureau.
+                <span className="text-[#ff6b4a] font-medium">Non, au contraire.</span> Le protocole est basé sur la méthode McKenzie, utilisée mondialement par les kinésithérapeutes pour traiter les hernies. Les mouvements de décompression aident à centraliser le disque. Cependant, si vous êtes en phase aiguë (douleur intense depuis moins de 72h), consultez d'abord un professionnel.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-2" className="border border-white/10 rounded-2xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
               <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
-                Durée des sessions ?
+                Quelle différence avec les vidéos YouTube gratuites ?
               </AccordionTrigger>
               <AccordionContent className="text-slate-400 pb-5">
-                <span className="text-[#ff6b4a] font-medium">15 minutes par jour.</span> Conçu pour s'intégrer dans n'importe quel emploi du temps chargé, même entre deux meetings.
+                <span className="text-[#ff6b4a] font-medium">Structure et progression.</span> YouTube vous donne des exercices isolés. NIVO vous donne un protocole séquencé sur 21 jours avec une logique de progression (décompression → mobilisation → renforcement → neuroplasticité). C'est la différence entre avoir des ingrédients et avoir une recette.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-3" className="border border-white/10 rounded-2xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
               <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
-                Est-ce du yoga ?
+                Combien de temps par jour ?
               </AccordionTrigger>
               <AccordionContent className="text-slate-400 pb-5">
-                <span className="text-[#ff6b4a] font-medium">Non.</span> C'est de la maintenance articulaire ciblée. Des mouvements précis basés sur la biomécanique, pas de spiritualité ou de postures complexes.
+                <span className="text-[#ff6b4a] font-medium">15 minutes.</span> Conçu pour s'intégrer dans votre flux de travail : entre deux meetings, pendant une pause café, ou juste avant de commencer votre journée. La régularité compte plus que la durée.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-4" className="border border-white/10 rounded-2xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
+              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
+                Y a-t-il une garantie ?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-400 pb-5">
+                <span className="text-[#ff6b4a] font-medium">Oui, 30 jours satisfait ou remboursé.</span> Si vous suivez le protocole pendant 21 jours et ne voyez aucune amélioration, nous vous remboursons intégralement. Aucune question posée.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-5" className="border border-white/10 rounded-2xl bg-[#0a0a16] px-6 data-[state=open]:border-[#ff6b4a]/30">
+              <AccordionTrigger className="text-white hover:text-[#ff6b4a] hover:no-underline py-5 text-left">
+                Besoin de matériel spécifique ?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-400 pb-5">
+                <span className="text-[#ff6b4a] font-medium">Non.</span> Tous les exercices se font au poids du corps. Vous pouvez les faire dans votre chambre, à côté de votre bureau, ou même en déplacement dans une chambre d'hôtel.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+        </div>
+      </section>
+
+      {/* 9. FINAL SECTION - Le Manifeste (ROI pour Entrepreneurs) */}
+      <section className="py-24 px-6 relative z-10">
+        <div className="container mx-auto max-w-4xl">
+          <div className="relative p-12 md:p-16 rounded-3xl bg-gradient-to-b from-[#ff6b4a]/10 to-transparent border border-[#ff6b4a]/20 overflow-hidden">
+            {/* Background Grid */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,107,74,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,107,74,0.03)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
+            
+            {/* Glow Effect */}
+            <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#ff6b4a]/20 rounded-full blur-[100px] pointer-events-none"></div>
+            
+            <div className="relative z-10 text-center">
+              <span className="font-mono text-[10px] text-[#ff6b4a] uppercase tracking-widest mb-6 block">Le Manifeste</span>
+              
+              <h2 className="font-display text-3xl md:text-5xl text-white font-bold mb-6 leading-tight">
+                Votre business scale.<br />
+                <span className="text-slate-400">Ne laissez pas votre corps devenir le goulot d'étranglement.</span>
+              </h2>
+              
+              <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Vous investissez dans les meilleurs outils, formations et stratégies pour faire croître votre activité. 
+                Mais votre actif le plus précieux, c'est votre capacité à rester assis, concentré et productif sur la durée.
+                <br /><br />
+                <span className="text-white font-medium">NIVO est l'assurance-vie de votre productivité.</span>
+              </p>
+              
+              <Link to="/diagnostic">
+                <Button size="lg" className="bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] glow-primary h-16 px-12 text-lg rounded-full font-bold transition-all hover:scale-105">
+                  Sécuriser mon Actif Principal
+                  <ArrowRight className="ml-3 h-6 w-6" />
+                </Button>
+              </Link>
+              
+              <p className="text-xs text-slate-600 mt-6 font-mono">
+                30 jours satisfait ou remboursé • Paiement unique • Accès à vie
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
