@@ -415,7 +415,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 3. PROBLEM SECTION - Latence Matérielle */}
+      {/* 3. PROBLEM SECTION - Latence Matérielle with Hover Data Overlay */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
@@ -432,6 +432,15 @@ export default function Landing() {
             {/* Carte 1 - Baisse de Focus */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-red-500/50 transition-all duration-500 overflow-hidden">
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
+              
+              {/* Hover Data Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-red-950/95 via-red-900/90 to-black/95 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 backdrop-blur-sm">
+                <span className="font-mono text-[10px] text-red-400 uppercase tracking-widest mb-2">Donnée Clinique</span>
+                <span className="text-5xl md:text-6xl font-bold text-red-500 mb-2">-20%</span>
+                <span className="text-lg text-white font-medium">Oxygénation Cérébrale</span>
+                <span className="text-xs text-red-400/70 mt-4 font-mono">Source: J Neurosci 2019</span>
+              </div>
+              
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-red-500/40 transition-all duration-300">
@@ -451,6 +460,15 @@ export default function Landing() {
             {/* Carte 2 - Ralentissement Métabolique */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-orange-500/50 transition-all duration-500 overflow-hidden">
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
+              
+              {/* Hover Data Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-950/95 via-orange-900/90 to-black/95 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 backdrop-blur-sm">
+                <span className="font-mono text-[10px] text-orange-400 uppercase tracking-widest mb-2">Donnée Clinique</span>
+                <span className="text-5xl md:text-6xl font-bold text-orange-500 mb-2">+90%</span>
+                <span className="text-lg text-white font-medium">Risque Diabète Type 2</span>
+                <span className="text-xs text-orange-400/70 mt-4 font-mono">Source: Ann Intern Med 2015</span>
+              </div>
+              
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-orange-500/40 transition-all duration-300">
@@ -470,6 +488,15 @@ export default function Landing() {
             {/* Carte 3 - Usure Silencieuse */}
             <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-yellow-500/50 transition-all duration-500 overflow-hidden">
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-50"></div>
+              
+              {/* Hover Data Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-950/95 via-yellow-900/90 to-black/95 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 backdrop-blur-sm">
+                <span className="font-mono text-[10px] text-yellow-400 uppercase tracking-widest mb-2">Donnée Clinique</span>
+                <span className="text-5xl md:text-6xl font-bold text-yellow-500 mb-2">+300%</span>
+                <span className="text-lg text-white font-medium">Pression Discale</span>
+                <span className="text-xs text-yellow-400/70 mt-4 font-mono">Source: Spine Journal 2021</span>
+              </div>
+              
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-yellow-500/40 transition-all duration-300">
@@ -489,11 +516,11 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 4. NEW SECTION - Architecture du Protocole (La Preuve) */}
+      {/* 4. NEW SECTION - Architecture du Protocole (Bento Grid with Circuit Lines) */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <span className="text-[#ff6b4a] font-mono text-xs tracking-widest uppercase mb-4 block">Fondations Scientifiques</span>
+            <span className="text-primary font-mono text-xs tracking-widest uppercase mb-4 block">Fondations Scientifiques</span>
             <h2 className="font-display text-4xl md:text-5xl text-white font-bold">
               Architecture du Protocole
             </h2>
@@ -502,76 +529,121 @@ export default function Landing() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Moteur Mécanique - McKenzie */}
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-[#ff6b4a]/5 to-transparent border border-[#ff6b4a]/20 hover:border-[#ff6b4a]/50 transition-all duration-500 overflow-hidden">
-              {/* Blueprint Grid Pattern */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,107,74,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,107,74,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50"></div>
-              <div className="relative z-10">
-                <div className="mb-6">
-                  <div className="w-14 h-14 rounded-2xl bg-[#ff6b4a]/10 border border-[#ff6b4a]/20 flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff6b4a]/40 transition-all duration-300">
-                    <Cpu className="w-7 h-7 text-[#ff6b4a]" />
+          {/* Bento Grid Container with Circuit Lines */}
+          <div className="relative">
+            {/* Circuit Lines SVG - Pulsing connections */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 hidden md:block" style={{ overflow: 'visible' }}>
+              {/* Horizontal line from card 1 to card 2 */}
+              <line 
+                x1="33%" y1="50%" x2="50%" y2="50%" 
+                stroke="url(#pulse-gradient-1)" 
+                strokeWidth="1" 
+                strokeDasharray="8 4"
+                className="animate-[pulse_3s_ease-in-out_infinite]"
+              />
+              {/* Horizontal line from card 2 to card 3 */}
+              <line 
+                x1="50%" y1="50%" x2="67%" y2="50%" 
+                stroke="url(#pulse-gradient-2)" 
+                strokeWidth="1" 
+                strokeDasharray="8 4"
+                className="animate-[pulse_3s_ease-in-out_infinite_0.5s]"
+              />
+              {/* Connection nodes */}
+              <circle cx="33%" cy="50%" r="3" fill="#ff6b4a" className="animate-[pulse_2s_ease-in-out_infinite]" />
+              <circle cx="67%" cy="50%" r="3" fill="#a855f7" className="animate-[pulse_2s_ease-in-out_infinite_1s]" />
+              
+              {/* Gradient definitions */}
+              <defs>
+                <linearGradient id="pulse-gradient-1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#ff6b4a" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="#22d3ee" stopOpacity="0.6" />
+                </linearGradient>
+                <linearGradient id="pulse-gradient-2" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="#a855f7" stopOpacity="0.6" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            {/* Bento Grid - Asymmetric Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 relative z-10">
+              {/* Card 1 - Moteur Mécanique - McKenzie (Larger card) */}
+              <div className="md:col-span-5 group relative p-8 rounded-3xl bg-gradient-to-br from-primary/8 via-primary/3 to-transparent border border-primary/20 hover:border-primary/50 transition-all duration-500 overflow-hidden">
+                {/* Blueprint Grid Pattern */}
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,107,74,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,107,74,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50"></div>
+                <div className="relative z-10">
+                  <div className="mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/40 transition-all duration-300">
+                      {/* Animated slow-rotating gear */}
+                      <Cpu className="w-8 h-8 text-primary animate-[spin_20s_linear_infinite]" />
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="font-mono text-[10px] text-[#ff6b4a] uppercase tracking-widest">Module 01</span>
-                </div>
-                <h3 className="text-2xl text-white font-medium mb-1">Moteur Mécanique</h3>
-                <p className="text-sm text-[#ff6b4a] font-mono mb-4">McKenzie Method®</p>
-                <p className="text-slate-400 leading-relaxed">
-                  Centralisation discale par mouvements directionnels. Technique utilisée par les kinés du monde entier.
-                </p>
-                <div className="mt-6 p-3 rounded-xl bg-black/40 border border-white/5">
-                  <span className="font-mono text-[10px] text-slate-500 block mb-1">OUTPUT</span>
-                  <span className="text-sm text-white">Réduction pression discale -40%</span>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="font-mono text-[10px] text-primary uppercase tracking-widest">Module 01</span>
+                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                  </div>
+                  <h3 className="text-2xl text-white font-medium mb-1">Moteur Mécanique</h3>
+                  <p className="text-sm text-primary font-mono mb-4">McKenzie Method®</p>
+                  <p className="text-slate-400 leading-relaxed">
+                    Centralisation discale par mouvements directionnels. Technique utilisée par les kinés du monde entier.
+                  </p>
+                  <div className="mt-6 p-4 rounded-xl bg-black/60 border border-white/5 backdrop-blur-sm">
+                    <span className="font-mono text-[10px] text-slate-500 block mb-1">OUTPUT</span>
+                    <span className="text-lg text-white font-light">Réduction pression discale <span className="text-primary font-medium">-40%</span></span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Pare-Feu - McGill */}
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-cyan-500/5 to-transparent border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden">
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50"></div>
-              <div className="relative z-10">
-                <div className="mb-6">
-                  <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 transition-all duration-300">
-                    <Shield className="w-7 h-7 text-cyan-400" />
+              {/* Card 2 - Pare-Feu - McGill (Center card) */}
+              <div className="md:col-span-4 group relative p-8 rounded-3xl bg-gradient-to-br from-cyan-500/8 via-cyan-500/3 to-transparent border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden">
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50"></div>
+                <div className="relative z-10">
+                  <div className="mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 transition-all duration-300">
+                      {/* Shimmering shield */}
+                      <Shield className="w-8 h-8 text-cyan-400 animate-[pulse_3s_ease-in-out_infinite]" />
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-widest">Module 02</span>
-                </div>
-                <h3 className="text-2xl text-white font-medium mb-1">Pare-Feu</h3>
-                <p className="text-sm text-cyan-400 font-mono mb-4">McGill Big 3®</p>
-                <p className="text-slate-400 leading-relaxed">
-                  Hygiène vertébrale & stabilité core. Les 3 exercices validés par la recherche pour protéger votre dos.
-                </p>
-                <div className="mt-6 p-3 rounded-xl bg-black/40 border border-white/5">
-                  <span className="font-mono text-[10px] text-slate-500 block mb-1">OUTPUT</span>
-                  <span className="text-sm text-white">Prévention récidive 85%</span>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-widest">Module 02</span>
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                  </div>
+                  <h3 className="text-2xl text-white font-medium mb-1">Pare-Feu</h3>
+                  <p className="text-sm text-cyan-400 font-mono mb-4">McGill Big 3®</p>
+                  <p className="text-slate-400 leading-relaxed">
+                    Hygiène vertébrale & stabilité core. Les 3 exercices validés par la recherche.
+                  </p>
+                  <div className="mt-6 p-4 rounded-xl bg-black/60 border border-white/5 backdrop-blur-sm">
+                    <span className="font-mono text-[10px] text-slate-500 block mb-1">OUTPUT</span>
+                    <span className="text-lg text-white font-light">Prévention récidive <span className="text-cyan-400 font-medium">85%</span></span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Système - Neuro-Physio */}
-            <div className="group relative p-8 rounded-3xl bg-gradient-to-b from-purple-500/5 to-transparent border border-purple-500/20 hover:border-purple-500/50 transition-all duration-500 overflow-hidden">
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50"></div>
-              <div className="relative z-10">
-                <div className="mb-6">
-                  <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-purple-500/40 transition-all duration-300">
-                    <Settings className="w-7 h-7 text-purple-400" />
+              {/* Card 3 - Système - Neuro-Physio */}
+              <div className="md:col-span-3 group relative p-6 rounded-3xl bg-gradient-to-br from-purple-500/8 via-purple-500/3 to-transparent border border-purple-500/20 hover:border-purple-500/50 transition-all duration-500 overflow-hidden">
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:20px_20px] opacity-50"></div>
+                <div className="relative z-10">
+                  <div className="mb-4">
+                    <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 group-hover:border-purple-500/40 transition-all duration-300">
+                      {/* Animated settings gear */}
+                      <Settings className="w-7 h-7 text-purple-400 animate-[spin_15s_linear_infinite_reverse]" />
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="font-mono text-[10px] text-purple-400 uppercase tracking-widest">Module 03</span>
-                </div>
-                <h3 className="text-2xl text-white font-medium mb-1">Système</h3>
-                <p className="text-sm text-purple-400 font-mono mb-4">Neuro-Physio</p>
-                <p className="text-slate-400 leading-relaxed">
-                  Reprogrammation posturale par neuroplasticité. 21 jours pour créer de nouveaux schémas moteurs durables.
-                </p>
-                <div className="mt-6 p-3 rounded-xl bg-black/40 border border-white/5">
-                  <span className="font-mono text-[10px] text-slate-500 block mb-1">OUTPUT</span>
-                  <span className="text-sm text-white">Automatisation posture 21j</span>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="font-mono text-[10px] text-purple-400 uppercase tracking-widest">Module 03</span>
+                    <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+                  </div>
+                  <h3 className="text-xl text-white font-medium mb-1">Système</h3>
+                  <p className="text-xs text-purple-400 font-mono mb-3">Neuro-Physio</p>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    Reprogrammation posturale par neuroplasticité.
+                  </p>
+                  <div className="mt-4 p-3 rounded-xl bg-black/60 border border-white/5 backdrop-blur-sm">
+                    <span className="font-mono text-[9px] text-slate-500 block mb-1">OUTPUT</span>
+                    <span className="text-sm text-white font-light">Automatisation <span className="text-purple-400 font-medium">21j</span></span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -858,7 +930,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 7. NEW SECTION - Le Benchmark (Comparatif) */}
+      {/* 7. NEW SECTION - Le Benchmark (Ultra-Clean Comparatif) */}
       <section className="py-24 px-6 relative z-10">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16">
@@ -868,93 +940,115 @@ export default function Landing() {
             </h2>
           </div>
 
-          {/* Comparison Table */}
-          <div className="rounded-3xl border border-white/10 overflow-hidden">
+          {/* Ultra-Clean Comparison Table */}
+          <div className="rounded-2xl border border-white/5 overflow-hidden backdrop-blur-sm">
             {/* Header */}
-            <div className="grid grid-cols-3 bg-white/5">
-              <div className="p-6 border-r border-white/10"></div>
-              <div className="p-6 border-r border-white/10 text-center">
-                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Médecine Classique</span>
-                <p className="text-red-400 text-sm mt-1">Réactif</p>
+            <div className="grid grid-cols-3">
+              <div className="p-6 border-r border-white/5 bg-transparent"></div>
+              <div className="p-6 border-r border-white/5 text-center bg-transparent">
+                <span className="font-mono text-[10px] text-slate-600 uppercase tracking-wider">Médecine Classique</span>
+                <p className="text-slate-500 text-xs mt-1">Réactif</p>
               </div>
-              <div className="p-6 text-center bg-[#ff6b4a]/10 relative">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-[#ff6b4a]"></div>
-                <span className="font-mono text-xs text-[#ff6b4a] uppercase tracking-wider">NIVO System Patch</span>
-                <p className="text-[#ff6b4a] text-sm mt-1 font-medium">Proactif</p>
+              <div className="p-6 text-center bg-white/[0.02] relative">
+                {/* Top Spotlight Glow */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-16 bg-gradient-to-b from-emerald-500/20 to-transparent blur-2xl pointer-events-none"></div>
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent"></div>
+                <span className="font-mono text-[10px] text-emerald-400 uppercase tracking-wider relative z-10">NIVO System Patch</span>
+                <p className="text-emerald-400/80 text-xs mt-1 font-medium relative z-10">Proactif</p>
               </div>
             </div>
 
             {/* Row 1 - Approche */}
-            <div className="grid grid-cols-3 border-t border-white/10">
-              <div className="p-6 border-r border-white/10">
-                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Approche</span>
+            <div className="grid grid-cols-3 border-t border-white/5">
+              <div className="p-5 border-r border-white/5">
+                <span className="font-mono text-[10px] text-slate-600 uppercase tracking-wider">Approche</span>
               </div>
-              <div className="p-6 border-r border-white/10 flex items-center gap-3">
-                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <span className="text-slate-400 text-sm">Réparer la casse</span>
+              <div className="p-5 border-r border-white/5 flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0">
+                  <X className="w-3 h-3 text-slate-500" />
+                </div>
+                <span className="text-slate-500 text-sm">Réparer la casse</span>
               </div>
-              <div className="p-6 bg-[#ff6b4a]/5 flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-[#ff6b4a] flex-shrink-0" />
+              <div className="p-5 bg-white/[0.02] flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                  <Check className="w-3 h-3 text-emerald-400" />
+                </div>
                 <span className="text-white text-sm font-medium">Maintenance quotidienne</span>
               </div>
             </div>
 
             {/* Row 2 - Lieu */}
-            <div className="grid grid-cols-3 border-t border-white/10">
-              <div className="p-6 border-r border-white/10">
-                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Lieu</span>
+            <div className="grid grid-cols-3 border-t border-white/5">
+              <div className="p-5 border-r border-white/5">
+                <span className="font-mono text-[10px] text-slate-600 uppercase tracking-wider">Lieu</span>
               </div>
-              <div className="p-6 border-r border-white/10 flex items-center gap-3">
-                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <span className="text-slate-400 text-sm">Cabinet médical (perte de temps)</span>
+              <div className="p-5 border-r border-white/5 flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0">
+                  <X className="w-3 h-3 text-slate-500" />
+                </div>
+                <span className="text-slate-500 text-sm">Cabinet médical (perte de temps)</span>
               </div>
-              <div className="p-6 bg-[#ff6b4a]/5 flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-[#ff6b4a] flex-shrink-0" />
+              <div className="p-5 bg-white/[0.02] flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                  <Check className="w-3 h-3 text-emerald-400" />
+                </div>
                 <span className="text-white text-sm font-medium">À votre bureau (flux de travail)</span>
               </div>
             </div>
 
             {/* Row 3 - Timing */}
-            <div className="grid grid-cols-3 border-t border-white/10">
-              <div className="p-6 border-r border-white/10">
-                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Timing</span>
+            <div className="grid grid-cols-3 border-t border-white/5">
+              <div className="p-5 border-r border-white/5">
+                <span className="font-mono text-[10px] text-slate-600 uppercase tracking-wider">Timing</span>
               </div>
-              <div className="p-6 border-r border-white/10 flex items-center gap-3">
-                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <span className="text-slate-400 text-sm">Attendre la douleur</span>
+              <div className="p-5 border-r border-white/5 flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0">
+                  <X className="w-3 h-3 text-slate-500" />
+                </div>
+                <span className="text-slate-500 text-sm">Attendre la douleur</span>
               </div>
-              <div className="p-6 bg-[#ff6b4a]/5 flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-[#ff6b4a] flex-shrink-0" />
+              <div className="p-5 bg-white/[0.02] flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                  <Check className="w-3 h-3 text-emerald-400" />
+                </div>
                 <span className="text-white text-sm font-medium">Prévention intégrée au quotidien</span>
               </div>
             </div>
 
             {/* Row 4 - Coût */}
-            <div className="grid grid-cols-3 border-t border-white/10">
-              <div className="p-6 border-r border-white/10">
-                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Coût</span>
+            <div className="grid grid-cols-3 border-t border-white/5">
+              <div className="p-5 border-r border-white/5">
+                <span className="font-mono text-[10px] text-slate-600 uppercase tracking-wider">Coût</span>
               </div>
-              <div className="p-6 border-r border-white/10 flex items-center gap-3">
-                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <span className="text-slate-400 text-sm">Dépenses récurrentes (kiné, médecin)</span>
+              <div className="p-5 border-r border-white/5 flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0">
+                  <X className="w-3 h-3 text-slate-500" />
+                </div>
+                <span className="text-slate-500 text-sm">Dépenses récurrentes</span>
               </div>
-              <div className="p-6 bg-[#ff6b4a]/5 flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-[#ff6b4a] flex-shrink-0" />
+              <div className="p-5 bg-white/[0.02] flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                  <Check className="w-3 h-3 text-emerald-400" />
+                </div>
                 <span className="text-white text-sm font-medium">Investissement unique (Asset)</span>
               </div>
             </div>
 
             {/* Row 5 - Résultat */}
-            <div className="grid grid-cols-3 border-t border-white/10">
-              <div className="p-6 border-r border-white/10">
-                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">Résultat</span>
+            <div className="grid grid-cols-3 border-t border-white/5">
+              <div className="p-5 border-r border-white/5">
+                <span className="font-mono text-[10px] text-slate-600 uppercase tracking-wider">Résultat</span>
               </div>
-              <div className="p-6 border-r border-white/10 flex items-center gap-3">
-                <X className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <span className="text-slate-400 text-sm">Soulagement temporaire, récidive</span>
+              <div className="p-5 border-r border-white/5 flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0">
+                  <X className="w-3 h-3 text-slate-500" />
+                </div>
+                <span className="text-slate-500 text-sm">Soulagement temporaire, récidive</span>
               </div>
-              <div className="p-6 bg-[#ff6b4a]/5 flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-[#ff6b4a] flex-shrink-0" />
+              <div className="p-5 bg-white/[0.02] flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                  <Check className="w-3 h-3 text-emerald-400" />
+                </div>
                 <span className="text-white text-sm font-medium">Autonomie & Anti-fragilité durables</span>
               </div>
             </div>
