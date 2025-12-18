@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -51,7 +51,25 @@ export default function Landing() {
   const navigate = useNavigate();
   const [selectedProgram, setSelectedProgram] = useState<'RAPID_PATCH' | 'SYSTEM_REBOOT' | 'ARCHITECT_MODE'>('SYSTEM_REBOOT');
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const showcaseRef = useRef<HTMLDivElement>(null);
   const details = PROGRAM_DETAILS[selectedProgram];
+
+  // Scroll listener for 3D perspective effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Calculate rotation based on scroll (5deg -> 0deg as user scrolls)
+  const calculateRotation = () => {
+    const maxScroll = 600;
+    const progress = Math.min(scrollY / maxScroll, 1);
+    return 5 * (1 - progress);
+  };
 
   const handleSelectProgram = (program: 'RAPID_PATCH' | 'SYSTEM_REBOOT' | 'ARCHITECT_MODE') => {
     if (program !== selectedProgram) {
@@ -96,11 +114,13 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* 1. HERO SECTION */}
+      {/* 1. HERO SECTION - Staggered Animations */}
       <section className="pt-32 pb-24 px-6 relative z-10">
         <div className="container mx-auto text-center max-w-4xl">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-8 animate-fade-in backdrop-blur-md">
+          {/* Badge - Animation 1 */}
+          <div 
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-8 backdrop-blur-md opacity-0 animate-[fadeInUp_0.6s_ease-out_0.1s_forwards]"
+          >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
@@ -110,30 +130,33 @@ export default function Landing() {
             </span>
           </div>
 
-          {/* Title */}
-          <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 animate-fade-in leading-[1.1]" style={{ animationDelay: '0.1s' }}>
-            La <span className="italic text-slate-500">Maintenance Système</span><br />
-            <span className="bg-gradient-to-r from-white via-slate-200 to-slate-500 bg-clip-text text-transparent">
+          {/* Title - Animation 2 (Staggered words) */}
+          <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 leading-[1.1]">
+            <span className="inline-block opacity-0 animate-[fadeInUp_0.5s_ease-out_0.2s_forwards]">La </span>
+            <span className="inline-block italic text-slate-500 opacity-0 animate-[fadeInUp_0.5s_ease-out_0.3s_forwards]">Maintenance </span>
+            <span className="inline-block italic text-slate-500 opacity-0 animate-[fadeInUp_0.5s_ease-out_0.4s_forwards]">Système</span>
+            <br />
+            <span className="inline-block bg-gradient-to-r from-white via-slate-200 to-slate-500 bg-clip-text text-transparent opacity-0 animate-[fadeInUp_0.5s_ease-out_0.5s_forwards]">
               pour le Corps Humain.
             </span>
           </h1>
 
-          {/* Description */}
-          <p className="text-lg md:text-xl text-slate-400 font-light mb-10 max-w-2xl mx-auto animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
+          {/* Description - Animation 3 */}
+          <p className="text-lg md:text-xl text-slate-400 font-light mb-10 max-w-2xl mx-auto leading-relaxed opacity-0 animate-[fadeInUp_0.6s_ease-out_0.6s_forwards]">
             Pour les entrepreneurs et créateurs qui passent leur vie assis.<br />
             <span className="text-slate-500">Basé sur les standards cliniques de décompression (Méthodes McKenzie & McGill).</span>
           </p>
 
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          {/* CTA - Animation 4 */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-[fadeInUp_0.6s_ease-out_0.8s_forwards]">
             <Link to="/diagnostic">
-              <Button size="lg" className="bg-[#ff6b4a] hover:bg-[#ff856b] text-[#050510] glow-primary h-14 px-8 text-lg rounded-full font-medium transition-all hover:scale-105">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground glow-primary h-14 min-h-[48px] px-8 text-lg rounded-full font-medium transition-all hover:scale-105">
                 Lancer le Scan Corporel
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link to="/login">
-              <Button variant="outline" size="lg" className="border-white/10 text-white hover:bg-white/5 h-14 px-8 rounded-full">
+              <Button variant="outline" size="lg" className="border-white/10 text-white hover:bg-white/5 h-14 min-h-[48px] px-8 rounded-full">
                 <ChevronRight className="mr-2 h-4 w-4" />
                 Connexion Système
               </Button>
@@ -142,8 +165,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 2. PRODUCT SHOWCASE - Hyper-Realistic Dashboard (Architect Mode Theme) */}
-      <section className="py-20 px-6 relative z-10">
+      {/* 2. PRODUCT SHOWCASE - 3D Floating Dashboard with Scroll Effect */}
+      <section className="py-20 px-6 relative z-10" ref={showcaseRef}>
         <div className="container mx-auto max-w-6xl">
           {/* Section Label */}
           <div className="text-center mb-12">
@@ -153,29 +176,65 @@ export default function Landing() {
 
           {/* Floating App Window Container */}
           <div 
-            className="relative animate-fade-in"
-            style={{ 
-              animationDelay: '0.5s',
-              perspective: '2000px'
-            }}
+            className="relative opacity-0 animate-[fadeInUp_1s_ease-out_1s_forwards]"
+            style={{ perspective: '2000px' }}
           >
-            {/* Multi-layer Glow Effect */}
-            <div className="absolute inset-0 scale-90 -z-10">
-              <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-slate-400/20 to-transparent blur-[100px] rounded-[40px]" />
-              <div className="absolute inset-x-10 top-10 bottom-20 bg-white/5 blur-[60px] rounded-[40px]" />
-            </div>
-            
-            {/* The Main Window - Architect Mode Theme */}
+            {/* MASSIVE Orange/Red Glow Effect Behind Dashboard */}
             <div 
-              className="relative rounded-[24px] border border-white/[0.08] bg-black overflow-hidden"
+              className="absolute inset-0 -z-10 transition-all duration-500"
               style={{
-                transform: 'rotateX(4deg) rotateY(-2deg)',
-                transformStyle: 'preserve-3d',
-                boxShadow: '0 60px 120px -30px rgba(0,0,0,0.8), 0 30px 60px -20px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.1)'
+                transform: `scale(1.1) translateY(${scrollY * 0.05}px)`,
               }}
             >
-              {/* Gloss/Reflection Effect on top-left */}
-              <div className="absolute top-0 left-0 w-1/2 h-1/3 bg-gradient-to-br from-white/[0.08] via-transparent to-transparent pointer-events-none rounded-tl-[24px]" />
+              {/* Primary massive glow */}
+              <div className="absolute inset-x-0 top-1/4 h-[500px] bg-gradient-radial from-primary/30 via-primary/10 to-transparent blur-[120px] rounded-full" 
+                style={{
+                  background: 'radial-gradient(ellipse 80% 50% at 50% 50%, rgba(255, 107, 74, 0.35) 0%, rgba(255, 107, 74, 0.15) 40%, transparent 70%)'
+                }}
+              />
+              {/* Secondary ambient glow */}
+              <div className="absolute inset-x-10 top-20 h-[400px] bg-gradient-radial from-orange-500/20 to-transparent blur-[100px] rounded-full"
+                style={{
+                  background: 'radial-gradient(ellipse 60% 40% at 50% 30%, rgba(255, 140, 100, 0.25) 0%, transparent 60%)'
+                }}
+              />
+              {/* Bottom reflection glow */}
+              <div className="absolute inset-x-20 bottom-0 h-[200px]"
+                style={{
+                  background: 'radial-gradient(ellipse 100% 100% at 50% 100%, rgba(255, 107, 74, 0.15) 0%, transparent 70%)'
+                }}
+              />
+            </div>
+            
+            {/* The Main Window - Architect Mode Theme with 3D Transform */}
+            <div 
+              className="relative rounded-[24px] border border-white/[0.08] bg-black overflow-hidden transition-transform duration-300 ease-out will-change-transform"
+              style={{
+                // Desktop: 3D rotation that reduces on scroll. Mobile: flat
+                transform: `perspective(1500px) rotateX(${calculateRotation()}deg)`,
+                transformStyle: 'preserve-3d',
+                boxShadow: `
+                  0 80px 160px -40px rgba(0,0,0,0.9), 
+                  0 40px 80px -30px rgba(255,107,74,0.15), 
+                  0 0 120px -20px rgba(255,107,74,0.2),
+                  inset 0 1px 0 rgba(255,255,255,0.1)
+                `
+              }}
+            >
+              {/* Glass Reflection Effect - Diagonal gradient on top-left */}
+              <div 
+                className="absolute top-0 left-0 right-0 h-1/2 pointer-events-none z-20 rounded-t-[24px] overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 20%, transparent 50%)'
+                }}
+              />
+              {/* Secondary glass shine line */}
+              <div 
+                className="absolute top-0 left-0 right-1/2 h-px pointer-events-none z-20"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)'
+                }}
+              />
               
               {/* Window Structure: Sidebar + Main */}
               <div className="flex">
